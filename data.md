@@ -144,7 +144,7 @@
 ✻ Brewed for 13s
 
 ❯ Use this token                                                                
-  lm_pat_live_766ec8edc6727d0884810ce3018d72b2d500fe7b74c0891152e83ee36c1b1f4e  
+  lm_pat_live_REDACTED  
 
   Ran 5 shell commands (ctrl+o to expand)
 

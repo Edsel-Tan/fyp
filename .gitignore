@@ -1,3 +1,16 @@
-data
-hrt
-.venv
+# credentials -- never commit
+.env
+.env.*
+
+# bulk data: re-pullable from findata, or rebuildable from the price bundle
+data/
+.venv/
+
+# large regenerable artifacts
+hrt/artifacts/panel.npz
+hrt/artifacts/fr_*.npz
+hrt/logs/
+hrt/artifacts/*.log
+
+__pycache__/
+*.pyc

@@ -1,0 +1,21 @@
+--agent hrt --signal causal --alpha_unit step  --seed 0
+--agent hrt --signal causal --alpha_unit episode --tag _ep --seed 0
+--agent hrt --signal paper --alpha_unit step  --seed 0
+--agent hrt --signal paper --alpha_unit episode --tag _ep --seed 0
+--agent ppo --signal causal --seed 0
+--agent hrt --signal causal --alpha_unit step  --seed 1
+--agent hrt --signal causal --alpha_unit episode --tag _ep --seed 1
+--agent hrt --signal paper --alpha_unit step  --seed 1
+--agent hrt --signal paper --alpha_unit episode --tag _ep --seed 1
+--agent ppo --signal causal --seed 1
+--agent hrt --signal causal --alpha_unit step  --seed 2
+--agent hrt --signal causal --alpha_unit episode --tag _ep --seed 2
+--agent hrt --signal paper --alpha_unit step  --seed 2
+--agent hrt --signal paper --alpha_unit episode --tag _ep --seed 2
+--agent ppo --signal causal --seed 2
+--agent hrt --signal causal --alpha_unit step  --seed 3
+--agent hrt --signal causal --alpha_unit episode --tag _ep --seed 3
+--agent hrt --signal paper --alpha_unit step  --seed 3
+--agent hrt --signal paper --alpha_unit episode --tag _ep --seed 3
+--agent ppo --signal causal --seed 3
+--agent ddpg --signal causal --seed 4
