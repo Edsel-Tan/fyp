@@ -5,6 +5,12 @@
 #
 #   PARALLEL=12 ./hrt/run_sweep.sh          # concurrency (default 12)
 #   PYTHON=.venv/bin/python ./hrt/run_sweep.sh
+#   RESUME=0 ./hrt/run_sweep.sh             # re-run arms that already finished
+#
+# Resumable by default: a run whose artifacts/runs/*.json already exists is
+# skipped, so a sweep killed by a scheduler time limit can simply be relaunched
+# and will pick up where it stopped. Each run writes its own JSON on completion,
+# so progress is never lost below run granularity.
 #
 # Each worker holds a ~2 GB replay buffer, so keep PARALLEL under
 # (free RAM in GB / 2.2). GPU memory is not the binding constraint: the networks
@@ -25,6 +31,24 @@ export OMP_NUM_THREADS="${OMP_NUM_THREADS:-2}" MKL_NUM_THREADS="${MKL_NUM_THREAD
 xargs -a "${JOBS:-hrt/jobs.txt}" -P "$PARALLEL" -I{} bash -c '
   set -- {}
   n=$(echo "$*" | tr -s " " | tr " " "_" | tr -d "\-")
+
+  # expected result path, mirroring train.py: {agent}_{signal}{tag}_s{seed}.json
+  agent=""; signal="causal"; tag=""; seed=""
+  prev=""
+  for tok in "$@"; do
+    case "$prev" in
+      --agent) agent="$tok" ;; --signal) signal="$tok" ;;
+      --tag) tag="$tok" ;;   --seed) seed="$tok" ;;
+    esac
+    prev="$tok"
+  done
+  out="hrt/artifacts/runs/${agent}_${signal}${tag}_s${seed}.json"
+
+  if [ "'"${RESUME:-1}"'" = "1" ] && [ -s "$out" ]; then
+    echo "skip (done): $out"
+    exit 0
+  fi
+
   "'"$PYTHON"'" hrt/train.py $* --timesteps '"$STEPS"' --eval_every 25000 \
     > "hrt/logs/${n}.log" 2>&1
   tail -1 "hrt/logs/${n}.log"
