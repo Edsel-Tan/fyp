@@ -1,0 +1,518 @@
+<title>Six Ideas, One Tape</title>
+<style>
+  :root{
+    --bg:#F5F7F8; --surface:#FFFFFF; --surface-2:#EDF1F3;
+    --ink:#111619; --ink-2:#3D4A52; --muted:#68767F;
+    --rule:#D8E0E4; --rule-strong:#B9C6CC;
+    --yes:#136F5B; --yes-soft:#DCEFE9;
+    --no:#A8323F;  --no-soft:#F7E1E3;
+    --warn:#9A6410; --warn-soft:#F7EBD6;
+    --accent:#136F5B;
+    --shadow:0 1px 2px rgba(17,22,25,.05),0 8px 24px -12px rgba(17,22,25,.18);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0C1013; --surface:#141A1E; --surface-2:#1B2328;
+      --ink:#E7EDF0; --ink-2:#B3C0C7; --muted:#85939C;
+      --rule:#263137; --rule-strong:#3A484F;
+      --yes:#4FC9A9; --yes-soft:#10312A;
+      --no:#EE8C96;  --no-soft:#3A1D21;
+      --warn:#E3AC55; --warn-soft:#3A2C13;
+      --accent:#4FC9A9;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 28px -14px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0C1013; --surface:#141A1E; --surface-2:#1B2328;
+    --ink:#E7EDF0; --ink-2:#B3C0C7; --muted:#85939C;
+    --rule:#263137; --rule-strong:#3A484F;
+    --yes:#4FC9A9; --yes-soft:#10312A;
+    --no:#EE8C96;  --no-soft:#3A1D21;
+    --warn:#E3AC55; --warn-soft:#3A2C13;
+    --accent:#4FC9A9;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 28px -14px rgba(0,0,0,.7);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:16px; line-height:1.6; margin:0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:clamp(28px,5vw,72px) clamp(18px,4vw,32px) 96px}
+  .mono{font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+  .tnum{font-variant-numeric:tabular-nums}
+
+  /* ---- masthead ---- */
+  .eyebrow{
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 18px;
+  }
+  h1{
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:clamp(30px,5.2vw,46px); line-height:1.08; letter-spacing:-.025em;
+    font-weight:600; margin:0 0 20px; text-wrap:balance;
+  }
+  .standfirst{font-size:clamp(17px,2vw,19px);color:var(--ink-2);max-width:64ch;margin:0 0 28px}
+  .meta{
+    display:flex;flex-wrap:wrap;gap:8px 22px;padding:16px 0;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    font-size:12.5px;color:var(--muted);
+  }
+  .meta b{color:var(--ink-2);font-weight:600}
+
+  /* ---- sections ---- */
+  section{margin-top:56px}
+  h2{
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:13px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+    color:var(--accent);margin:0 0 6px;
+  }
+  h2 + .lede{font-size:clamp(20px,2.6vw,25px);line-height:1.28;letter-spacing:-.015em;
+    font-weight:600;margin:0 0 20px;max-width:56ch;text-wrap:balance}
+  h3{font-size:17px;margin:32px 0 8px;letter-spacing:-.01em}
+  p{margin:0 0 15px;max-width:68ch}
+  a{color:var(--accent)}
+
+  /* ---- verdict table ---- */
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 8px}
+  table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+  th,td{text-align:left;padding:11px 14px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+  th{
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    font-weight:600;border-bottom:1px solid var(--rule-strong);white-space:nowrap;
+  }
+  td.num{font-family:ui-monospace,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  .chip{
+    display:inline-block;padding:2px 9px;border-radius:3px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;
+    font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;white-space:nowrap;
+  }
+  .chip.go{background:var(--yes-soft);color:var(--yes)}
+  .chip.caution{background:var(--warn-soft);color:var(--warn)}
+  .chip.stop{background:var(--no-soft);color:var(--no)}
+
+  /* ---- readiness rail (echoes a 0-1 market price) ---- */
+  .rail{display:flex;gap:3px;align-items:center}
+  .rail i{width:15px;height:7px;border-radius:1px;background:var(--rule-strong);display:block}
+  .rail i.on{background:var(--accent)}
+  .rail i.warnon{background:var(--warn)}
+  .rail i.stopon{background:var(--no)}
+
+  /* ---- idea cards ---- */
+  .idea{
+    background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+    padding:22px 24px;margin:0 0 16px;box-shadow:var(--shadow);
+  }
+  .idea header{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:baseline;margin-bottom:12px}
+  .idea .n{
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;
+    color:var(--muted);letter-spacing:.08em;
+  }
+  .idea h3{margin:0;font-size:17.5px;flex:1 1 240px;letter-spacing:-.01em}
+  .idea p{margin:0 0 10px;font-size:15px;color:var(--ink-2)}
+  .idea p:last-child{margin-bottom:0}
+  .verdictline{
+    display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;
+    margin-top:14px;padding-top:13px;border-top:1px solid var(--rule);
+    font-size:12.5px;color:var(--muted);
+  }
+
+  /* ---- callout ---- */
+  .callout{
+    border-left:3px solid var(--accent);background:var(--surface-2);
+    padding:16px 20px;border-radius:0 5px 5px 0;margin:22px 0;
+  }
+  .callout.risk{border-left-color:var(--no)}
+  .callout p{margin:0;font-size:15px;color:var(--ink-2)}
+  .callout p + p{margin-top:10px}
+  .callout strong{color:var(--ink)}
+
+  /* ---- stat row ---- */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+    background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin:22px 0}
+  .stat{background:var(--surface);padding:16px 18px}
+  .stat .v{font-family:ui-monospace,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums;
+    font-size:24px;letter-spacing:-.02em;line-height:1.1;display:block;margin-bottom:5px}
+  .stat .k{font-size:12px;color:var(--muted);line-height:1.35;display:block}
+  .stat.pos .v{color:var(--yes)} .stat.neg .v{color:var(--no)} .stat.warn .v{color:var(--warn)}
+
+  ul,ol{margin:0 0 15px;padding-left:22px;max-width:68ch}
+  li{margin-bottom:7px}
+  code{
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;
+    background:var(--surface-2);padding:1.5px 5px;border-radius:3px;
+  }
+  hr{border:0;border-top:1px solid var(--rule);margin:48px 0}
+  .foot{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:13px;color:var(--muted)}
+  .foot p{max-width:68ch}
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">Data feasibility audit &middot; H398280 &middot; 17 Aug 2026</p>
+  <h1>Six ideas, one tape</h1>
+  <p class="standfirst">
+    Every prediction-market idea in the brainstorm rests on the same substrate: a Polymarket/Kalshi
+    trade tape that begins <b>21 May 2026</b> and an order book that is mostly not there. That single
+    fact reorders the recommendation.
+  </p>
+  <div class="meta">
+    <span><b>Source</b> lum.id/findata REST</span>
+    <span><b>Equity DB</b> 2,012,954 bars / 4,628 symbols</span>
+    <span><b>PM probes</b> 583 markets, 32 resolved tapes</span>
+  </div>
+
+  <section>
+    <h2>Headline</h2>
+    <p class="lede">The idea the brainstorm recommends is the one the data least supports.</p>
+    <p>
+      <code>fyp_ideas.md</code> lands on <b>idea 4 — RL market-making on prediction-market order
+      books</b>, partly because it "plugs directly into the lab's existing Polymarket data".
+      It does not. Polymarket order-book capture stopped on 29 July 2026, the snapshots that exist are
+      spaced ~3 minutes apart, and a large share of them carry depth on only one side or no depth at
+      all. Market-making is a microstructure problem being asked to run on data with neither the
+      resolution nor the continuity to support it.
+    </p>
+    <p>
+      Meanwhile <b>idea 1</b> (informed-trader decomposition) and <b>idea 3</b> (cross-venue
+      mispricing) are both far better provisioned than the document assumes — trades carry taker
+      wallet addresses, and the vendor already publishes cross-venue market matches, which is
+      normally the hardest part of idea 3.
+    </p>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Idea</th><th>Data readiness</th><th>Verdict</th><th>Binding constraint</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">1</td><td>Informed-trader vs. crowd decomposition</td>
+            <td><span class="rail"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td>
+            <td><span class="chip go">Strongest</span></td>
+            <td>3 months of tape</td>
+          </tr>
+          <tr>
+            <td class="num">2</td><td>Calibration &amp; price-signal decay after news</td>
+            <td><span class="rail"><i class="warnon"></i><i class="warnon"></i><i class="warnon"></i><i></i><i></i></span></td>
+            <td><span class="chip caution">Viable</span></td>
+            <td>Few resolved events in window</td>
+          </tr>
+          <tr>
+            <td class="num">3</td><td>Cross-platform mispricing (Polymarket vs Kalshi)</td>
+            <td><span class="rail"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td>
+            <td><span class="chip go">Strongest</span></td>
+            <td>Matching is pre-solved &rarr; novelty</td>
+          </tr>
+          <tr>
+            <td class="num">4</td><td>RL market-making on PM order books</td>
+            <td><span class="rail"><i class="stopon"></i><i></i><i></i><i></i><i></i></span></td>
+            <td><span class="chip stop">Blocked</span></td>
+            <td>No usable LOB history</td>
+          </tr>
+          <tr>
+            <td class="num">5</td><td>LLM-reasoning-gated RL, thesis-consistency reward</td>
+            <td><span class="rail"><i class="warnon"></i><i class="warnon"></i><i class="warnon"></i><i></i><i></i></span></td>
+            <td><span class="chip caution">Viable</span></td>
+            <td>Equity data usable; news depth untested</td>
+          </tr>
+          <tr>
+            <td class="num">6</td><td>Hierarchical RL execution + transaction costs</td>
+            <td><span class="rail"><i class="warnon"></i><i class="warnon"></i><i></i><i></i><i></i></span></td>
+            <td><span class="chip caution">Viable</span></td>
+            <td>Daily bars only; no intraday depth pulled</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);max-width:68ch">
+      Readiness is my judgement of how much of the required data exists today, not a measure of
+      academic merit. Ideas 5 and 6 were assessed against the equity database only; I did not probe
+      the news and intraday endpoints they would additionally need.
+    </p>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>Constraint 01</h2>
+    <p class="lede">The prediction-market tape starts 21 May 2026 and is still running.</p>
+    <p>
+      Across a 583-market sample, no captured Polymarket trade predates
+      <span class="mono">2026-05-21T19:49Z</span>, and the newest reaches
+      <span class="mono">2026-08-16T10:56Z</span> — about 12 hours before this audit. The boundary is
+      the vendor's capture start, not market age: markets that opened in December 2025 still have no
+      tape before 21 May.
+    </p>
+    <p>
+      This is the governing constraint on ideas 1, 2 and 3. You have <b>~3 months of history that
+      grows a day per day</b>, which is workable for a thesis running to spring but rules out any
+      design needing the 2024 election period. Kalshi's tape reaches back further — trades appear
+      from April 2026 on the market I traced — so a Kalshi-anchored study buys extra history.
+    </p>
+    <div class="callout risk">
+      <p>
+        <strong>Watch the <code>volume</code> field.</strong> The Fed June market advertises
+        <span class="mono tnum">$43,061,416</span> of volume; the captured tape over its whole life
+        holds <span class="mono tnum">$1,295,360</span> across 2,635 trades. The field is
+        Polymarket's lifetime figure and is not comparable to anything you can compute locally.
+        Several markets showing tens of millions in volume returned <b>zero</b> captured trades.
+        Rank markets by captured trade count, never by <code>volume</code>.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Constraint 02</h2>
+    <p class="lede">The order book is the weak link, and it fails differently on each venue.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>&nbsp;</th><th>Polymarket</th><th>Kalshi</th></tr></thead>
+        <tbody>
+          <tr><td><b>Latest snapshot</b></td><td class="num" style="color:var(--no)">2026-07-29</td><td class="num" style="color:var(--yes)">2026-08-16</td></tr>
+          <tr><td><b>Still capturing?</b></td><td>No — nothing in August across 14 open markets</td><td>Yes</td></tr>
+          <tr><td><b>Cadence</b></td><td class="num">~169 s median, irregular</td><td class="num">300 s, fixed</td></tr>
+          <tr><td><b>Two-sided depth</b></td><td>Frequently one-sided or empty</td><td class="num">500/500 snapshots</td></tr>
+          <tr><td><b>Depth</b></td><td>Deep when present (91 ask levels seen)</td><td class="num">38 levels median</td></tr>
+          <tr><td><b>History</b></td><td>~30 May &rarr; 29 Jul, gappy</td><td>~30 Jul onward</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Kalshi's book is genuinely good data — perfectly regular 5-minute snapshots, always two-sided,
+      ~38 price levels a side. But it only starts around 30 July, so there is roughly a fortnight of
+      it. Polymarket has a longer window and richer depth, but capture has stopped and the snapshots
+      are unreliable.
+    </p>
+    <p>
+      Either way, <b>5-minute snapshots cannot support a market-making agent</b>. Quoting, inventory
+      management and adverse selection all live at second-or-finer resolution; at 300 seconds you are
+      not modelling a book, you are interpolating one. That is what blocks idea 4 in its stated form.
+    </p>
+    <div class="callout risk">
+      <p>
+        <strong>The live stream does not work.</strong> <code>/prediction-markets/stream</code> never
+        returns HTTP headers at all — it simply hangs, on both <code>condition_ids</code> and
+        <code>asset_ids</code> subscriptions. The control, <code>/quotes/stream</code>, answers 200
+        immediately and delivers crypto ticks at ~78 ms. So the vendor's prediction-market streaming
+        path cannot currently be used to capture your own high-frequency book.
+      </p>
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>Finding 01</h2>
+    <p class="lede">Concentration in a single market reproduces the paper's premise almost exactly.</p>
+    <p>
+      I pulled the complete captured tape for the resolved market <i>"Will there be no change in Fed
+      interest rates after the June 2026 meeting?"</i> — 2,635 trades, 811 unique takers — and
+      measured how notional is distributed across wallets.
+    </p>
+    <div class="stats">
+      <div class="stat"><span class="v">93.2%</span><span class="k">of notional from the top 3% of takers</span></div>
+      <div class="stat"><span class="v">84.4%</span><span class="k">from the top 1% — just 8 wallets</span></div>
+      <div class="stat"><span class="v">0.972</span><span class="k">Gini across taker notional</span></div>
+      <div class="stat"><span class="v">1</span><span class="k">median trades per taker</span></div>
+    </div>
+    <p>
+      Gómez-Cram et al. report that ~3% of Polymarket traders drive price discovery. On this market,
+      3% of takers supply 93% of the flow. The premise of idea 1 is directly observable in this
+      dataset, which is a meaningful de-risking of that project.
+    </p>
+
+    <h3>And the crowd shows a textbook favourite-longshot bias</h3>
+    <p>
+      The market resolved YES and traded near 0.98 for most of its captured life. Splitting takers by
+      trade size shows who was on which side:
+    </p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Taker group</th><th>Trades</th><th>Bet the YES (winning) side</th><th>Mean price paid</th><th>Mean ticket</th></tr></thead>
+        <tbody>
+          <tr><td>Smallest 50%</td><td class="num">1,317</td><td class="num" style="color:var(--no)">35.1%</td><td class="num">0.356</td><td class="num">$7</td></tr>
+          <tr><td>50–90%</td><td class="num">1,054</td><td class="num" style="color:var(--no)">34.3%</td><td class="num">0.351</td><td class="num">$37</td></tr>
+          <tr><td>Top 10%</td><td class="num">264</td><td class="num">51.1%</td><td class="num">0.511</td><td class="num">$4,722</td></tr>
+          <tr><td>Top 1%</td><td class="num">27</td><td class="num" style="color:var(--yes)">59.3%</td><td class="num">0.590</td><td class="num">$44,221</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Small takers bought the 2-cent longshot roughly two times in three; the largest takers sided
+      with the favourite. Per-trade ROI follows: the bottom nine size deciles all lose, the top decile
+      is the only one that does not.
+    </p>
+  </section>
+
+  <section>
+    <h2>Finding 02</h2>
+    <p class="lede">Scaled to 32 resolved markets, that edge does not survive.</p>
+    <p>
+      I repeated the exercise on every cleanly-resolved market I could find inside the tape window
+      with at least 150 captured trades — 32 markets spanning Fed decisions, NBA playoffs, Bitcoin
+      thresholds and three national elections. Pooled by notional, the result <b>reverses</b>:
+    </p>
+    <div class="stats">
+      <div class="stat"><span class="v">+1.33%</span><span class="k">pooled ROI, top 3% of wallets</span></div>
+      <div class="stat"><span class="v">+2.51%</span><span class="k">pooled ROI, bottom 90% — the crowd wins</span></div>
+      <div class="stat warn"><span class="v">20/32</span><span class="k">markets where whales beat the crowd (62%)</span></div>
+      <div class="stat neg"><span class="v">t = 0.16</span><span class="k">on the mean per-market difference</span></div>
+    </div>
+    <p>
+      The pooled figure is also fragile to a single observation. Removing one market — a Seoul mayoral
+      contest where a handful of small wallets caught a +148% move — flips the crowd from
+      <span class="mono">+2.51%</span> to <span class="mono">&minus;4.08%</span> while barely moving
+      the whales (<span class="mono">+0.91%</span>). Per-market ROI differences have a standard
+      deviation of <span class="mono">32.7%</span> against a mean of <span class="mono">+0.90%</span>.
+    </p>
+    <div class="callout">
+      <p>
+        <strong>This is the useful result, not a failed one.</strong> It says the informed-trader
+        effect is real in direction (62% sign test, and whales beat the crowd once one outlier is
+        removed) but hopelessly underpowered at n=32 with three months of tape. It also says
+        <b>trader ROI is the wrong estimator</b> — the literature measures contribution to price
+        discovery, not profit, and profit in a market that opens at 0.98 is nearly all noise.
+      </p>
+      <p>
+        For idea 1 that converts a vague research question into a concrete methodological plan:
+        scale to hundreds of markets as the tape accumulates, and use a price-discovery measure
+        rather than PnL.
+      </p>
+    </div>
+    <div class="callout risk">
+      <p>
+        <strong>Do not label "informed" wallets from the leaderboard.</strong> Its PnL is computed
+        over each wallet's entire history, so using it to classify traders in a market you are
+        forecasting leaks the outcome — straightforward look-ahead bias. It is also stale: of the top
+        100 wallets I sampled, only <b>48%</b> have traded since the tape begins, and 13 last traded
+        in November 2024. Derive informedness from the tape, on a rolling backward-looking window.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Finding 03</h2>
+    <p class="lede">Cross-venue matching is already done for you — across four venues, not two.</p>
+    <p>
+      <code>/prediction-markets/matched-pairs</code> returns, for a Polymarket market, its
+      counterparts elsewhere with a similarity score and an <code>exact</code>/<code>related</code>
+      label. Of 583 sampled Polymarket markets, <b>148 (25%)</b> have at least one match and
+      <b>140 (24%)</b> have an exact one. Counterparties break down as Kalshi 184, Limitless 17,
+      Opinion 3.
+    </p>
+    <p>
+      That is a real gift and a real problem. The gift: idea 3's data-engineering burden mostly
+      evaporates, and a four-venue study is more interesting than the two-venue one the brainstorm
+      describes. The problem: <b>semantic matching was going to be a good chunk of the contribution</b>.
+      If the vendor hands you the pairs, idea 3 needs its novelty somewhere else — the obvious
+      candidates being the structural asymmetry the document already identifies (CFTC-regulated venue
+      versus not), or auditing the matches themselves, since a 97-similarity "exact" pair can still
+      have materially different resolution criteria.
+    </p>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>The equity database</h2>
+    <p class="lede">Sound, with two defects that will silently corrupt any returns work.</p>
+    <p>
+      <code>data/findata.sqlite</code> (248 MB) holds 2,012,954 daily bars for 4,628 symbols from
+      19 Aug 2024 to 14 Aug 2026, plus 6,270 latest-quarter and 72,525 historical fundamental records.
+      Median 494 bars per symbol is exactly right for two years of US sessions. Internal OHLC
+      consistency is good: 157 violations in two million rows.
+    </p>
+    <p>The two defects both bite returns calculations:</p>
+    <ol>
+      <li>
+        <b>No split adjustment.</b> <code>adj_close</code> and <code>vwap</code> are 100% NULL, as the
+        earlier session flagged. Screening for extreme one-day moves above a $1 price floor leaves
+        <b>282 symbols (6.1%)</b> with discontinuities, and the ratios cluster hard at exactly 2.0×
+        (81 events) — real splits, not volatility. Fetch <code>/splits/{symbol}</code> and back-adjust
+        before computing anything.
+      </li>
+      <li>
+        <b>Sub-penny prices detonate return series.</b> 6,974 rows close below $0.001 and 109 close at
+        exactly zero. Computed naively, daily returns reach <span class="mono">+3,749,999%</span> and
+        the cross-sectional mean return is <span class="mono">+400%</span>. With a $1 floor on both
+        legs the distribution becomes sane — median 0.00%, 1st percentile &minus;8.9%, 99th +10.4%.
+        Apply a price floor and a liquidity screen before any modelling.
+      </li>
+    </ol>
+    <p>
+      Composition is worth knowing before designing a cross-sectional study: 1,449 of the covered
+      names are Financial Services (many closed-end funds and trusts), median market cap is $1.16 B,
+      and only 55 names exceed $200 B. Fundamentals fields are a clean 25-item set — revenue, EBITDA,
+      FCF, capex, debt, equity — quarterly, reaching back to 1994 for long-lived filers.
+    </p>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>Recommendation</h2>
+    <p class="lede">Lead with idea 1, and start capturing your own book today either way.</p>
+    <p>
+      <b>Idea 1 is now the strongest candidate</b>, inverting the brainstorm's ranking. Every input it
+      needs exists and is live: trade-level tape with taker wallets, wallet profiles carrying
+      behavioural style flags (<code>is_whale</code>, <code>is_market_maker</code>,
+      <code>is_contrarian</code>…), position and activity history, and top-holder snapshots. I have
+      already reproduced its central premise, found a clean secondary result in the longshot bias, and
+      established that the naive version of its test fails — which is exactly the kind of groundwork
+      that makes a first supervision meeting productive.
+    </p>
+    <p>
+      <b>Idea 3 is the strong second</b> and pairs naturally with idea 1: both are measurement studies
+      on the same tape, so the data engineering is shared. Its open question is novelty, not
+      feasibility.
+    </p>
+    <p>
+      <b>Idea 4 should not be committed to on current data.</b> If the RL-market-making angle matters
+      to you — and it is the one that best satisfies the "RL for trading" half of the brief — the
+      salvage is to <b>run your own order-book capture now</b>, polling Polymarket's and Kalshi's
+      public CLOB endpoints directly rather than through this vendor, whose Polymarket capture has
+      stopped and whose streaming route is broken. Every week you delay is a week of book you cannot
+      recover later. Six months of self-captured second-resolution book would make idea 4 genuinely
+      strong by spring; without it the project has no simulator to learn against.
+    </p>
+
+    <h3>What I would do next</h3>
+    <ol>
+      <li><b>Start a book capture daemon this week</b> — Kalshi and Polymarket public APIs, 1–5 s
+        polling, append-only. Cheap to run, impossible to backfill.</li>
+      <li><b>Mirror the trade tape locally</b>, paging by time window, for every market with captured
+        trades. It is small, and it stops you re-hitting a vendor that has already had a multi-hour
+        outage during this project.</li>
+      <li><b>Rebuild the idea-1 test around price discovery</b> — information shares or a
+        Hasbrouck-style decomposition — rather than trader ROI, and let market count grow with the
+        tape.</li>
+      <li><b>Audit twenty matched pairs by hand</b> before betting idea 3 on them; confirm that
+        "exact" survives a reading of both resolution rules.</li>
+      <li><b>Back-adjust the equity bars</b> for splits and add a price/liquidity screen, so ideas 5
+        and 6 start from a clean panel.</li>
+    </ol>
+  </section>
+
+  <div class="foot">
+    <p>
+      Scripts for the reproducible parts are in <code>scripts/</code> —
+      <code>pm_informed_vs_crowd.py</code>, <code>pm_matched_pairs.py</code>,
+      <code>pm_tape_coverage.py</code>. All require <code>LUMID_TOKEN</code> in the environment.
+    </p>
+    <p style="margin-top:10px">
+      Caveats on my own numbers: the 32-market panel is a convenience sample drawn from keyword
+      searches, not the full market universe, so it is not a clean population estimate; single-market
+      results come from one Fed market that was near-resolved throughout, which compresses every ROI
+      toward zero; and API list routes cap at 500–1000 rows, so a handful of the busiest windows may
+      be truncated despite the time-paging. The token pasted into the earlier session transcript is
+      still worth rotating.
+    </p>
+  </div>
+
+</div>

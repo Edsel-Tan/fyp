@@ -1,0 +1,486 @@
+<title>The Un-Rebalanced 30</title>
+<style>
+  :root{
+    --bg:#F5F7F8; --surface:#FFFFFF; --surface-2:#EDF1F3;
+    --ink:#111619; --ink-2:#3D4A52; --muted:#68767F;
+    --rule:#D8E0E4; --rule-strong:#B9C6CC;
+    --yes:#136F5B; --yes-soft:#DCEFE9;
+    --no:#A8323F;  --no-soft:#F7E1E3;
+    --warn:#9A6410; --warn-soft:#F7EBD6;
+    --accent:#136F5B;
+    --band:#136F5B; --band-soft:rgba(19,111,91,.16);
+    --shadow:0 1px 2px rgba(17,22,25,.05),0 8px 24px -12px rgba(17,22,25,.18);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0C1013; --surface:#141A1E; --surface-2:#1B2328;
+      --ink:#E7EDF0; --ink-2:#B3C0C7; --muted:#85939C;
+      --rule:#263137; --rule-strong:#3A484F;
+      --yes:#4FC9A9; --yes-soft:#10312A;
+      --no:#EE8C96;  --no-soft:#3A1D21;
+      --warn:#E3AC55; --warn-soft:#3A2C13;
+      --accent:#4FC9A9;
+      --band:#4FC9A9; --band-soft:rgba(79,201,169,.18);
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 28px -14px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0C1013; --surface:#141A1E; --surface-2:#1B2328;
+    --ink:#E7EDF0; --ink-2:#B3C0C7; --muted:#85939C;
+    --rule:#263137; --rule-strong:#3A484F;
+    --yes:#4FC9A9; --yes-soft:#10312A;
+    --no:#EE8C96;  --no-soft:#3A1D21;
+    --warn:#E3AC55; --warn-soft:#3A2C13;
+    --accent:#4FC9A9;
+    --band:#4FC9A9; --band-soft:rgba(79,201,169,.18);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 28px -14px rgba(0,0,0,.7);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:16px; line-height:1.6; margin:0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:clamp(28px,5vw,72px) clamp(18px,4vw,32px) 96px}
+  .mono{font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+  .tnum{font-variant-numeric:tabular-nums}
+
+  .eyebrow{
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 18px;
+  }
+  h1{
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:clamp(30px,5.2vw,46px); line-height:1.08; letter-spacing:-.025em;
+    font-weight:600; margin:0 0 20px; text-wrap:balance;
+  }
+  .standfirst{font-size:clamp(17px,2vw,19px);color:var(--ink-2);max-width:64ch;margin:0 0 28px}
+  .meta{
+    display:flex;flex-wrap:wrap;gap:8px 22px;padding:16px 0;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    font-size:12.5px;color:var(--muted);
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  .meta b{color:var(--ink-2);font-weight:600}
+
+  h2{
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:clamp(19px,2.6vw,23px);letter-spacing:-.015em;font-weight:600;
+    margin:0 0 6px;text-wrap:balance;
+  }
+  h3{font-size:15.5px;font-weight:650;margin:0 0 6px;letter-spacing:-.005em}
+  section{margin-top:52px;display:flex;flex-direction:column;gap:18px}
+  .sec-head{display:flex;flex-direction:column;gap:6px;
+    border-left:2px solid var(--accent);padding-left:14px}
+  .sec-head p{margin:0;color:var(--ink-2);max-width:68ch}
+  p{margin:0;max-width:70ch}
+  p + p{margin-top:12px}
+  a{color:var(--accent)}
+
+  .verdict{
+    background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+    box-shadow:var(--shadow);padding:22px 24px;
+    display:flex;flex-direction:column;gap:14px;margin-top:34px;
+  }
+  .verdict .line{display:flex;gap:12px;align-items:baseline}
+  .verdict .tag{
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+    padding:3px 8px;border-radius:2px;white-space:nowrap;flex:none;min-width:74px;text-align:center;
+  }
+  .t-yes{background:var(--yes-soft);color:var(--yes)}
+  .t-no{background:var(--no-soft);color:var(--no)}
+  .t-warn{background:var(--warn-soft);color:var(--warn)}
+
+  .scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{padding:7px 11px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--rule)}
+  th{
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+    font-weight:600;text-align:right;background:var(--surface-2);position:sticky;top:0;
+  }
+  th:first-child,td:first-child{text-align:left}
+  th:nth-child(2),td:nth-child(2){text-align:left}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:var(--surface-2)}
+  td.sym{font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;font-weight:650}
+  td.num{font-variant-numeric:tabular-nums;font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+  .pos{color:var(--yes)}.neg{color:var(--no)}
+  .sect{color:var(--muted);font-size:12px}
+  caption{caption-side:bottom;text-align:left;padding:10px 11px;color:var(--muted);font-size:12.5px;line-height:1.5}
+
+  .note{
+    background:var(--surface-2);border-left:2px solid var(--rule-strong);
+    padding:14px 16px;font-size:14.5px;color:var(--ink-2);border-radius:0 3px 3px 0;
+  }
+  .note.warn{border-left-color:var(--warn);background:var(--warn-soft);color:var(--ink)}
+  .note.warn b{color:var(--warn)}
+
+  ol.defects{list-style:none;counter-reset:d;margin:0;padding:0;
+    display:flex;flex-direction:column;gap:2px}
+  ol.defects li{
+    counter-increment:d;display:grid;grid-template-columns:34px 1fr;gap:14px;
+    padding:14px 16px;background:var(--surface);border:1px solid var(--rule);
+    border-radius:3px;font-size:14.5px;
+  }
+  ol.defects li::before{
+    content:counter(d,decimal-leading-zero);
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11.5px;color:var(--muted);letter-spacing:.04em;padding-top:3px;
+  }
+  ol.defects b{display:block;margin-bottom:3px}
+  ol.defects code{
+    font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12.5px;background:var(--surface-2);padding:1px 5px;border-radius:2px;
+  }
+
+  figure{margin:0;background:var(--surface);border:1px solid var(--rule);
+    border-radius:3px;padding:18px 18px 12px}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{color:var(--muted);font-size:12.5px;margin-top:10px;line-height:1.5;max-width:76ch}
+  .sv-lbl{font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11px;fill:var(--muted)}
+  .sv-lbl-hi{fill:var(--ink);font-weight:650}
+
+  ul.plain{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;max-width:70ch}
+  ul.plain li{padding-left:2px}
+
+  footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);
+    color:var(--muted);font-size:12.5px;line-height:1.6}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">Findata · 20 years · 15.2M bars · buy once, hold</p>
+  <h1>The Un-Rebalanced 30</h1>
+  <p class="standfirst">
+    A 30-name equal-weight portfolio meant to be bought once and left alone.
+    With twenty years of tape instead of two, the screen can finally be tested
+    properly — and the answer is that it only works if you actually hold it.
+  </p>
+
+  <div class="meta">
+    <span>Tape <b>2006-07-03 → 2026-08-07</b></span>
+    <span>Trading days <b>5,056</b></span>
+    <span>Bars <b>15.2M</b></span>
+    <span>Investable <b>1,913</b></span>
+    <span>Passed screen <b>262</b></span>
+    <span>Held <b>30</b></span>
+  </div>
+
+  <div class="verdict">
+    <div class="line">
+      <span class="tag t-yes mono">Answer</span>
+      <p>30 names, 3.33% each, nine sectors, no trades. Wired into the tracker as
+      the benchmark <span class="mono">FYP30</span>.</p>
+    </div>
+    <div class="line">
+      <span class="tag t-yes mono">Finding</span>
+      <p>The edge is <b>entirely a function of holding period</b>. Re-formed every
+      year it <em>loses</em> to an equal-weight basket by 3.0 points a year. Held
+      three years or more it wins — +2.5 points at 3 years, +2.4 at 7, beating
+      equal weight in 9 of 13 and 7 of 9 vintages. This is a holding rule, not a
+      trading signal.</p>
+    </div>
+    <div class="line">
+      <span class="tag t-no mono">Correction</span>
+      <p>My earlier report called missing dividends "the largest single distortion".
+      That was <b>wrong</b>. The <span class="mono">close</span> column is already a
+      total-return series; only the <span class="mono">adj_close</span> field is
+      NULL, and I read the field name instead of testing the data. Every return
+      below includes reinvested dividends.</p>
+    </div>
+    <div class="line">
+      <span class="tag t-warn mono">Caveat</span>
+      <p>Against a <em>cap-weighted</em> universe the edge is a coin flip
+      (15.4% vs 14.7% across start years). The reliable win is over equal weight.
+      And the long-horizon vintages overlap heavily, so treat the t-statistics as
+      descriptive.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <h2>Holding period is the whole story</h2>
+      <p>The same 25 names, the same formation dates, the same point-in-time data.
+      Only the holding period changes.</p>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>Formed each 1 August from 2011, held with zero trades. Returns are annualised
+        and include dividends. "Percentile" is the screened basket's rank against 1,000 random
+        25-name baskets drawn from the identical universe on the identical date — 50% means the
+        screen added nothing.</caption>
+        <thead><tr><th>Hold</th><th>Vintages</th><th>Screen</th><th>Equal wt</th><th>Cap wt</th>
+        <th>Excess vs EW</th><th>t</th><th>Beat EW</th><th>Percentile</th></tr></thead>
+        <tbody>
+          <tr><td>1 year</td><td class="num">15</td><td class="num">10.66%</td><td class="num">13.68%</td><td class="num">11.69%</td><td class="num neg">−3.03%</td><td class="num">−1.39</td><td class="num">4 / 15</td><td class="num neg">40%</td></tr>
+          <tr><td>2 years</td><td class="num">14</td><td class="num">13.06%</td><td class="num">12.72%</td><td class="num">12.23%</td><td class="num">+0.34%</td><td class="num">0.27</td><td class="num">7 / 14</td><td class="num">52%</td></tr>
+          <tr><td>3 years</td><td class="num">13</td><td class="num">14.68%</td><td class="num">12.22%</td><td class="num">12.41%</td><td class="num pos">+2.46%</td><td class="num">1.98</td><td class="num">9 / 13</td><td class="num pos">67%</td></tr>
+          <tr><td>5 years</td><td class="num">11</td><td class="num">13.24%</td><td class="num">11.98%</td><td class="num">13.55%</td><td class="num pos">+1.26%</td><td class="num">1.25</td><td class="num">7 / 11</td><td class="num pos">63%</td></tr>
+          <tr><td>7 years</td><td class="num">9</td><td class="num">14.57%</td><td class="num">12.18%</td><td class="num">14.03%</td><td class="num pos">+2.38%</td><td class="num">2.38</td><td class="num">7 / 9</td><td class="num pos">72%</td></tr>
+          <tr><td>10 years</td><td class="num">6</td><td class="num">13.39%</td><td class="num">12.43%</td><td class="num">13.98%</td><td class="num pos">+0.96%</td><td class="num">1.45</td><td class="num">5 / 6</td><td class="num pos">69%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>At one year the screen is actively harmful: it loses to a random basket 60% of
+    the time. The sign flips at two years and the advantage is established by three.
+    That is what you would expect from a rule that selects durable, cash-generative
+    businesses — the quality shows up in compounding, not in the next four earnings
+    prints, and over twelve months the defensive tilt just costs you beta in risk-on
+    years.</p>
+
+    <div class="note warn">
+      <b>Read the overlap warning seriously.</b> A 10-year column built from annual
+      start dates on a 20-year tape has at most two non-overlapping windows. The six
+      vintages there share most of their history with each other. The 1- and 2-year
+      rows are close to independent; the 7- and 10-year rows are close to a single
+      observation dressed up as several.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Why thirty names</h2>
+      <p>Re-derived at the horizon that actually applies. Dispersion between single
+      stocks grows with the square root of time, so a basket sized for one year is
+      undersized for ten.</p>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>3,000 random equal-weight baskets per size, bought once and held ten years,
+        averaged across formation years 2011–2016. Terminal wealth is linear in the weights, so
+        the median barely moves; what diversification buys is the left tail.</caption>
+        <thead><tr><th>Positions</th><th>Median CAGR</th><th>5th pct</th><th>95th pct</th>
+        <th>P(CAGR &lt; 0)</th><th>P(CAGR &lt; 5%)</th><th>Largest weight at year 10</th></tr></thead>
+        <tbody>
+          <tr><td class="num">5</td><td class="num">11.46%</td><td class="num neg">4.14%</td><td class="num">19.35%</td><td class="num">1.0%</td><td class="num neg">8.7%</td><td class="num neg">41.9%</td></tr>
+          <tr><td class="num">10</td><td class="num">11.83%</td><td class="num">6.61%</td><td class="num">17.81%</td><td class="num">0.1%</td><td class="num">3.0%</td><td class="num">27.3%</td></tr>
+          <tr><td class="num">15</td><td class="num">12.00%</td><td class="num">7.71%</td><td class="num">17.02%</td><td class="num">0.0%</td><td class="num">1.1%</td><td class="num">21.1%</td></tr>
+          <tr><td class="num">20</td><td class="num">12.12%</td><td class="num">8.34%</td><td class="num">16.36%</td><td class="num">0.0%</td><td class="num">0.5%</td><td class="num">17.6%</td></tr>
+          <tr><td class="num">25</td><td class="num">12.17%</td><td class="num">8.75%</td><td class="num">16.02%</td><td class="num">0.0%</td><td class="num">0.2%</td><td class="num">15.2%</td></tr>
+          <tr style="background:var(--yes-soft)"><td class="num"><b>30</b></td><td class="num"><b>12.17%</b></td><td class="num pos"><b>9.08%</b></td><td class="num"><b>15.77%</b></td><td class="num">0.0%</td><td class="num"><b>0.1%</b></td><td class="num"><b>13.5%</b></td></tr>
+          <tr><td class="num">40</td><td class="num">12.25%</td><td class="num">9.55%</td><td class="num">15.29%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">11.2%</td></tr>
+          <tr><td class="num">60</td><td class="num">12.31%</td><td class="num">10.07%</td><td class="num">14.78%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">8.5%</td></tr>
+          <tr><td class="num">100</td><td class="num">12.36%</td><td class="num">10.61%</td><td class="num">14.25%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">6.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Thirty is where the fifth percentile stops improving quickly: 5 names risk a
+    9% chance of sub-5% annual returns over a decade, 30 names cut that to 0.1%, and
+    100 names buy another 1.5 points of tail for 70 more positions. Thirty also keeps
+    the drift tolerable — the largest position reaches 13.5% after ten untouched
+    years, which is concentrated but not a different portfolio.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>The portfolio</h2>
+      <p>Formed 7 August 2026, equal-weighted at 3.33%. Share counts are per $100,000.
+      Every name clears $21m median daily volume.</p>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>All ratios are trailing-twelve-month, built from quarterly filings lagged 75
+        days. Net debt / EBITDA below zero means net cash. Dividend yield is trailing cash paid
+        over price — the screen does not select for it.</caption>
+        <thead>
+          <tr><th>Sym</th><th>Company</th><th>Sector</th><th>Price</th><th>Shares<br>/$100k</th>
+          <th>Mcap $b</th><th>ROE</th><th>Op&nbsp;mgn</th><th>Rev&nbsp;g</th>
+          <th>FCF&nbsp;yld</th><th>ND/EBITDA</th><th>Div&nbsp;yld</th></tr>
+        </thead>
+        <tbody>
+<tr><td class="sym">EVR</td><td>Evercore Inc.</td><td class="sect">Financial Services</td><td class="num">305.94</td><td class="num">11</td><td class="num">13.2</td><td class="num">42%</td><td class="num">22%</td><td class="num">47%</td><td class="num">11.5%</td><td class="num">-0.1</td><td class="num">1.1%</td></tr>
+<tr><td class="sym">HCI</td><td>HCI Group, Inc.</td><td class="sect">Financial Services</td><td class="num">188.69</td><td class="num">18</td><td class="num">2.3</td><td class="num">28%</td><td class="num">48%</td><td class="num">22%</td><td class="num">18.7%</td><td class="num">-2.1</td><td class="num">0.8%</td></tr>
+<tr><td class="sym">DAVE</td><td>Dave Inc.</td><td class="sect">Technology</td><td class="num">317.93</td><td class="num">10</td><td class="num">4.7</td><td class="num">110%</td><td class="num">35%</td><td class="num">59%</td><td class="num">7.0%</td><td class="num">0.6</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">RRC</td><td>Range Resources Corporation</td><td class="sect">Energy</td><td class="num">38.28</td><td class="num">87</td><td class="num">8.8</td><td class="num">20%</td><td class="num">31%</td><td class="num">22%</td><td class="num">14.7%</td><td class="num">0.6</td><td class="num">1.0%</td></tr>
+<tr><td class="sym">NEM</td><td>Newmont Corporation</td><td class="sect">Basic Materials</td><td class="num">112.98</td><td class="num">30</td><td class="num">102.6</td><td class="num">24%</td><td class="num">53%</td><td class="num">25%</td><td class="num">12.0%</td><td class="num">-0.2</td><td class="num">0.9%</td></tr>
+<tr><td class="sym">EQT</td><td>EQT Corporation</td><td class="sect">Energy</td><td class="num">51.69</td><td class="num">64</td><td class="num">33.0</td><td class="num">13%</td><td class="num">47%</td><td class="num">58%</td><td class="num">12.3%</td><td class="num">0.7</td><td class="num">1.3%</td></tr>
+<tr><td class="sym">GPOR</td><td>Gulfport Energy Corporation</td><td class="sect">Energy</td><td class="num">162.76</td><td class="num">20</td><td class="num">2.9</td><td class="num">33%</td><td class="num">45%</td><td class="num">63%</td><td class="num">12.4%</td><td class="num">0.7</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">CARG</td><td>CarGurus, Inc.</td><td class="sect">Consumer Cyclical</td><td class="num">38.99</td><td class="num">85</td><td class="num">3.2</td><td class="num">63%</td><td class="num">22%</td><td class="num">6%</td><td class="num">8.8%</td><td class="num">0.4</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">KNSL</td><td>Kinsale Capital Group, Inc.</td><td class="sect">Financial Services</td><td class="num">373.76</td><td class="num">9</td><td class="num">7.6</td><td class="num">27%</td><td class="num">35%</td><td class="num">17%</td><td class="num">13.4%</td><td class="num">0.0</td><td class="num">0.2%</td></tr>
+<tr><td class="sym">ADBE</td><td>Adobe Inc.</td><td class="sect">Technology</td><td class="num">265.21</td><td class="num">13</td><td class="num">80.6</td><td class="num">63%</td><td class="num">37%</td><td class="num">11%</td><td class="num">12.8%</td><td class="num">0.0</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">ADSK</td><td>Autodesk, Inc.</td><td class="sect">Technology</td><td class="num">249.08</td><td class="num">13</td><td class="num">41.4</td><td class="num">46%</td><td class="num">27%</td><td class="num">18%</td><td class="num">6.6%</td><td class="num">0.0</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">AR</td><td>Antero Resources Corporation</td><td class="sect">Energy</td><td class="num">34.71</td><td class="num">96</td><td class="num">10.9</td><td class="num">12%</td><td class="num">21%</td><td class="num">23%</td><td class="num">16.3%</td><td class="num">2.2</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">PIPR</td><td>Piper Sandler Companies</td><td class="sect">Financial Services</td><td class="num">74.79</td><td class="num">45</td><td class="num">5.1</td><td class="num">21%</td><td class="num">22%</td><td class="num">32%</td><td class="num">11.1%</td><td class="num">-0.5</td><td class="num">4.3%</td></tr>
+<tr><td class="sym">ADT</td><td>ADT Inc.</td><td class="sect">Industrials</td><td class="num">7.64</td><td class="num">436</td><td class="num">4.7</td><td class="num">16%</td><td class="num">26%</td><td class="num">3%</td><td class="num">38.1%</td><td class="num">2.7</td><td class="num">2.9%</td></tr>
+<tr><td class="sym">CF</td><td>CF Industries Holdings, Inc.</td><td class="sect">Basic Materials</td><td class="num">114.35</td><td class="num">29</td><td class="num">16.2</td><td class="num">33%</td><td class="num">36%</td><td class="num">21%</td><td class="num">10.0%</td><td class="num">0.5</td><td class="num">1.7%</td></tr>
+<tr><td class="sym">DXCM</td><td>DexCom, Inc.</td><td class="sect">Healthcare</td><td class="num">84.75</td><td class="num">39</td><td class="num">27.1</td><td class="num">31%</td><td class="num">21%</td><td class="num">16%</td><td class="num">5.3%</td><td class="num">0.2</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">CRM</td><td>Salesforce, Inc.</td><td class="sect">Technology</td><td class="num">192.74</td><td class="num">17</td><td class="num">129.7</td><td class="num">13%</td><td class="num">21%</td><td class="num">10%</td><td class="num">11.1%</td><td class="num">0.8</td><td class="num">0.9%</td></tr>
+<tr><td class="sym">ARIS</td><td>Aris Water Solutions, Inc.</td><td class="sect">Basic Materials</td><td class="num">17.40</td><td class="num">192</td><td class="num">3.1</td><td class="num">11%</td><td class="num">42%</td><td class="num">104%</td><td class="num">5.7%</td><td class="num">0.2</td><td class="num">0.8%</td></tr>
+<tr><td class="sym">HL</td><td>Hecla Mining Company</td><td class="sect">Basic Materials</td><td class="num">16.85</td><td class="num">198</td><td class="num">10.4</td><td class="num">11%</td><td class="num">44%</td><td class="num">18%</td><td class="num">4.6%</td><td class="num">-0.4</td><td class="num">0.1%</td></tr>
+<tr><td class="sym">INCY</td><td>Incyte Corporation</td><td class="sect">Healthcare</td><td class="num">120.56</td><td class="num">28</td><td class="num">22.7</td><td class="num">26%</td><td class="num">27%</td><td class="num">21%</td><td class="num">6.4%</td><td class="num">-1.8</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">NBIX</td><td>Neurocrine Biosciences, Inc.</td><td class="sect">Healthcare</td><td class="num">163.41</td><td class="num">20</td><td class="num">16.9</td><td class="num">20%</td><td class="num">25%</td><td class="num">29%</td><td class="num">4.9%</td><td class="num">0.2</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">THC</td><td>Tenet Healthcare Corporation</td><td class="sect">Healthcare</td><td class="num">262.13</td><td class="num">13</td><td class="num">16.3</td><td class="num">35%</td><td class="num">16%</td><td class="num">5%</td><td class="num">20.6%</td><td class="num">2.3</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">RDDT</td><td>Reddit, Inc.</td><td class="sect">Communication Servic</td><td class="num">161.70</td><td class="num">21</td><td class="num">32.1</td><td class="num">22%</td><td class="num">25%</td><td class="num">71%</td><td class="num">2.7%</td><td class="num">-2.1</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">KTB</td><td>Kontoor Brands, Inc.</td><td class="sect">Consumer Cyclical</td><td class="num">77.05</td><td class="num">43</td><td class="num">4.6</td><td class="num">45%</td><td class="num">12%</td><td class="num">21%</td><td class="num">8.7%</td><td class="num">2.6</td><td class="num">2.7%</td></tr>
+<tr><td class="sym">AZZ</td><td>AZZ Inc.</td><td class="sect">Industrials</td><td class="num">150.92</td><td class="num">22</td><td class="num">4.7</td><td class="num">24%</td><td class="num">16%</td><td class="num">5%</td><td class="num">9.5%</td><td class="num">0.9</td><td class="num">0.6%</td></tr>
+<tr><td class="sym">BLBD</td><td>Blue Bird Corporation</td><td class="sect">Consumer Cyclical</td><td class="num">68.76</td><td class="num">48</td><td class="num">2.5</td><td class="num">45%</td><td class="num">12%</td><td class="num">9%</td><td class="num">7.4%</td><td class="num">-0.9</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">BKE</td><td>The Buckle, Inc.</td><td class="sect">Consumer Cyclical</td><td class="num">45.94</td><td class="num">73</td><td class="num">2.2</td><td class="num">52%</td><td class="num">21%</td><td class="num">7%</td><td class="num">9.9%</td><td class="num">0.4</td><td class="num">16.1%</td></tr>
+<tr><td class="sym">T</td><td>AT&T Inc.</td><td class="sect">Communication Servic</td><td class="num">23.79</td><td class="num">140</td><td class="num">157.9</td><td class="num">19%</td><td class="num">19%</td><td class="num">3%</td><td class="num">11.0%</td><td class="num">2.8</td><td class="num">4.7%</td></tr>
+<tr><td class="sym">LOPE</td><td>Grand Canyon Education, Inc.</td><td class="sect">Consumer Defensive</td><td class="num">152.53</td><td class="num">22</td><td class="num">3.9</td><td class="num">32%</td><td class="num">28%</td><td class="num">7%</td><td class="num">6.8%</td><td class="num">0.0</td><td class="num">0.0%</td></tr>
+<tr><td class="sym">PAYX</td><td>Paychex, Inc.</td><td class="sect">Industrials</td><td class="num">120.04</td><td class="num">28</td><td class="num">35.8</td><td class="num">41%</td><td class="num">37%</td><td class="num">16%</td><td class="num">6.0%</td><td class="num">1.1</td><td class="num">3.8%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><b>Sector mix.</b> Six sectors hold 4 names each (13.3%) — Financials,
+    Technology, Energy, Materials, Consumer Cyclical, Healthcare — with Industrials 3,
+    Communication Services 2 and Consumer Defensive 1. A hard cap of four per sector
+    binds on all six; without it Energy and Financials would dominate.</p>
+
+    <div class="note">
+      <b>The screen.</b> Positive trailing earnings, operating income and free cash
+      flow; operating margin above 5%, gross margin above 20%; revenue growing;
+      margins not collapsing; ROE between 10% and 200%; equity at least 15% of assets;
+      net debt under 3× EBITDA; earnings yield above 2%; at least $2bn market cap and
+      $20m a day of volume; no drawdown worse than 60% in the prior year. 262 of 1,913
+      names clear it. Ranking inside that pool uses four equally-weighted pillars —
+      quality, growth, value and cash conversion — with no fitted coefficients.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Wired into the tracker</h2>
+      <p>The portfolio is now a benchmark in <span class="mono">~/services/finance</span>,
+      not just a table in a report.</p>
+    </div>
+
+    <p>A benchmark there used to have to be a ticker. It can now be a basket: a JSON
+    file in <span class="mono">composites/</span> names the holdings and weights, the
+    sync path fetches the constituents instead of the basket, and the basket is rebuilt
+    from them. Everything downstream — growth chart, scorecard, beta, alpha — treats it
+    as an ordinary symbol. Baskets are held un-rebalanced, which is the point rather
+    than a simplification.</p>
+
+    <div class="scroll">
+      <table>
+        <caption>Live from the tracker's own API over the user's trade window, 2025-03-17 to
+        2026-08-17. FYP30's history before 2026-08-07 is a hindsight backtest; FYP25P was
+        selected on point-in-time data and priced only from its formation date, so its whole
+        series is out of sample.</caption>
+        <thead><tr><th>Benchmark</th><th>Total return</th><th>CAGR</th><th>Vol</th><th>Sharpe</th><th>Max DD</th></tr></thead>
+        <tbody>
+          <tr><td>Your portfolio</td><td class="num">32.2%</td><td class="num">21.7%</td><td class="num">14.2%</td><td class="num pos">1.45</td><td class="num">−9.2%</td></tr>
+          <tr><td class="mono">SPY</td><td class="num">39.1%</td><td class="num">26.2%</td><td class="num">17.6%</td><td class="num">1.41</td><td class="num">−13.7%</td></tr>
+          <tr><td class="mono">QQQ</td><td class="num">53.1%</td><td class="num">35.0%</td><td class="num">22.8%</td><td class="num">1.43</td><td class="num">−15.7%</td></tr>
+          <tr><td class="mono">FYP30</td><td class="num">42.0%</td><td class="num">28.1%</td><td class="num">20.7%</td><td class="num">1.30</td><td class="num">−14.7%</td></tr>
+          <tr><td class="mono">FYP25P</td><td class="num">28.3%</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Settings now reads <span class="mono">SPY,QQQ,FYP30</span>. The list is capped at
+    three, so <span class="mono">SCHA</span> was displaced — swap it back, or swap in
+    <span class="mono">FYP25P</span>, from the Settings tab. Twelve new checks cover the
+    composite logic, including that an un-rebalanced NAV equals the weighted growth of
+    its holdings to 1e-6; the full suite passes.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Defects in this database</h2>
+      <p>Each one changed a number. The first is a correction to my own earlier report.</p>
+    </div>
+
+    <ol class="defects">
+      <li><div><b>I was wrong that returns excluded dividends.</b>
+        <code>adj_close</code> is NULL for all 15.2M rows, and I concluded the closes
+        were price-only. They are not: <code>close</code> is already split- and
+        dividend-adjusted. AT&amp;T's June 2009 close is $5.53 while it paid $0.41 a
+        quarter — a 28% yield if the series were raw. Its only post-2009 split explains
+        1.3× of the 4.3× gap; the residual is reinvested dividends. Realty Income's 20-year
+        "price" CAGR here is 10.9%, which is its real-world <em>total</em> return.
+        Applying dividends on top manufactured a 30%/yr yield for NVDA before I caught it.</div></li>
+
+      <li><div><b>The dividends endpoint silently truncates at 50 rows.</b>
+        <code>/dividends/{sym}</code> takes an undocumented <code>limit</code>; without it
+        you get ~26 records after de-duplication, so roughly six years. With
+        <code>limit=5000</code> Coca-Cola returns 370 records back to 1970. The first pull
+        took the default and would have under-adjusted everything before 2020.</div></li>
+
+      <li><div><b><code>amount</code> and <code>adj_amount</code> differ by up to 200×.</b>
+        <code>amount</code> is cash as paid; <code>adj_amount</code> restates it into
+        split-adjusted share terms. NVDA's 2012 dividend is $0.075 as paid and $0.0019
+        adjusted. Using the wrong one against a split-adjusted close is a 40× error per
+        payment.</div></li>
+
+      <li><div><b>The income statement was capped at 12 quarters while the balance sheet
+        got 80.</b> Both come from <code>/fundamentals/{sym}/history</code>, but the
+        original pull passed <code>limit=12</code>. Income was therefore the binding
+        constraint on how far back any point-in-time test could run: every formation date
+        before 2024 had an <em>empty</em> universe and the whole backtest silently
+        collapsed to a single year. Re-pulling at <code>limit=80</code> took the table from
+        72,525 rows to 270,963 and the mean symbol from 12 quarters to 43.6.</div></li>
+
+      <li><div><b>ETF prices are unusable and ETF dividends do not exist.</b>
+        SPY has 565 bars across 19 years — 30 a year against 251 for any common stock —
+        and <code>/dividends/SPY</code> returns <code>[]</code>, as does QQQ, VTI, RSP, DIA
+        and TLT. There is no index benchmark to be had here, which is why every benchmark
+        in this report is built from individual stocks.</div></li>
+
+      <li><div><b>A market-cap filter deleted every delisted name.</b> Carried over from the
+        first report and still true: <code>symbols.market_cap</code> is a pull-time snapshot,
+        so deriving shares against the panel's last date yields NULL for anything that stopped
+        trading, and a <code>notna()</code> filter then removes exactly the companies that
+        died. Shares are now backed out at each symbol's own last traded price.</div></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>What I would tell you before you buy it</h2>
+    </div>
+    <ul class="plain">
+      <li><b>Do not judge it for three years.</b> That is not an excuse written in
+      advance — it is the measured result. At a one-year horizon this screen is worse
+      than random, and the whole case for it rests on horizons you have to actually sit
+      through.</li>
+
+      <li><b>Cap-weighting is nearly as good and far less work.</b> Across start years the
+      screen made 15.4% against 14.7% for simply cap-weighting the same investable
+      universe. If you would not enjoy owning 30 individual positions, that gap is not
+      worth it.</li>
+
+      <li><b>Survivorship still flatters these numbers slightly.</b> Over a 15-year hold,
+      6.5% of the universe stops printing. Their last price is a median 26% below their own
+      peak and 8 of 50 ended more than 80% down, so they are mostly acquisitions rather
+      than wipeouts — but a company that fails quietly leaves the tape rather than
+      printing its way to zero, and that biases every long-hold return upward.</li>
+
+      <li><b>Half the portfolio has a short history.</b> Only 17 of 30 names have a full
+      20-year tape; RDDT, ARIS, BLBD and DAVE are recent listings with no record through a
+      real bear market. They score well on current fundamentals and are the least proven.</li>
+
+      <li><b>The rule would name different companies next year.</b> It is a point-in-time
+      snapshot of cheap-and-profitable, not a list of permanent compounders. Holding it
+      untouched is the strategy that was tested — but do not imagine the same 30 names
+      would screen well in 2031.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Built from <span class="mono">data/findata.sqlite</span> — 15,207,829 daily bars across
+    4,640 symbols over 5,056 trading days ending 2026-08-07, plus 270,963 income, 248,250
+    balance-sheet and 249,346 cash-flow quarters and 256,638 dividend records.
+    Reproduce with <span class="mono">scripts/findata_pull2.py</span> (data),
+    <span class="mono">panel2.py</span> + <span class="mono">factors2.py</span> (panel),
+    <span class="mono">fixed_horizon.py</span> (the horizon table),
+    <span class="mono">final2.py</span> (sizing and selection) and
+    <span class="mono">emit_composite.py</span> (the tracker benchmark).
+    Analysis only — not investment advice.
+  </footer>
+
+</div>
