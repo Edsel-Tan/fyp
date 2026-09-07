@@ -14,3 +14,7 @@ hrt/artifacts/*.log
 
 __pycache__/
 *.pyc
+
+# regenerable analysis panels (hundreds of MB each)
+hrt/artifacts/panel_synth*.npz
+crypto/artifacts/*.npz
