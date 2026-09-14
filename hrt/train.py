@@ -229,6 +229,11 @@ def main():
     ap.add_argument("--agent", choices=["hrt", "ppo", "ddpg"], required=True)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--panel", default=os.path.join(ART, "panel.npz"))
+    ap.add_argument("--fr", default=None,
+                    help="forecast .npz; defaults to fr_causal.npz / fr_paper.npz. Point it at "
+                         "the matching fr_synth_* when --panel is a synthetic null panel.")
+    ap.add_argument("--runs_dir", default=os.path.join(ART, "runs"),
+                    help="where the run JSON lands; keeps null-panel runs out of runs/")
     ap.add_argument("--signal", choices=["causal", "paper", "shuffle", "none"],
                     default="causal")
     ap.add_argument("--timesteps", type=int, default=500_000)
@@ -252,7 +257,8 @@ def main():
     ap.add_argument("--log_trades", action="store_true")
     args = ap.parse_args()
 
-    frfile = os.path.join(ART, "fr_paper.npz" if args.signal == "paper" else "fr_causal.npz")
+    frfile = args.fr or os.path.join(
+        ART, "fr_paper.npz" if args.signal == "paper" else "fr_causal.npz")
     data = build_data(args.panel, frfile, args.signal)
     t0 = time.time()
     if args.agent == "hrt":
@@ -266,11 +272,11 @@ def main():
         res[k] = evaluate(stepper, data, k, args.seed)
         tm = res[k].pop("_trade_matrix")
         if args.log_trades:
-            np.save(os.path.join(ART, "runs",
+            np.save(os.path.join(args.runs_dir,
                     f"trades_{args.agent}_{args.signal}{args.tag}_s{args.seed}_{k}.npy"), tm)
     name = f"{args.agent}_{args.signal}{args.tag}_s{args.seed}.json"
-    os.makedirs(os.path.join(ART, "runs"), exist_ok=True)
-    json.dump(res, open(os.path.join(ART, "runs", name), "w"))
+    os.makedirs(args.runs_dir, exist_ok=True)
+    json.dump(res, open(os.path.join(args.runs_dir, name), "w"))
     print(f"{args.agent} s{args.seed}: "
           f"2021 cum {res['test2021']['cum_return']:+.4f} sharpe {res['test2021']['sharpe']:+.4f} | "
           f"2022 cum {res['test2022']['cum_return']:+.4f} sharpe {res['test2022']['sharpe']:+.4f} | "

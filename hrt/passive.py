@@ -6,7 +6,7 @@ runs a do-nothing strategy through the same TradingEnv the agents use -- integer
 share lots, hmax cap, cash-sequenced fills, 0.1% cost -- so any RL result can be
 compared against "deploy the cash once and sit still" under identical mechanics.
 """
-import json, os, sys
+import argparse, json, os, sys
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -34,8 +34,13 @@ def buy_and_hold(prices, fr, seed=0):
 
 
 def main():
-    data = build_data(os.path.join(ART, "panel.npz"),
-                      os.path.join(ART, "fr_causal.npz"), "causal")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--panel", default=os.path.join(ART, "panel.npz"))
+    ap.add_argument("--fr", default=os.path.join(ART, "fr_causal.npz"))
+    ap.add_argument("--out", default=os.path.join(ART, "passive.json"))
+    a = ap.parse_args()
+    # the floor is signal-free by construction; --fr only has to match --panel's calendar
+    data = build_data(a.panel, a.fr, "causal")
     out = {}
     print(f"{'period':>10}{'cum':>12}{'ann':>12}{'vol':>10}{'sharpe':>10}{'maxDD':>10}{'deployed':>10}")
     print("-" * 74)
@@ -45,8 +50,8 @@ def main():
         print(f"{period[-4:]:>10}{m['cum_return']:>+12.4f}{m['ann_return']:>+12.4f}"
               f"{m['ann_vol']:>10.4f}{m['sharpe']:>+10.4f}{m['max_drawdown']:>+10.4f}"
               f"{m['deployed_frac']:>10.3f}")
-    json.dump(out, open(os.path.join(ART, "passive.json"), "w"), indent=1)
-    print("\nwrote", os.path.join(ART, "passive.json"))
+    json.dump(out, open(a.out, "w"), indent=1)
+    print("\nwrote", a.out)
 
 
 if __name__ == "__main__":
