@@ -113,6 +113,53 @@ sacctmgr -n show assoc user=$USER format=account,partition
 Add `#SBATCH --partition=...` / `--account=...` to the job scripts if your site
 requires them.
 
+### Already done on the NUS cluster (login node `xcnf12`)
+
+The repo is cloned at `/home/w/weekean/fyp/fyp` with a working `.venv`
+(`torch 2.13.0+cu126`, correct for Hopper). No module system here — `00_env.sh`
+has `CLUSTER_MODULES=""` and the module block is guarded. Partitions are set in
+the job scripts:
+
+| Stage | Partition | Why |
+|---|---|---|
+| `01_prepare`, `04_report` | `normal` | CPU only; 3 h cap is ample |
+| `02_forecast` | `gpu` | 3 h cap, 30 min job |
+| `03_sweep` | `gpu-long` | the only GPU partition above 3 h (3-day cap) |
+
+Two site limits that bite:
+
+- **`gpu` caps wall time at 3:00:00.** The 12 h sweep must go to `gpu-long`.
+- **`gpu-long` will not allocate more than 48 CPUs.** A 72-CPU request fails
+  with *Requested node configuration is not available* even though 96-core nodes
+  are listed. So the sweep runs 48 CPU / 128 GB / `PARALLEL=24`.
+- **`gpu-long` has no H200.** H200 exists only in `gpu`, whose 3 h cap the sweep
+  cannot use in one allocation. The sweep lands on H100/A100 — irrelevant for a
+  kernel-launch-bound workload.
+
+**Three bugs fixed in the job scripts**, each of which broke the chain here:
+
+1. **Stage ordering.** `01_prepare` ran `passive.py`, which loads `fr_causal.npz`
+   — a file `02_forecast` produces. Stage 01 could never succeed on a clean
+   checkout; it died with `FileNotFoundError` and took the whole dependency chain
+   with it (`DependencyNeverSatisfied`). `passive.py` now runs in `02_forecast`,
+   after `forecast.py`.
+2. **`srun` inside the sweep.** `srun --unbuffered ./hrt/run_sweep.sh` dies
+   instantly with *CPU binding outside of job step allocation … Unable to satisfy
+   cpu bind request* — the batch step's CPU mask does not match what `srun` tries
+   to bind. `run_sweep.sh` forks its own workers with `xargs -P` and needs no step
+   launcher, so the `srun` is simply gone.
+3. **Silent CPU fallback.** `train.py --device` defaults to `cpu` whenever
+   `torch.cuda.is_available()` is false, so a GPU-less or broken-GPU node runs the
+   entire sweep on CPU with nothing in the logs to say so. The sweep now asserts
+   CUDA before launching and refuses to start otherwise. This is the same class of
+   silent failure as the PPO trap in §2 — worth the four lines.
+
+**GPU selection.** `gpu:1` on `gpu-long` schedules soonest but lands on `xgpe2`
+(`gpu:nv`), where the batch step reported *CUDA unknown error* and `cuda=False`.
+`gpu:nv` is not inherently broken — stage 02 ran fine on `xgpd0`, a TITAN V — but
+the sweep now asks for `gpu:h100-96:1` explicitly. Approximate queue waits when
+tested: `nv` immediate, `h100-96` ~25 min, `a100-80` ~1 h, `a100-40` ~2 h.
+
 ---
 
 ## 5. Running it
@@ -130,9 +177,9 @@ sbatch hrt/slurm/04_report.sbatch         # CPU, ~1 min
 
 | Script | Does | Resources |
 |---|---|---|
-| `01_prepare` | rebuild panel from the bundle; all non-RL benchmarks; both test suites | 8 CPU, 24 GB, no GPU |
-| `02_forecast` | both forward-return models; signal-value check; **HLC diagnostic** | 1 GPU, 8 CPU, 24 GB |
-| `03_sweep` | all 21 RL runs on one GPU | 1 GPU, 48 CPU, 96 GB |
+| `01_prepare` | rebuild panel from the bundle; benchmarks; both test suites | 8 CPU, 24 GB, no GPU |
+| `02_forecast` | both forward-return models; passive floor; signal-value check; **HLC diagnostic** | 1 GPU, 8 CPU, 24 GB |
+| `03_sweep` | all 60 RL jobs on one GPU (finished runs skipped) | 1 GPU, 48 CPU, 128 GB |
 | `03_sweep_array` | *alternative*: one run per array task, `%8` concurrent | 1 GPU each, 4 CPU, 8 GB |
 | `04_report` | aggregate + regenerate the HTML report | 4 CPU, 16 GB |
 
@@ -158,7 +205,7 @@ RESUME=0 ...                              # only to force a full redo
 
 ### Which sweep script
 
-`03_sweep.sbatch` is the default and the right one on a busy queue: 21 workers
+`03_sweep.sbatch` is the default and the right one on a busy queue: 24 workers
 share **one** GPU inside **one** allocation. Use `03_sweep_array.sbatch` instead
 when your site caps wall time below what the sweep needs, or when short jobs
 schedule far sooner than one long reservation — it costs 21 GPU allocations for
@@ -259,14 +306,55 @@ in the returns.
 
 ## 9. Where to take it next
 
-**Do not** start with the sentiment arm. `/news/{symbol}` caps at 200 items,
-ignores every date parameter and paging, and serves only the trailing fortnight
-(`since`/`until` returns HTTP 500). The 2015–2019 window is unreachable, so full
-HRT cannot be built from findata **at any scale of hardware** — the H200 changes
-nothing here. The route that works is FNSPID via the FinRL-DeepSeek benchmark on
-HuggingFace, which ships precomputed LLM sentiment and risk scores, but it moves
-the universe to an 89-name Nasdaq set. That is a different experiment, worth
-choosing deliberately rather than drifting into.
+**The sentiment arm is still the wrong place to start, but for a different
+reason than stated here before.** Re-probed 2026-08-25 from the login node (data
+routes answer unauthenticated, so no token is needed to check any of this):
+
+- `/news/{symbol}` and `/news/search` — dead as described. Date parameters are
+  silently ignored; both serve only the trailing fortnight. `/news/AAPL` with
+  `since`/`until` now returns `[]` rather than a 500, which is the same
+  no-history outcome.
+- **`/kols/tweets/search` does serve history.** `since`/`until` are honoured
+  — `?q=$AAPL&cashtag=AAPL&since=2016-01-01&until=2016-03-01` returns 83 tweets
+  strictly inside that window. `from`/`to` and `start`/`end` are ignored, which
+  is likely what the earlier "ignores every date parameter" finding actually hit.
+  Results cap at 200 per window, so page by narrowing the window, not by offset.
+
+So the 2015–2019 window is **reachable** after all. What kills it is density,
+not access. Coverage of a 20-symbol sample of the 2015 S&P constituents,
+counting symbol-days with at least one tweet in a June:
+
+| Window | Tweets | Symbols with zero | Symbol-days covered |
+|---|---|---|---|
+| 2015-06 | 87 | 8/20 | **13.1%** |
+| 2019-06 | 173 | 8/20 | **24.8%** |
+| 2021-06 | 873 | 5/20 | 45.5% |
+| 2022-06 | 781 | 3/20 | 46.7% |
+
+A per-name daily sentiment feature over the training window would be ~85% empty,
+and the empties are not random — they concentrate in exactly the non-mega-cap
+names. These are also curated KOL tweets carrying no sentiment score, a different
+modality from the paper's news sentiment, and scoring them needs an LLM pass the
+compute nodes cannot make (no internet) .
+
+Three shapes that do fit the data, in order of how much they change the experiment:
+
+1. **A market-level daily sentiment scalar** instead of a per-name feature.
+   Unfiltered daily volume is ~17–31 tweets/day in 2017–2019 and hits the
+   200 cap by 2022 — dense on every trading day. This is the cheapest honest
+   sentiment arm and keeps the 370-name universe intact.
+2. **Restrict the universe to the high-coverage names.** Dense-ish, but selects
+   on attention, which is its own survivorship-flavoured bias.
+3. **FNSPID** (`Zihan1004/FNSPID` on HuggingFace, reachable from the login node).
+   `Stock_news/All_external.csv` is 5.3 GB and `nasdaq_exteral_data.csv` 21.6 GB;
+   raw, with no sentiment scores. The precomputed scores are in
+   `benstaf/nasdaq_news_sentiment` (0.5 GB, DeepSeek and Llama variants) but only
+   for the 89-name Nasdaq set. Raw FNSPID is far broader than that benchmark
+   subset, so scoring it yourself is the one route that could keep the S&P
+   universe — at the cost of an LLM pass over millions of records.
+
+Whichever way, it is a different experiment, worth choosing deliberately rather
+than drifting into.
 
 Better uses of the hardware, in order:
 
@@ -274,9 +362,10 @@ Better uses of the hardware, in order:
    4.4 points of gross edge, 6.33 points of commission. Add a turnover penalty
    and a non-constant cost model and measure whether the edge survives. Report
    net *and* gross — that split is where the story lives.
-2. **More seeds.** Dispersion is wide (HRT-FR 2022 spans ~20 points across
-   seeds); the committed runs are 4 seeds, the paper used 10. Cheap on an H200
-   and it firms up every claim.
+2. ~~**More seeds.**~~ **Done / running.** `jobs.txt` now spans seeds 0–9 for
+   every arm — 60 jobs, of which the 25 committed runs are skipped and 35 are
+   new. Dispersion was wide (HRT-FR 2022 spans ~20 points across seeds) on 4
+   seeds; this brings it to the paper's 10.
 3. **Fix survivorship.** Needs CRSP, Sharadar or Norgate for delisted prices.
    Until then the 370-name universe is the acquired-and-survived cohort and the
    12.3-point gap is a lower bound.
@@ -295,7 +384,7 @@ hrt/
   env.py agents.py     trading environment; PPO (factored) and DDPG
   train.py             phased alternating training  --signal, --alpha_unit
   run_sweep.sh         resumable driver; PARALLEL / STEPS / JOBS / RESUME
-  jobs.txt             the 21-run 2×2 + baselines
+  jobs.txt             the 2×2 + baselines, seeds 0–9 (60 jobs)
   report.py            aggregate -> summary.json + console tables
   make_report.py       -> hrt_reproduction.html
   test_*.py diag_hlc.py the checks from §8

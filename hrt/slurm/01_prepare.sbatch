@@ -1,4 +1,5 @@
 #!/bin/bash
+#SBATCH --partition=normal
 #SBATCH --job-name=hrt-prep
 #SBATCH --output=hrt/logs/slurm-%x-%j.out
 #SBATCH --cpus-per-task=8
@@ -10,7 +11,6 @@ source "${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../..}
 
 python hrt/data.py                 # panel.npz from prices_bundle.npz  (~7 min)
 python hrt/baselines.py            # min-variance, equal-weight, S&P 500
-python hrt/passive.py              # buy-once-and-hold floor
 python hrt/deadjust.py             # price-only panel
 python hrt/test_alpha158.py        # features vs an independent implementation
 python hrt/test_env.py             # environment invariants

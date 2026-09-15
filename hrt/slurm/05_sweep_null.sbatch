@@ -1,13 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=hrt-null
 #SBATCH --output=hrt/logs/slurm-%x-%j.out
-#SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=52
 #SBATCH --mem=96G
-#SBATCH --time=12:00:00
-##SBATCH --partition=            # FILL IN: sinfo -o "%P %G %m %c %l"
-##SBATCH --account=              # FILL IN: sacctmgr -n show assoc user=$USER format=account,partition
-#
+#SBATCH --time=06:00:00
+#SBATCH --gpus=h100-96              
 # RESULTS.md §10.1 / §9 -- the one experiment that has never been run.
 #
 # §4 falsifies the *forecaster* on synthetic null panels: under the paper's label

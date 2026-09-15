@@ -1,4 +1,5 @@
 #!/bin/bash
+#SBATCH --partition=gpu
 #SBATCH --job-name=hrt-fc
 #SBATCH --output=hrt/logs/slurm-%x-%j.out
 #SBATCH --gres=gpu:1
@@ -11,6 +12,7 @@ source "${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../..}
 
 python hrt/forecast.py --label causal
 python hrt/forecast.py --label paper
+python hrt/passive.py             # buy-once-and-hold floor (needs fr_causal.npz)
 python hrt/signal_strategy.py
 python hrt/diag_hlc.py --signal paper --timesteps 30720   # alignment must climb
 echo "FORECAST OK"

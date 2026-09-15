@@ -1,0 +1,2 @@
+/var/lib/slurm/slurmd/job846546/slurm_script: line 49: /home/w/weekean/fyp/fyp/hrt/slurm/hrt/slurm/00_env.sh: No such file or directory
+ERROR: hrt/artifacts/panel.npz missing -- run hrt/slurm/01_prepare.sbatch first

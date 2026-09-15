@@ -8,8 +8,8 @@
 #   sacctmgr -n show assoc user=$USER format=account,partition
 
 # ---- EDIT ME ----------------------------------------------------------------
-CLUSTER_MODULES="cuda/12.6 python/3.12"     # module names on your cluster
-REPO="${REPO:-$HOME/fyp}"                    # where you cloned the repo
+CLUSTER_MODULES=""                           # this cluster has no module system
+REPO="${REPO:-/home/w/weekean/fyp/fyp}"      # where you cloned the repo
 VENVDIR="${VENVDIR:-$REPO/.venv}"
 # -----------------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ set -euo pipefail
 if command -v module >/dev/null 2>&1; then
   module purge  || true
   # shellcheck disable=SC2086
-  module load $CLUSTER_MODULES || echo "WARN: module load failed; check names" >&2
+  if [ -n "$CLUSTER_MODULES" ]; then module load $CLUSTER_MODULES || echo "WARN: module load failed; check names" >&2; fi
 fi
 cd "$REPO"
 # shellcheck disable=SC1091

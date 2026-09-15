@@ -1,4 +1,5 @@
 #!/bin/bash
+#SBATCH --partition=normal
 #SBATCH --job-name=hrt-rep
 #SBATCH --output=hrt/logs/slurm-%x-%j.out
 #SBATCH --cpus-per-task=4

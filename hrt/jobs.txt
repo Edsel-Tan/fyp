@@ -3,19 +3,58 @@
 --agent hrt --signal paper --alpha_unit step  --seed 0
 --agent hrt --signal paper --alpha_unit episode --tag _ep --seed 0
 --agent ppo --signal causal --seed 0
+--agent ddpg --signal causal --seed 0
 --agent hrt --signal causal --alpha_unit step  --seed 1
 --agent hrt --signal causal --alpha_unit episode --tag _ep --seed 1
 --agent hrt --signal paper --alpha_unit step  --seed 1
 --agent hrt --signal paper --alpha_unit episode --tag _ep --seed 1
 --agent ppo --signal causal --seed 1
+--agent ddpg --signal causal --seed 1
 --agent hrt --signal causal --alpha_unit step  --seed 2
 --agent hrt --signal causal --alpha_unit episode --tag _ep --seed 2
 --agent hrt --signal paper --alpha_unit step  --seed 2
 --agent hrt --signal paper --alpha_unit episode --tag _ep --seed 2
 --agent ppo --signal causal --seed 2
+--agent ddpg --signal causal --seed 2
 --agent hrt --signal causal --alpha_unit step  --seed 3
 --agent hrt --signal causal --alpha_unit episode --tag _ep --seed 3
 --agent hrt --signal paper --alpha_unit step  --seed 3
 --agent hrt --signal paper --alpha_unit episode --tag _ep --seed 3
 --agent ppo --signal causal --seed 3
+--agent ddpg --signal causal --seed 3
+--agent hrt --signal causal --alpha_unit step  --seed 4
+--agent hrt --signal causal --alpha_unit episode --tag _ep --seed 4
+--agent hrt --signal paper --alpha_unit step  --seed 4
+--agent hrt --signal paper --alpha_unit episode --tag _ep --seed 4
+--agent ppo --signal causal --seed 4
 --agent ddpg --signal causal --seed 4
+--agent hrt --signal causal --alpha_unit step  --seed 5
+--agent hrt --signal causal --alpha_unit episode --tag _ep --seed 5
+--agent hrt --signal paper --alpha_unit step  --seed 5
+--agent hrt --signal paper --alpha_unit episode --tag _ep --seed 5
+--agent ppo --signal causal --seed 5
+--agent ddpg --signal causal --seed 5
+--agent hrt --signal causal --alpha_unit step  --seed 6
+--agent hrt --signal causal --alpha_unit episode --tag _ep --seed 6
+--agent hrt --signal paper --alpha_unit step  --seed 6
+--agent hrt --signal paper --alpha_unit episode --tag _ep --seed 6
+--agent ppo --signal causal --seed 6
+--agent ddpg --signal causal --seed 6
+--agent hrt --signal causal --alpha_unit step  --seed 7
+--agent hrt --signal causal --alpha_unit episode --tag _ep --seed 7
+--agent hrt --signal paper --alpha_unit step  --seed 7
+--agent hrt --signal paper --alpha_unit episode --tag _ep --seed 7
+--agent ppo --signal causal --seed 7
+--agent ddpg --signal causal --seed 7
+--agent hrt --signal causal --alpha_unit step  --seed 8
+--agent hrt --signal causal --alpha_unit episode --tag _ep --seed 8
+--agent hrt --signal paper --alpha_unit step  --seed 8
+--agent hrt --signal paper --alpha_unit episode --tag _ep --seed 8
+--agent ppo --signal causal --seed 8
+--agent ddpg --signal causal --seed 8
+--agent hrt --signal causal --alpha_unit step  --seed 9
+--agent hrt --signal causal --alpha_unit episode --tag _ep --seed 9
+--agent hrt --signal paper --alpha_unit step  --seed 9
+--agent hrt --signal paper --alpha_unit episode --tag _ep --seed 9
+--agent ppo --signal causal --seed 9
+--agent ddpg --signal causal --seed 9

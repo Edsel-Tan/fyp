@@ -1,7 +1,8 @@
 #!/bin/bash
+#SBATCH --partition=gpu
 #SBATCH --job-name=hrt-arr
 #SBATCH --output=hrt/logs/slurm-%x-%A_%a.out
-#SBATCH --array=1-21%8
+#SBATCH --array=1-60%8
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=8G
