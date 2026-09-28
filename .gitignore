@@ -3,6 +3,7 @@
 .env.*
 
 # bulk data: re-pullable from findata, or rebuildable from the price bundle
+papers/
 data/
 .venv/
 
@@ -18,3 +19,13 @@ __pycache__/
 # regenerable analysis panels (hundreds of MB each)
 hrt/artifacts/panel_synth*.npz
 crypto/artifacts/*.npz
+
+# working files, not deliverables
+PREPARATION.md
+RAW.md
+
+# private SSH key for the lum.id GPU sandbox (SANDBOX.md)
+/.ssh
+
+# probe-sweep checkpoints (~2.8 GB); the run JSONs beside them are tracked
+hrt/artifacts/runs_probe/*/ckpt/

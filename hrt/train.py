@@ -83,6 +83,26 @@ def evaluate(step_fn, data, key, seed=0):
     return m
 
 
+def probe(step_fn, data, seed, args, gstep, nets):
+    """--probe: score every eval point on both test years and keep the policy.
+
+    Checkpoint selection normally sees only the validation Sharpe; recording the
+    full validation and test value paths at every eval point lets any selection
+    rule (raw, floor-relative, final) be scored afterwards without retraining,
+    and the saved weights make exact re-simulation under other costs possible.
+    """
+    out = {}
+    for k in ("valid", "test2021", "test2022"):
+        m = evaluate(step_fn, data, k, seed)
+        out[k] = {"sharpe": m["sharpe"], "cum_return": m["cum_return"],
+                  "turnover": m["turnover"], "values": m["values"]}
+    d = os.path.join(args.runs_dir, "ckpt", args.run_name)
+    os.makedirs(d, exist_ok=True)
+    torch.save({n: {k: v.detach().cpu() for k, v in net.state_dict().items()}
+                for n, net in nets.items()}, os.path.join(d, f"step{gstep:07d}.pt"))
+    return out
+
+
 # ------------------------------------------------------------------- HRT
 def make_hrt_stepper(hlc, llc, deterministic=True):
     def step(e):
@@ -146,6 +166,9 @@ def train_hrt(data, args, seed):
         if gstep % args.eval_every < args.rollout:
             m = evaluate(make_hrt_stepper(hlc, llc), data, "valid", seed)
             hist.append({"step": gstep, "valid_sharpe": m["sharpe"], "valid_cum": m["cum_return"]})
+            if args.probe:
+                hist[-1]["probe"] = probe(make_hrt_stepper(hlc, llc), data, seed, args, gstep,
+                                          {"hlc_pi": hlc.pi, "llc_actor": llc.actor})
             if m["sharpe"] > best:
                 best = m["sharpe"]
                 best_state = ({k: v.detach().clone() for k, v in hlc.pi.state_dict().items()},
@@ -212,6 +235,10 @@ def train_flat(data, args, seed, kind):
         if gstep % args.eval_every < args.rollout:
             m = evaluate(make_flat_stepper(agent, kind), data, "valid", seed)
             hist.append({"step": gstep, "valid_sharpe": m["sharpe"]})
+            if args.probe:
+                hist[-1]["probe"] = probe(make_flat_stepper(agent, kind), data, seed, args, gstep,
+                                          {"pi" if kind == "ppo" else "actor":
+                                           agent.pi if kind == "ppo" else agent.actor})
             if m["sharpe"] > best:
                 best = m["sharpe"]
                 net = agent.pi if kind == "ppo" else agent.actor
@@ -255,7 +282,11 @@ def main():
     ap.add_argument("--tag", default="")
     ap.add_argument("--verbose", action="store_true")
     ap.add_argument("--log_trades", action="store_true")
+    ap.add_argument("--probe", action="store_true",
+                    help="score every eval point on valid+test and save its weights "
+                         "under runs_dir/ckpt/<run>/ (checkpoint-rule audit)")
     args = ap.parse_args()
+    args.run_name = f"{args.agent}_{args.signal}{args.tag}_s{args.seed}"
 
     frfile = args.fr or os.path.join(
         ART, "fr_paper.npz" if args.signal == "paper" else "fr_causal.npz")
@@ -274,7 +305,7 @@ def main():
         if args.log_trades:
             np.save(os.path.join(args.runs_dir,
                     f"trades_{args.agent}_{args.signal}{args.tag}_s{args.seed}_{k}.npy"), tm)
-    name = f"{args.agent}_{args.signal}{args.tag}_s{args.seed}.json"
+    name = f"{args.run_name}.json"
     os.makedirs(args.runs_dir, exist_ok=True)
     json.dump(res, open(os.path.join(args.runs_dir, name), "w"))
     print(f"{args.agent} s{args.seed}: "

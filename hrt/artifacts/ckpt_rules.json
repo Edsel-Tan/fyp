@@ -1,0 +1,5840 @@
+{
+ "summary": {
+  "real_raw_minus_final": {
+   "mean": -0.0022319550040908577,
+   "t": -0.33795573490294395,
+   "n": 40
+  },
+  "real_excess_minus_final": {
+   "mean": -0.0027676052202796424,
+   "t": -0.430764656305462,
+   "n": 40
+  },
+  "real_oracle_minus_final": {
+   "mean": 0.051289760472975995,
+   "t": 9.82700334550449,
+   "n": 40
+  },
+  "null_raw_minus_final": {
+   "mean": -0.01796527150887855,
+   "t": -1.2959078803449275,
+   "n": 78
+  },
+  "null_excess_minus_final": {
+   "mean": -0.01917036100943007,
+   "t": -1.404842181723934,
+   "n": 78
+  },
+  "null_oracle_minus_final": {
+   "mean": 0.17829107578327696,
+   "t": 7.640359725494823,
+   "n": 78
+  },
+  "real_rho_raw": {
+   "mean": -0.05319946961310301,
+   "t": -0.8629840840589297,
+   "n": 40
+  },
+  "real_rho_excess": {
+   "mean": -0.048170835656853074,
+   "t": -0.7885015054121729,
+   "n": 40
+  },
+  "null_rho_raw": {
+   "mean": 0.014923188266498646,
+   "t": 0.3478740418847443,
+   "n": 78
+  },
+  "null_rho_excess": {
+   "mean": 0.025390777357569522,
+   "t": 0.6026163865881125,
+   "n": 78
+  }
+ },
+ "rows": [
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 100352,
+   "excess": -0.05174884412666225,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 126976,
+   "excess": -0.026098641735909256,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.00567121608090404,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": 0.048194229018404755,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 100352,
+   "excess": 0.001682570335326261,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 126976,
+   "excess": -0.00974129856273842,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.04860644629054345,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 100352,
+   "excess": 0.001682570335326261,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 26624,
+   "excess": 0.02040718227083671,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 51200,
+   "excess": -0.0038248498463631098,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.013661185273832421,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": 0.02040718227083671,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 26624,
+   "excess": -0.059982548219630116,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 51200,
+   "excess": -0.020137283831364594,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.006071438250514483,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 100352,
+   "excess": -0.006071438250514483,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 301056,
+   "excess": 0.0029050645567256783,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 126976,
+   "excess": 0.019628352623646927,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.05112651224897191,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 475136,
+   "excess": 0.0655414693658003,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 301056,
+   "excess": -0.03749764213324491,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 126976,
+   "excess": -0.061359473509959184,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.01272343662558939,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 475136,
+   "excess": 0.04000278242074684,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 75776,
+   "excess": -0.029254991629090954,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 75776,
+   "excess": -0.029254991629090954,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.01877994502757563,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.010665738130549496,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 75776,
+   "excess": -0.02385127462420944,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 75776,
+   "excess": -0.02385127462420944,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.014479483960873618,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 225280,
+   "excess": -0.01005195150559235,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 100352,
+   "excess": 0.036753571039197075,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 100352,
+   "excess": 0.036753571039197075,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.014826801079997898,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 100352,
+   "excess": 0.036753571039197075,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 100352,
+   "excess": -0.08694701633354396,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 100352,
+   "excess": -0.08694701633354396,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.028767745580049464,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 151552,
+   "excess": -0.021965884546275127,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 251904,
+   "excess": -0.025441048992727477,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 376832,
+   "excess": -0.012840107518591992,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.06637433823044114,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 376832,
+   "excess": -0.012840107518591992,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 251904,
+   "excess": -0.004041277012623357,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 376832,
+   "excess": -0.059643222733223644,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.05237852310254432,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.04110641099493639,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 126976,
+   "excess": -0.07692953521345958,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 376832,
+   "excess": -0.0972633907815672,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.04049298940532631,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": -0.014902254983286678,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 126976,
+   "excess": -0.05663451716235324,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 376832,
+   "excess": -0.09034861101537628,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.05425647538985734,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 301056,
+   "excess": -0.0048615635639154275,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 450560,
+   "excess": -0.0723411400718017,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 450560,
+   "excess": -0.0723411400718017,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.023056226035538918,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 251904,
+   "excess": -0.004060007239842012,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 450560,
+   "excess": -0.021921131490535206,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 450560,
+   "excess": -0.021921131490535206,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.06810514174267912,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 126976,
+   "excess": 0.02492080239872818,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 75776,
+   "excess": -0.10516152080430552,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 75776,
+   "excess": -0.10516152080430552,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.018111225091339334,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 425984,
+   "excess": 0.060704776859960896,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 75776,
+   "excess": -0.06415341260122642,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 75776,
+   "excess": -0.06415341260122642,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.04452541241718877,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": 0.03270513615020121,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 51200,
+   "excess": 0.008235365681668938,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 51200,
+   "excess": 0.008235365681668938,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.07705459032452122,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.008235365681668938,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 51200,
+   "excess": -0.027356027631126323,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 51200,
+   "excess": -0.027356027631126323,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.04364566832149641,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 276480,
+   "excess": 0.03648754996403114,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 475136,
+   "excess": 0.02800824597623075,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 475136,
+   "excess": 0.02800824597623075,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.07074950691808102,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 475136,
+   "excess": 0.02800824597623075,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 475136,
+   "excess": -0.09389627129271849,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 475136,
+   "excess": -0.09389627129271849,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.07536105013008987,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": 0.003980226818738664,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 475136,
+   "excess": -0.07725936197953853,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 475136,
+   "excess": -0.07725936197953853,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.13356892199431591,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 325632,
+   "excess": -0.007093799532549738,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 475136,
+   "excess": -0.1158237070866196,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 475136,
+   "excess": -0.1158237070866196,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.08362476031123478,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 200704,
+   "excess": -0.010231758292726822,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 200704,
+   "excess": -0.014252157272620414,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 200704,
+   "excess": -0.014252157272620414,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.038420435617971815,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 475136,
+   "excess": 0.02398513538158009,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 200704,
+   "excess": -0.11801849624507776,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 200704,
+   "excess": -0.11801849624507776,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.08752675012182431,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 376832,
+   "excess": -0.03109220660222345,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 126976,
+   "excess": 0.015908744145967102,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 126976,
+   "excess": 0.015908744145967102,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.005133813583609426,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 376832,
+   "excess": 0.04625156022969534,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 126976,
+   "excess": -0.12352380354759829,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 126976,
+   "excess": -0.12352380354759829,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.09482834900663228,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 75776,
+   "excess": 0.0228522175777488,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 26624,
+   "excess": -0.011485208863851293,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 26624,
+   "excess": -0.011485208863851293,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.06198551563523047,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 251904,
+   "excess": 0.020334135478309534,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 26624,
+   "excess": -0.06489020004883561,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 26624,
+   "excess": -0.06489020004883561,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.022970793226926856,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 176128,
+   "excess": -0.01642393896934702,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 251904,
+   "excess": 0.0038349053909874087,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 376832,
+   "excess": 0.004480109009658451,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.008399603797097921,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 301056,
+   "excess": 0.02628465508907274,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 251904,
+   "excess": -0.0815984128765469,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 376832,
+   "excess": -0.06986969484315164,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.05918441394073104,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 151552,
+   "excess": -0.029706313183156863,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 26624,
+   "excess": 0.054904348173041795,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 26624,
+   "excess": 0.054904348173041795,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.03416236077980961,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 251904,
+   "excess": 0.08805788308458151,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 26624,
+   "excess": -0.021738543292330936,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 26624,
+   "excess": -0.021738543292330936,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.027863082014149665,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 200704,
+   "excess": 0.05894443073887612,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 425984,
+   "excess": -0.021261322486106016,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 200704,
+   "excess": 0.014538608910429796,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.018809106926947372,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": 0.047530733455790175,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 425984,
+   "excess": -0.07334490969834395,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 200704,
+   "excess": -0.06859684018086298,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.03998267085748719,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 100352,
+   "excess": -0.015496999658925703,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 501760,
+   "excess": 0.05361296071281507,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 501760,
+   "excess": 0.05361296071281507,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.05361296071281507,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.061998633040002415,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 501760,
+   "excess": -0.03111361684922398,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 501760,
+   "excess": -0.03111361684922398,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.03111361684922398,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 325632,
+   "excess": -0.009028791072732467,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 401408,
+   "excess": 0.008957632150728534,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 401408,
+   "excess": 0.008957632150728534,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.017167228376066213,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 75776,
+   "excess": 0.04905712372927229,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 401408,
+   "excess": -0.094735024398238,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 401408,
+   "excess": -0.094735024398238,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.036326158502322015,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 350208,
+   "excess": -0.020989304778597395,
+   "group": "real"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 325632,
+   "excess": 0.014637069115480905,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 276480,
+   "excess": -0.007260032684336171,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.03228784730648471,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 450560,
+   "excess": 0.0524468199305923,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 325632,
+   "excess": -0.01361949435509846,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 276480,
+   "excess": 0.017242777721371505,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.04925537931143853,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 376832,
+   "excess": 0.22290975663721158,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 200704,
+   "excess": -0.004454372998349165,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 251904,
+   "excess": -0.0016234970758448597,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.010342197201019365,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 126976,
+   "excess": 0.07474657929686823,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 200704,
+   "excess": -0.04085146210419077,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 251904,
+   "excess": 5.167313662579609e-05,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.09884071644465553,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.21908295130942368,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 51200,
+   "excess": 0.002064548448293624,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 51200,
+   "excess": 0.002064548448293624,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.03117928858867136,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 75776,
+   "excess": 0.030074904413100345,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 51200,
+   "excess": -0.0013503029463555194,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 51200,
+   "excess": -0.0013503029463555194,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.016114821711771476,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": -0.0013503029463555194,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 100352,
+   "excess": -0.00980416843441001,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 100352,
+   "excess": -0.00980416843441001,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.061107491843287676,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.09213960672315857,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 100352,
+   "excess": 0.017158985993110498,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 100352,
+   "excess": 0.017158985993110498,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.026607265317990514,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 501760,
+   "excess": 0.026607265317990514,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 75776,
+   "excess": -0.05082750128847513,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 75776,
+   "excess": -0.05082750128847513,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.05686937407837955,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.03018599752325346,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 75776,
+   "excess": -0.016313483178129973,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 75776,
+   "excess": -0.016313483178129973,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.03777725056578207,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 100352,
+   "excess": 0.03777725056578207,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 325632,
+   "excess": -0.1554414614344365,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 325632,
+   "excess": -0.1554414614344365,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.16864178604803282,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 475136,
+   "excess": 0.039364362226546046,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 325632,
+   "excess": -0.01234772939615647,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 325632,
+   "excess": -0.01234772939615647,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.046797461802327245,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 301056,
+   "excess": 0.08912983894023396,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 251904,
+   "excess": -0.35154389383259366,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 251904,
+   "excess": -0.35154389383259366,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.16372220685646932,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": -0.058586796115059125,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 251904,
+   "excess": -0.2228929177753416,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 251904,
+   "excess": -0.2228929177753416,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.27889062621832594,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.17646035617383293,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 475136,
+   "excess": -0.14500847126934946,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 475136,
+   "excess": -0.14500847126934946,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.019560518366504853,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 425984,
+   "excess": 0.022183450562405893,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 475136,
+   "excess": -0.19885150492122516,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 475136,
+   "excess": -0.19885150492122516,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.11219253047326727,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 100352,
+   "excess": 1.362813850879712,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 200704,
+   "excess": -0.10256718977204582,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 376832,
+   "excess": -0.23122575200126783,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.09955224047245081,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 401408,
+   "excess": 0.14086406179366828,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 200704,
+   "excess": -0.1710009040067817,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 376832,
+   "excess": -0.08572693821293542,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.13615931389091407,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": 0.2646682497943369,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 75776,
+   "excess": -0.39646462047626674,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 75776,
+   "excess": -0.39646462047626674,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.11253975470313582,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 401408,
+   "excess": -0.03393794117481441,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 75776,
+   "excess": 0.1275621913532603,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 75776,
+   "excess": 0.1275621913532603,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.11468569492551284,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 301056,
+   "excess": 0.534696501513203,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 401408,
+   "excess": -0.2193246821243423,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 401408,
+   "excess": -0.2193246821243423,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.05288569990656811,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 501760,
+   "excess": 0.05288569990656811,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 401408,
+   "excess": -0.14108560365029532,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 401408,
+   "excess": -0.14108560365029532,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.1309591917887718,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 376832,
+   "excess": -0.03042829732253527,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 251904,
+   "excess": -0.022940601284760498,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 251904,
+   "excess": -0.022940601284760498,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.06580356265951137,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 401408,
+   "excess": 0.009178118010302772,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 251904,
+   "excess": -0.1601334632224769,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 251904,
+   "excess": -0.1601334632224769,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.06147167161272593,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 100352,
+   "excess": 0.19099642300345754,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 501760,
+   "excess": -0.12333102614037439,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 501760,
+   "excess": -0.12333102614037439,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.12333102614037439,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 425984,
+   "excess": 0.1762630534388936,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 501760,
+   "excess": -0.12987052979938463,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 501760,
+   "excess": -0.12987052979938463,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.12987052979938463,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 75776,
+   "excess": 0.15298813817017898,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 100352,
+   "excess": -0.17075132797380743,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 100352,
+   "excess": -0.17075132797380743,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.1756538834453354,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 301056,
+   "excess": 0.19750662423726073,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 100352,
+   "excess": -0.018308218199895254,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 100352,
+   "excess": -0.018308218199895254,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.061596466663764504,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 200704,
+   "excess": 0.17246310722496672,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 475136,
+   "excess": -0.08248215737173514,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 200704,
+   "excess": -0.04004647100454095,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.008606829460367615,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 325632,
+   "excess": 0.07782577619178066,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 475136,
+   "excess": -0.008503494198206063,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 200704,
+   "excess": -0.12576776904448494,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.17327828670294743,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 225280,
+   "excess": 0.26892415343723863,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 225280,
+   "excess": -0.09660632002441083,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 225280,
+   "excess": -0.09660632002441083,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.05204287353420578,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 75776,
+   "excess": -0.0062338598863366235,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 225280,
+   "excess": -0.036148403814576624,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 225280,
+   "excess": -0.036148403814576624,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.01611154717951524,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": 0.31635510107103726,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 325632,
+   "excess": -0.03619575969106248,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 325632,
+   "excess": -0.03619575969106248,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.05495459672763858,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": 0.019626881375717664,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 325632,
+   "excess": -0.05612372378850261,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 325632,
+   "excess": -0.05612372378850261,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.020102581483839588,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 425984,
+   "excess": 0.3958812609985729,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 151552,
+   "excess": -0.0034370633672126116,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 51200,
+   "excess": -0.06279193438171371,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.09120030429899717,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": 0.03235765349763242,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 151552,
+   "excess": 0.08480828754681458,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 51200,
+   "excess": -0.01816927075275121,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.022908579636392812,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 225280,
+   "excess": 0.4669510359704838,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 325632,
+   "excess": -0.18084627021360034,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 376832,
+   "excess": -0.20680350544672677,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.13277454610324224,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": -0.024228796248909945,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 325632,
+   "excess": 0.2768856740525656,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 376832,
+   "excess": 0.3927844245223504,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.3486197047321775,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 376832,
+   "excess": 0.3927844245223504,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 475136,
+   "excess": -0.07194218450270384,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 450560,
+   "excess": -0.04339792548738375,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.0058573016986051,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 501760,
+   "excess": -0.0058573016986051,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 475136,
+   "excess": 0.22595466491824223,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 450560,
+   "excess": 0.2413183424117984,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.3490325929372282,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 225280,
+   "excess": 0.4549194563703418,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 376832,
+   "excess": 0.14340104558482858,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 376832,
+   "excess": 0.14340104558482858,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.026898138069798905,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 350208,
+   "excess": 0.2372606735611712,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 376832,
+   "excess": 0.33849858698766555,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 376832,
+   "excess": 0.33849858698766555,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.1969927483104259,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 100352,
+   "excess": 0.4514338184024518,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 51200,
+   "excess": 0.059372148297444194,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 51200,
+   "excess": 0.059372148297444194,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.08043020115079791,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 100352,
+   "excess": 0.08043020115079791,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 51200,
+   "excess": 0.3676449926625829,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 51200,
+   "excess": 0.3676449926625829,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.3300494860054737,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.3676449926625829,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 100352,
+   "excess": -0.058886626137127474,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 100352,
+   "excess": -0.058886626137127474,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.058886626137127474,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": 0.07590631496493427,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 100352,
+   "excess": 0.2234258961327784,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 100352,
+   "excess": 0.2234258961327784,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.2234258961327784,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": 0.35345057170727157,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 51200,
+   "excess": -0.03190620683309786,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 51200,
+   "excess": -0.03190620683309786,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.03190620683309786,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 26624,
+   "excess": -0.03159386465869207,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 51200,
+   "excess": 0.13597215386891093,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 51200,
+   "excess": 0.13597215386891093,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.13597215386891093,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.13597215386891093,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 75776,
+   "excess": -0.04469648648425717,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 75776,
+   "excess": -0.04469648648425717,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.11789433109807113,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 276480,
+   "excess": 0.24560933859041978,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 75776,
+   "excess": -0.14327528590579797,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 75776,
+   "excess": -0.14327528590579797,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.07120039479139528,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 376832,
+   "excess": 0.1552815600975821,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 401408,
+   "excess": -0.03065824934713679,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 401408,
+   "excess": -0.03065824934713679,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.10612843831171714,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 325632,
+   "excess": -0.023868352764606304,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 401408,
+   "excess": 0.010976479838458841,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 401408,
+   "excess": 0.010976479838458841,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.06312043195701733,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 475136,
+   "excess": 0.06680662319335151,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 276480,
+   "excess": -0.0657129021518017,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 276480,
+   "excess": -0.0657129021518017,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.07228204506108038,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 425984,
+   "excess": 0.00038114458198357237,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 276480,
+   "excess": -0.02717079125320021,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 276480,
+   "excess": -0.02717079125320021,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.3406855544825942,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 501760,
+   "excess": 0.3406855544825942,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 325632,
+   "excess": -0.10287620471881942,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 325632,
+   "excess": -0.10287620471881942,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.01556108657681643,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 151552,
+   "excess": 0.04213561554662959,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 325632,
+   "excess": -0.17469946872114184,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 325632,
+   "excess": -0.17469946872114184,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.08183780397458551,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 350208,
+   "excess": 0.16515367662013092,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 26624,
+   "excess": -0.15011341440785575,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 26624,
+   "excess": -0.15011341440785575,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.016392158249889266,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 276480,
+   "excess": 0.09118338004469895,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 26624,
+   "excess": 0.22477216605746686,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 26624,
+   "excess": 0.22477216605746686,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.07578009065246216,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 276480,
+   "excess": 0.3756005992139635,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 200704,
+   "excess": -0.07415810267717537,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 200704,
+   "excess": -0.07415810267717537,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.07072916775323612,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 301056,
+   "excess": 0.07933948762589071,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 200704,
+   "excess": 0.22226313108139562,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 200704,
+   "excess": 0.22226313108139562,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.38673814890415614,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 376832,
+   "excess": 0.5404897939640048,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 200704,
+   "excess": -0.07076139705970264,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 200704,
+   "excess": -0.07076139705970264,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.14700649755634065,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 376832,
+   "excess": 0.06614676065429903,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 200704,
+   "excess": 0.003606612426855671,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 200704,
+   "excess": 0.003606612426855671,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.020890273033131734,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 325632,
+   "excess": 0.2642751718468834,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 425984,
+   "excess": 0.0644285157402592,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 425984,
+   "excess": 0.0644285157402592,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.014042764528925944,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 450560,
+   "excess": 0.08448928121001875,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 425984,
+   "excess": 0.04029000424553364,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 425984,
+   "excess": 0.04029000424553364,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": -0.01417176472772419,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 200704,
+   "excess": 0.3362210856771497,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 100352,
+   "excess": -0.08675839490630621,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 100352,
+   "excess": -0.08675839490630621,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.05806000608101247,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.1547177006304089,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 100352,
+   "excess": 0.12646310510070102,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 100352,
+   "excess": 0.12646310510070102,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.20649664228289422,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 200704,
+   "excess": 0.46991224215009586,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 301056,
+   "excess": 0.0713980183182964,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 301056,
+   "excess": 0.0713980183182964,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.060367602440061785,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 225280,
+   "excess": 0.5038681744797079,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 301056,
+   "excess": 0.11973435864110793,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 301056,
+   "excess": 0.11973435864110793,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.3433984815568265,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 75776,
+   "excess": 0.5933706355388355,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 75776,
+   "excess": 0.040316446825463426,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 75776,
+   "excess": 0.040316446825463426,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.08069340194785701,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 126976,
+   "excess": 0.09820473044971723,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 75776,
+   "excess": 0.6557957093509428,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 75776,
+   "excess": 0.6557957093509428,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.21359260302292138,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 100352,
+   "excess": 0.7065976049426053,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 401408,
+   "excess": 0.07058651419583717,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 401408,
+   "excess": 0.07058651419583717,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.06729701896848994,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 75776,
+   "excess": 0.12297504655492075,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 401408,
+   "excess": 0.32942892073971786,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 401408,
+   "excess": 0.32942892073971786,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.2928965134197741,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 325632,
+   "excess": 0.4899538664130585,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 51200,
+   "excess": 0.06605564859186275,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 51200,
+   "excess": 0.06605564859186275,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.06793937015584339,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 200704,
+   "excess": 0.11947186959582756,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 51200,
+   "excess": 0.6250128688469356,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 51200,
+   "excess": 0.6250128688469356,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.4208683320935529,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 51200,
+   "excess": 0.6250128688469356,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 251904,
+   "excess": 0.04087534716376828,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 251904,
+   "excess": 0.04087534716376828,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.11866655193916442,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 501760,
+   "excess": 0.11866655193916442,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 251904,
+   "excess": 0.35463329864129367,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 251904,
+   "excess": 0.35463329864129367,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.49575475527423496,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 501760,
+   "excess": 0.49575475527423496,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "raw",
+   "step": 276480,
+   "excess": 0.11708839833671736,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "excess",
+   "step": 276480,
+   "excess": 0.11708839833671736,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.059067951910424576,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rule": "oracle",
+   "step": 176128,
+   "excess": 0.11932896767683066,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "raw",
+   "step": 276480,
+   "excess": 0.32406547790575635,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "excess",
+   "step": 276480,
+   "excess": 0.32406547790575635,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "final",
+   "step": 501760,
+   "excess": 0.4347705402975679,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rule": "oracle",
+   "step": 475136,
+   "excess": 0.568422505266251,
+   "group": "null"
+  }
+ ],
+ "corr": [
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": -0.7574370709382151,
+   "rho_excess": -0.6864988558352404,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": 0.334096109839817,
+   "rho_excess": -0.31807780320366136,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": 1.0,
+   "rho_excess": 0.9961089494163424,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": -0.9961089494163424,
+   "rho_excess": -0.9883268482490273,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": -0.0820165537998495,
+   "rho_excess": -0.1000752445447705,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": -0.25959367945823925,
+   "rho_excess": -0.41158765989465756,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": 0.14913657770800626,
+   "rho_excess": 0.1616954474097331,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": -0.2998430141287284,
+   "rho_excess": -0.3971742543171114,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rho_raw": 0.136480686695279,
+   "rho_excess": 0.4489270386266095,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rho_raw": -0.6429184549356224,
+   "rho_excess": -0.3716738197424893,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": 0.5488721804511278,
+   "rho_excess": 0.5548872180451127,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": 0.14586466165413534,
+   "rho_excess": 0.10977443609022557,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": -0.22105263157894736,
+   "rho_excess": -0.26616541353383455,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": 0.3278195488721804,
+   "rho_excess": 0.3413533834586466,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": -0.21654135338345865,
+   "rho_excess": -0.11278195488721804,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": -0.41052631578947363,
+   "rho_excess": -0.5924812030075187,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": 0.13383458646616542,
+   "rho_excess": 0.09473684210526315,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": -0.012030075187969924,
+   "rho_excess": -0.012030075187969924,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rho_raw": 0.037593984962406006,
+   "rho_excess": 0.03909774436090225,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rho_raw": -0.25112781954887214,
+   "rho_excess": -0.13834586466165413,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": 0.13984962406015036,
+   "rho_excess": 0.08120300751879699,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": -0.3203007518796992,
+   "rho_excess": -0.3669172932330827,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": 0.2120300751879699,
+   "rho_excess": 0.18496240601503755,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": -0.23308270676691725,
+   "rho_excess": -0.1969924812030075,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": 0.23909774436090225,
+   "rho_excess": 0.14887218045112782,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": -0.1518796992481203,
+   "rho_excess": -0.09022556390977443,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": 0.11578947368421053,
+   "rho_excess": 0.09624060150375939,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": 0.1413533834586466,
+   "rho_excess": 0.10075187969924812,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rho_raw": 0.48872180451127817,
+   "rho_excess": 0.5233082706766917,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rho_raw": -0.3533834586466165,
+   "rho_excess": -0.29774436090225564,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": 0.10075187969924812,
+   "rho_excess": 0.2556390977443609,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": -0.26917293233082706,
+   "rho_excess": -0.3142857142857143,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": 0.12932330827067667,
+   "rho_excess": 0.009022556390977442,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": -0.4285714285714286,
+   "rho_excess": -0.306766917293233,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": -0.4285714285714286,
+   "rho_excess": -0.25112781954887214,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": -0.625563909774436,
+   "rho_excess": -0.5744360902255639,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": 0.5187969924812029,
+   "rho_excess": 0.6375939849624059,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": -0.32631578947368417,
+   "rho_excess": -0.2045112781954887,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rho_raw": 0.09022556390977443,
+   "rho_excess": 0.17744360902255638,
+   "group": "real"
+  },
+  {
+   "kind": "real",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rho_raw": 0.16842105263157892,
+   "rho_excess": 0.10977443609022557,
+   "group": "real"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": 0.3714285714285714,
+   "rho_excess": 0.32631578947368417,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": -0.4360902255639097,
+   "rho_excess": -0.37744360902255636,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": -0.05263157894736842,
+   "rho_excess": -0.05413533834586466,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": -0.09924812030075188,
+   "rho_excess": -0.13984962406015036,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": 0.055384615384615386,
+   "rho_excess": -0.003076923076923077,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": 0.055384615384615386,
+   "rho_excess": 0.11076923076923077,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": 0.22105263157894736,
+   "rho_excess": 0.2556390977443609,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": -0.4285714285714286,
+   "rho_excess": -0.4466165413533834,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rho_raw": 0.25680933852140075,
+   "rho_excess": 0.25680933852140075,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ddpg_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rho_raw": -0.40077821011673154,
+   "rho_excess": -0.40077821011673154,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": -0.3157894736842105,
+   "rho_excess": -0.3037593984962406,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": -0.07368421052631578,
+   "rho_excess": -0.08120300751879699,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": -0.2150375939849624,
+   "rho_excess": -0.2270676691729323,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": 0.37293233082706767,
+   "rho_excess": 0.39097744360902253,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": 0.07218045112781954,
+   "rho_excess": 0.04210526315789473,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": -0.4661654135338345,
+   "rho_excess": -0.3203007518796992,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": -0.1518796992481203,
+   "rho_excess": -0.13684210526315788,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": 0.19849624060150375,
+   "rho_excess": 0.3278195488721804,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rho_raw": 0.10225563909774435,
+   "rho_excess": 0.06165413533834586,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rho_raw": 0.2421052631578947,
+   "rho_excess": 0.14586466165413534,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": -0.38947368421052625,
+   "rho_excess": -0.3759398496240601,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": 0.30526315789473685,
+   "rho_excess": 0.3669172932330827,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": -0.3398496240601503,
+   "rho_excess": -0.32481203007518794,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": 0.10827067669172932,
+   "rho_excess": 0.08872180451127819,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": -0.08120300751879699,
+   "rho_excess": -0.11278195488721804,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": -0.193984962406015,
+   "rho_excess": -0.20300751879699244,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": -0.16240601503759397,
+   "rho_excess": -0.10526315789473684,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": 0.16240601503759397,
+   "rho_excess": 0.2120300751879699,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rho_raw": 0.1819548872180451,
+   "rho_excess": 0.07969924812030074,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rho_raw": 0.15488721804511277,
+   "rho_excess": 0.12030075187969923,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": 0.24962406015037594,
+   "rho_excess": -0.012030075187969924,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": -0.21954887218045113,
+   "rho_excess": -0.019548872180451125,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": -0.2526315789473684,
+   "rho_excess": -0.35488721804511275,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": -0.15488721804511277,
+   "rho_excess": -0.05864661654135337,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": 0.6902255639097743,
+   "rho_excess": 0.31729323308270674,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": -0.33533834586466166,
+   "rho_excess": 0.20751879699248119,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": -0.6796992481203006,
+   "rho_excess": -0.6796992481203006,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": 0.7999999999999999,
+   "rho_excess": 0.9473684210526315,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rho_raw": -0.19849624060150375,
+   "rho_excess": -0.10676691729323308,
+   "group": "null"
+  },
+  {
+   "kind": "null0",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rho_raw": 0.43458646616541347,
+   "rho_excess": 0.5263157894736841,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": -0.003007518796992481,
+   "rho_excess": 0.006015037593984962,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": -0.04060150375939849,
+   "rho_excess": -0.048120300751879695,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": -0.9883040935672512,
+   "rho_excess": -0.9883040935672512,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": 0.9999999999999999,
+   "rho_excess": 0.9999999999999999,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": -1.0,
+   "rho_excess": -1.0,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": 0.2607003891050584,
+   "rho_excess": 0.2607003891050584,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": -1.0,
+   "rho_excess": -1.0,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ddpg_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": 1.0,
+   "rho_excess": 1.0,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": 0.025563909774436087,
+   "rho_excess": 0.18796992481203004,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": 0.05563909774436089,
+   "rho_excess": 0.11428571428571428,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": -0.05263157894736842,
+   "rho_excess": -0.021052631578947364,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": 0.33684210526315783,
+   "rho_excess": 0.3278195488721804,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": -0.31729323308270674,
+   "rho_excess": -0.3578947368421052,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": 0.22105263157894736,
+   "rho_excess": 0.25864661654135335,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": -0.12481203007518797,
+   "rho_excess": -0.07969924812030074,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": 0.33383458646616543,
+   "rho_excess": 0.2421052631578947,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2021",
+   "rho_raw": -0.06165413533834586,
+   "rho_excess": -0.009022556390977442,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal_ep",
+   "seed": 4,
+   "period": "test2022",
+   "rho_raw": 0.28872180451127816,
+   "rho_excess": 0.362406015037594,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": 0.05714285714285714,
+   "rho_excess": 0.07669172932330826,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": -0.2857142857142857,
+   "rho_excess": -0.26616541353383455,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": -0.09624060150375939,
+   "rho_excess": -0.1609022556390977,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": 0.0781954887218045,
+   "rho_excess": 0.004511278195488721,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": 0.4090225563909774,
+   "rho_excess": 0.3218045112781954,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": 0.20751879699248119,
+   "rho_excess": 0.10977443609022557,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": 0.23609022556390977,
+   "rho_excess": 0.20902255639097742,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": 0.2120300751879699,
+   "rho_excess": 0.2646616541353383,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rho_raw": 0.2827067669172932,
+   "rho_excess": 0.32631578947368417,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "hrt_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rho_raw": -0.23157894736842105,
+   "rho_excess": -0.27518796992481204,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2021",
+   "rho_raw": -0.2571428571428572,
+   "rho_excess": -0.24962406015037594,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 0,
+   "period": "test2022",
+   "rho_raw": 0.22255639097744356,
+   "rho_excess": 0.19248120300751878,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2021",
+   "rho_raw": -0.4616541353383458,
+   "rho_excess": -0.33533834586466166,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 1,
+   "period": "test2022",
+   "rho_raw": -0.009022556390977442,
+   "rho_excess": 0.0631578947368421,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2021",
+   "rho_raw": -0.013533834586466165,
+   "rho_excess": -0.04661654135338346,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 2,
+   "period": "test2022",
+   "rho_raw": 0.0015037593984962405,
+   "rho_excess": 0.012030075187969924,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2021",
+   "rho_raw": 0.3533834586466165,
+   "rho_excess": 0.37744360902255636,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 3,
+   "period": "test2022",
+   "rho_raw": 0.312781954887218,
+   "rho_excess": 0.312781954887218,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2021",
+   "rho_raw": 0.4812030075187969,
+   "rho_excess": 0.4947368421052631,
+   "group": "null"
+  },
+  {
+   "kind": "null1",
+   "arm": "ppo_causal",
+   "seed": 4,
+   "period": "test2022",
+   "rho_raw": 0.34285714285714286,
+   "rho_excess": 0.3533834586466165,
+   "group": "null"
+  }
+ ]
+}
