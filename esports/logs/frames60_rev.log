@@ -1,0 +1,116 @@
+0 22808 {'finished': 1}
+200 22808 {'finished': 189, 'none': 12}
+400 22808 {'finished': 388, 'none': 13}
+600 22808 {'finished': 583, 'none': 14, 'open': 4}
+800 22808 {'finished': 782, 'none': 14, 'open': 5}
+1000 22808 {'finished': 979, 'none': 16, 'open': 6}
+1200 22808 {'finished': 1176, 'none': 17, 'open': 8}
+1400 22808 {'finished': 1375, 'none': 18, 'open': 8}
+1600 22808 {'finished': 1570, 'none': 23, 'open': 8}
+1800 22808 {'finished': 1769, 'none': 23, 'open': 9}
+2000 22808 {'finished': 1969, 'none': 23, 'open': 9}
+2200 22808 {'finished': 2167, 'none': 24, 'open': 10}
+2400 22808 {'finished': 2365, 'none': 25, 'open': 11}
+2600 22808 {'finished': 2563, 'none': 25, 'open': 13}
+2800 22808 {'finished': 2759, 'none': 25, 'open': 17}
+3000 22808 {'finished': 2956, 'none': 25, 'open': 20}
+3200 22808 {'finished': 3154, 'none': 26, 'open': 21}
+3400 22808 {'finished': 3350, 'none': 28, 'open': 23}
+3600 22808 {'finished': 3529, 'none': 45, 'open': 27}
+3800 22808 {'finished': 3728, 'none': 46, 'open': 27}
+4000 22808 {'finished': 3922, 'none': 51, 'open': 28}
+4200 22808 {'finished': 4119, 'none': 53, 'open': 29}
+4400 22808 {'finished': 4315, 'none': 55, 'open': 31}
+4600 22808 {'finished': 4507, 'none': 57, 'open': 37}
+4800 22808 {'finished': 4697, 'none': 61, 'open': 43}
+5000 22808 {'finished': 4890, 'none': 63, 'open': 48}
+5200 22808 {'finished': 5087, 'none': 66, 'open': 48}
+5400 22808 {'finished': 5284, 'none': 66, 'open': 51}
+5600 22808 {'finished': 5479, 'none': 67, 'open': 55}
+5800 22808 {'finished': 5674, 'none': 70, 'open': 57}
+6000 22808 {'finished': 5867, 'none': 75, 'open': 59}
+6200 22808 {'finished': 6050, 'none': 82, 'open': 69}
+6400 22808 {'finished': 6240, 'none': 83, 'open': 78}
+6600 22808 {'finished': 6434, 'none': 83, 'open': 84}
+6800 22808 {'finished': 6625, 'none': 84, 'open': 92}
+7000 22808 {'finished': 6822, 'none': 84, 'open': 95}
+7200 22808 {'finished': 7016, 'none': 86, 'open': 99}
+7400 22808 {'finished': 7210, 'none': 89, 'open': 102}
+7600 22808 {'finished': 7403, 'none': 90, 'open': 108}
+7800 22808 {'finished': 7599, 'none': 91, 'open': 111}
+8000 22808 {'finished': 7787, 'none': 95, 'open': 119}
+8200 22808 {'finished': 7982, 'none': 97, 'open': 122}
+8400 22808 {'finished': 8180, 'none': 97, 'open': 124}
+8600 22808 {'finished': 8372, 'none': 99, 'open': 130}
+8800 22808 {'finished': 8560, 'none': 101, 'open': 140}
+9000 22808 {'finished': 8750, 'none': 101, 'open': 150}
+9200 22808 {'finished': 8936, 'none': 101, 'open': 164}
+9400 22808 {'finished': 9121, 'none': 103, 'open': 177}
+9600 22808 {'finished': 9304, 'none': 112, 'open': 185}
+9800 22808 {'finished': 9495, 'none': 112, 'open': 194}
+10000 22808 {'finished': 9671, 'none': 127, 'open': 203}
+10200 22808 {'finished': 9856, 'none': 130, 'open': 215}
+10400 22808 {'finished': 10039, 'none': 132, 'open': 230}
+10600 22808 {'finished': 10224, 'none': 136, 'open': 241}
+10800 22808 {'finished': 10423, 'none': 136, 'open': 242}
+11000 22808 {'finished': 10621, 'none': 136, 'open': 244}
+11200 22808 {'finished': 10806, 'none': 147, 'open': 248}
+11400 22808 {'finished': 10927, 'none': 147, 'open': 248, 'skip': 79}
+11600 22808 {'finished': 10928, 'none': 147, 'open': 248, 'skip': 278}
+11800 22808 {'finished': 10930, 'none': 147, 'open': 248, 'skip': 476}
+12000 22808 {'finished': 10930, 'none': 147, 'open': 248, 'skip': 676}
+12200 22808 {'finished': 10930, 'none': 147, 'open': 248, 'skip': 876}
+12400 22808 {'finished': 10931, 'none': 147, 'open': 248, 'skip': 1075}
+12600 22808 {'finished': 10931, 'none': 147, 'open': 248, 'skip': 1275}
+12800 22808 {'finished': 10931, 'none': 147, 'open': 248, 'skip': 1475}
+13000 22808 {'finished': 10931, 'none': 147, 'open': 248, 'skip': 1675}
+13200 22808 {'finished': 10931, 'none': 147, 'open': 248, 'skip': 1875}
+13400 22808 {'finished': 10931, 'none': 147, 'open': 248, 'skip': 2075}
+13600 22808 {'finished': 10932, 'none': 147, 'open': 248, 'skip': 2274}
+13800 22808 {'finished': 10934, 'none': 147, 'open': 248, 'skip': 2472}
+14000 22808 {'finished': 10935, 'none': 147, 'open': 248, 'skip': 2671}
+14200 22808 {'finished': 10935, 'none': 147, 'open': 248, 'skip': 2871}
+14400 22808 {'finished': 10935, 'none': 147, 'open': 248, 'skip': 3071}
+14600 22808 {'finished': 10936, 'none': 147, 'open': 248, 'skip': 3270}
+14800 22808 {'finished': 10936, 'none': 147, 'open': 248, 'skip': 3470}
+15000 22808 {'finished': 10937, 'none': 147, 'open': 248, 'skip': 3669}
+15200 22808 {'finished': 10938, 'none': 147, 'open': 248, 'skip': 3868}
+15400 22808 {'finished': 10939, 'none': 147, 'open': 248, 'skip': 4067}
+15600 22808 {'finished': 10939, 'none': 147, 'open': 248, 'skip': 4267}
+15800 22808 {'finished': 10939, 'none': 147, 'open': 248, 'skip': 4467}
+16000 22808 {'finished': 10940, 'none': 147, 'open': 248, 'skip': 4666}
+16200 22808 {'finished': 10940, 'none': 147, 'open': 248, 'skip': 4866}
+16400 22808 {'finished': 10941, 'none': 147, 'open': 248, 'skip': 5065}
+16600 22808 {'finished': 10941, 'none': 147, 'open': 248, 'skip': 5265}
+16800 22808 {'finished': 10941, 'none': 147, 'open': 248, 'skip': 5465}
+17000 22808 {'finished': 10941, 'none': 147, 'open': 248, 'skip': 5665}
+17200 22808 {'finished': 10941, 'none': 147, 'open': 248, 'skip': 5865}
+17400 22808 {'finished': 10941, 'none': 147, 'open': 248, 'skip': 6065}
+17600 22808 {'finished': 10941, 'none': 147, 'open': 248, 'skip': 6265}
+17800 22808 {'finished': 10942, 'none': 147, 'open': 248, 'skip': 6464}
+18000 22808 {'finished': 10942, 'none': 147, 'open': 248, 'skip': 6664}
+18200 22808 {'finished': 10942, 'none': 147, 'open': 248, 'skip': 6864}
+18400 22808 {'finished': 10942, 'none': 147, 'open': 248, 'skip': 7064}
+18600 22808 {'finished': 10942, 'none': 147, 'open': 248, 'skip': 7264}
+18800 22808 {'finished': 10942, 'none': 147, 'open': 248, 'skip': 7464}
+19000 22808 {'finished': 10942, 'none': 147, 'open': 248, 'skip': 7664}
+19200 22808 {'finished': 10942, 'none': 147, 'open': 248, 'skip': 7864}
+19400 22808 {'finished': 10942, 'none': 147, 'open': 248, 'skip': 8064}
+19600 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 8263}
+19800 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 8463}
+20000 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 8663}
+20200 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 8863}
+20400 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 9063}
+20600 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 9263}
+20800 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 9463}
+21000 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 9663}
+21200 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 9863}
+21400 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 10063}
+21600 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 10263}
+21800 22808 {'finished': 10943, 'none': 147, 'open': 248, 'skip': 10463}
+22000 22808 {'finished': 10944, 'none': 147, 'open': 248, 'skip': 10662}
+22200 22808 {'finished': 10944, 'none': 147, 'open': 248, 'skip': 10862}
+22400 22808 {'finished': 10944, 'none': 147, 'open': 248, 'skip': 11062}
+22600 22808 {'finished': 10944, 'none': 147, 'open': 248, 'skip': 11262}
+22800 22808 {'finished': 10967, 'none': 147, 'open': 248, 'skip': 11439}
+DONE {'finished': 10974, 'none': 147, 'open': 248, 'skip': 11439}

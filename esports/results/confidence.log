@@ -1,0 +1,57 @@
+sd_boot: median 0.088 p90 0.180;  sd_dis: median 0.191 p90 0.487;  corr 0.57
+
+A/B. calibration of lr all by segment (perfect: int 0, slope 1)
+                 segment  frames  games    ll   ece  cal_int  cal_slope
+                     all  349422  10582 0.461 0.015   -0.049      0.937
+                min 0-10   93845  10582 0.598 0.026   -0.111      0.954
+               min 10-20  105067  10568 0.493 0.018   -0.033      0.920
+               min 20-30   99447  10537 0.354 0.009    0.014      0.949
+               min 30-99   51063   7117 0.349 0.012   -0.019      0.937
+            tier1 league  128064   3865 0.474 0.018   -0.031      0.894
+            tier2 league  221358   6717 0.453 0.014   -0.060      0.964
+           international   10270    310 0.470 0.022    0.045      0.992
+         patch age < 7 d  130912   3958 0.456 0.012   -0.014      0.950
+        patch age >= 7 d  218510   6624 0.464 0.017   -0.069      0.929
+fewest-games player < 20   63198   1927 0.434 0.031   -0.221      1.042
+         PM-linked games   54407   1625 0.468 0.023   -0.060      0.889
+              sd_boot lo  116474   9746 0.591 0.022   -0.103      0.981
+             sd_boot mid  116474  10453 0.471 0.014   -0.008      0.929
+              sd_boot hi  116474  10543 0.321 0.014   -0.018      0.923
+               sd_dis lo  116474   9835 0.590 0.024   -0.095      0.943
+              sd_dis mid  116474  10414 0.487 0.012   -0.019      0.937
+               sd_dis hi  116474  10560 0.305 0.012   -0.003      0.933
+shrink by sd_boot      per-game ll 0.4339  vs lr all -0.0000 [-0.0001, +0.0000]
+shrink by sd_dis       per-game ll 0.4340  vs lr all +0.0001 [-0.0001, +0.0002]
+family-mean ensemble   per-game ll 0.4348  vs lr all +0.0009 [+0.0000, +0.0018]
+
+C. encompassing weights (y ~ logit mkt + logit model) by uncertainty tercile, lag 0
+     sd tercile  frames  w_mkt  w_model    lo    hi  ll_model  ll_mkt
+ sd_dis      lo   13827  0.674    0.354 0.173 0.544     0.595   0.580
+ sd_dis     mid   13827  0.464    0.477 0.338 0.604     0.511   0.512
+ sd_dis      hi   13827  0.369    0.529 0.400 0.693     0.378   0.385
+sd_boot      lo   13827  0.672    0.339 0.159 0.524     0.602   0.589
+sd_boot     mid   13827  0.461    0.470 0.309 0.633     0.502   0.502
+sd_boot      hi   13827  0.395    0.528 0.409 0.673     0.380   0.386
+
+L=0: eval trades of the theta gate by sd_dis tercile
+        n    pp
+sd_t           
+lo    244  6.52
+mid   244  7.67
+hi    244 13.32
+
+L=5: eval trades of the theta gate by sd_dis tercile
+        n    pp
+sd_t           
+lo    220  6.16
+mid   219  4.64
+hi    220 13.14
+
+D. trading gates (params chosen on selection months, eval Feb-Apr 2026)
+ L                        strat                                                  params  sel_gross_pp    n  games  gross_pp  ci_lo  ci_hi  pre_fee_gross_pp  fee_regime_gross_pp  fee_regime_net_pp
+ 0                      B theta                                            {'th': 0.25}        13.924  732    277     9.169  1.060 18.202             4.038               11.610              8.579
+ 0 B theta, sd_dis < sel median {'th': 0.25, 'sd_max': np.float64(0.19490569512178388)}        12.985  358    151     8.668 -2.485 21.066             3.991               10.715              8.562
+ 0            Z edge/sd_dis > k                                     {'th': 0, 'k': 3.0}         8.488  241    116     0.529 -9.658 13.261            -9.140                5.798              4.002
+ 5                      B theta                                            {'th': 0.25}        13.136  659    251     7.986 -0.919 17.320             3.413               10.066              7.316
+ 5 B theta, sd_dis < sel median {'th': 0.25, 'sd_max': np.float64(0.19544817903173473)}        12.116  324    131     6.862 -4.261 20.993             2.328                8.799              6.980
+ 5            Z edge/sd_dis > k                                    {'th': 0, 'k': 0.75}         6.823 4229    797     2.707 -1.479  6.992            -0.236                4.251              0.640

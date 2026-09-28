@@ -1,0 +1,8 @@
+tier1: validation recalibration a=+0.126 b=1.109  (validation frames 34989)
+tier2: validation recalibration a=-0.008 b=1.087  (validation frames 61800)
+all test   per-game ll 0.4255 -> 0.4272  diff +0.0017 [+0.0010, +0.0026]  test slope before 0.936 after 0.854
+tier1      per-game ll 0.4471 -> 0.4510  diff +0.0038 [+0.0020, +0.0057]  test slope before 0.929 after 0.838
+PM-linked  per-game ll 0.4271 -> 0.4300  diff +0.0029 [+0.0007, +0.0052]  test slope before 0.924 after 0.841
+rolling 3-month recal all test   0.4255 -> 0.4259  diff +0.0004 [-0.0006, +0.0014]  slope before 0.936 after 0.981
+rolling 3-month recal PM-linked  0.4271 -> 0.4278  diff +0.0007 [-0.0028, +0.0039]  slope before 0.924 after 0.982
+calibration slope by month: {Period('2025-04', 'M'): 1.1, Period('2025-05', 'M'): 1.13, Period('2025-06', 'M'): 0.99, Period('2025-07', 'M'): 1.0, Period('2025-08', 'M'): 1.03, Period('2025-09', 'M'): 1.11, Period('2025-10', 'M'): 1.01, Period('2025-11', 'M'): 0.95, Period('2026-01', 'M'): 0.91, Period('2026-02', 'M'): 0.94, Period('2026-03', 'M'): 0.93, Period('2026-04', 'M'): 0.97, Period('2026-05', 'M'): 0.87, Period('2026-06', 'M'): 0.87, Period('2026-07', 'M'): 0.85, Period('2026-08', 'M'): 0.9, Period('2026-09', 'M'): 0.9}

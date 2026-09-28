@@ -1,0 +1,13 @@
+games with details: train 8783 test 10582; frames 640138
+prior_new oof  per-game ll 0.4255  by 10-min bucket {0: 0.5822, 10: 0.4852, 20: 0.3519, 30: 0.3477}
++ vision       per-game ll 0.4254  by 10-min bucket {0: 0.5824, 10: 0.4854, 20: 0.3517, 30: 0.3471}
++ vision minus base: -0.0000 [-0.0004, +0.0003]
+logit change per +1 SD (train) of each vision term, at 10/20/30 min:
+           10     20     30
+wp      0.123  0.082  0.063
+wd      0.058  0.032  0.010
+cw     -0.010  0.023  0.004
+wp_sup -0.076 -0.085 -0.111
+wp_jgl -0.031 -0.067 -0.084
+d5_wp  -0.034 -0.012  0.038
+d5_wd   0.020  0.028  0.034

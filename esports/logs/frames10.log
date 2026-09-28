@@ -1,0 +1,18 @@
+0 2913 {'finished': 1}
+200 2913 {'finished': 194, 'open': 4, 'none': 3}
+0 2913 {'skip': 1}
+200 2913 {'skip': 201}
+400 2913 {'skip': 354, 'finished': 47}
+600 2913 {'skip': 354, 'finished': 240, 'open': 5, 'none': 2}
+800 2913 {'skip': 354, 'finished': 437, 'open': 8, 'none': 2}
+1000 2913 {'skip': 354, 'finished': 632, 'open': 13, 'none': 2}
+1200 2913 {'skip': 354, 'finished': 824, 'open': 19, 'none': 4}
+1400 2913 {'skip': 354, 'finished': 1016, 'open': 27, 'none': 4}
+1600 2913 {'skip': 354, 'finished': 1212, 'open': 30, 'none': 5}
+1800 2913 {'skip': 354, 'finished': 1407, 'open': 35, 'none': 5}
+2000 2913 {'skip': 354, 'finished': 1600, 'open': 41, 'none': 6}
+2200 2913 {'skip': 354, 'finished': 1798, 'open': 43, 'none': 6}
+2400 2913 {'skip': 354, 'finished': 1992, 'open': 46, 'none': 9}
+2600 2913 {'skip': 354, 'finished': 2188, 'open': 50, 'none': 9}
+2800 2913 {'skip': 354, 'finished': 2382, 'open': 54, 'none': 11}
+DONE {'skip': 354, 'finished': 2488, 'open': 60, 'none': 11}
