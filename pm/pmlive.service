@@ -1,0 +1,32 @@
+# Polymarket live capture + dashboard.
+#   sudo cp pm/pmlive.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now pmlive
+#   journalctl -u pmlive -f
+[Unit]
+Description=Polymarket minute-bar capture and dashboard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=aimer
+Group=aimer
+WorkingDirectory=/home/aimer/fyp
+ExecStart=/home/aimer/fyp/pm/run_pmlive.sh
+Environment=PORT=2217
+Environment=CYCLE_H=6
+Environment=TOP=150
+Environment=SPORTS_CAP=40
+# Let the collector flush its in-memory minute bars before the tree is killed.
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=120
+Restart=always
+RestartSec=15
+# The capture is append-only data; keep it out of the way of the rest of the box.
+Nice=5
+IOSchedulingClass=best-effort
+IOSchedulingPriority=5
+
+[Install]
+WantedBy=multi-user.target

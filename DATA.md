@@ -207,3 +207,120 @@ EOF
 
 A healthy pull shows **730,492,126** resolved fills, **2,588,367** accounts and
 **704,521** events spanning 2022-11-21 to 2026-04-28.
+
+### 9.1 The text layer
+
+The archive has no question field, but `market_slug` is the question lowercased and
+hyphenated, so one `replace` recovers it. `pm/pmv1_text_panel.py` does that and writes
+three tables under `data/nlp/`:
+
+```bash
+python pm/pmv1_text_panel.py --horizon 24     # slugs + resolution + panel, ~9 s
+python pm/pmv1_text_embed.py --model finbert --field text
+```
+
+| file | rows | what it is |
+|---|---:|---|
+| `slugs.parquet` | 851,420 | one row per `condition_id`: slug, category, first/last fill, fill count |
+| `resolution.parquet` | 838,118 | `win_event` on the `outcome_seq = 1` axis, `neg_risk`, close/resolve times |
+| `panel.parquet` | 527,736 | one row per (market, day): last bar of the day, execution VWAPs, both targets, and the reconstructed question |
+| `emb_{model}_{field}.npz` | 31,877 | mean-pooled frozen embeddings, 768-d (FinBERT/BERT) or 384-d (MiniLM) |
+
+**The corpus is not uniformly natural language, and that is the first thing to check.**
+Measured over all 746 M fills:
+
+| slug shape | markets | share of fills | example |
+|---|---:|---:|---|
+| contains a unix timestamp | 220,495 | **57.1 %** | `btc-updown-5m-1776662700` |
+| contains an ISO date | 392,975 | 11.4 % | `nba-bos-bkn-2025-11-18-1h-spread-away-5pt5` |
+| neither | 237,950 | 31.6 % | `will-arsenal-win-a-trophy-this-season` |
+
+`panel.parquet` tags each row `kind ∈ {ts, date, nl}` on those patterns and carries both
+`text` (verbatim) and `text_scrub` (clock readings masked). The timestamped markets are
+individually tiny and short-lived, so they are 57 % of fills but only 0.5 % of liquid
+market-days — the panel is 87 % `nl` by row.
+
+### Traps in the text layer
+
+- **`neg_risk` carries a different boolean vocabulary in each layer.** The standard binary
+  layer writes `'f'` and only `'f'`; the negative-risk layer writes `'true'` and only
+  `'true'`. A predicate written against one (`neg_risk <> 'false'`) labels *every* row of
+  the other as true, which reads as "every market is multi-outcome" and silently disables
+  any test that conditions on it. Compare against `'true'` and nothing else.
+- **The slug is a timestamp.** A tf-idf ridge on the slug alone predicts the observation
+  date at **R² = 0.92** (MAE 43 days against a 175-day naive baseline). Masking every
+  literal date, year and integer only takes it to R² = 0.886 — the proper nouns are
+  themselves dated. Any train/test split that interleaves in time hands a text model the
+  period. See `RESULTS.md` §3.6.
+- **Slugs carry numeric disambiguators.** `will-hyperliquid-hit-55-in-2025-178-267-799`
+  ends in an id, not content. They are unique per market, so under any split that puts a
+  market on both sides they are a primary key to the label.
+- **`category_refined` is noisy.** `pepe-spot-listed-on-coinbase-in-april` is labelled
+  `Sports`. Use it as a control, not as ground truth.
+
+## 10. Self-captured live data: the Polymarket public API
+
+The vendor Polymarket order-book capture stopped 2026-07-29 (§6) and the
+Polymarket-v1 archive ends 2026-04-28, so any book-level question after that has
+to be captured first-hand. Polymarket's own API is open, unauthenticated, and
+sufficient for it; §9's archive remains the right tape for history.
+
+`pm/pmlive_universe.py` maintains the universe in `data/pmlive.sqlite`,
+`pm/pmlive_collect.py` writes minute bars to `data/pmlive/`, and
+`pm/run_pmlive.sh` supervises both for a long run.
+
+**The three routes, all keyless.**
+
+| host | use |
+| --- | --- |
+| `gamma-api.polymarket.com` | event/market discovery, ranking by `volume24hr` |
+| `clob.polymarket.com` | `GET /book`, `POST /books`, `prices-history` |
+| `data-api.polymarket.com` | `/trades`, with a *reported* taker side |
+| `wss://ws-subscriptions-clob.polymarket.com/ws/market` | live book stream |
+
+**Why minute bars and not the raw feed.** The raw websocket runs 34 GB/day for a
+top-150 universe — 3 TB over a quarter. Aggregating in memory to one-minute bars
+(mid OHLC, both touches and sizes, 5-level depth notional, update count) measures
+**7.22 B/row** on real captured data, or ~32 MB/day at 3,092 tokens. The book
+cannot be backfilled, so the capture start date is a hard boundary like the
+vendor tape's was.
+
+### Traps — every one of these fails silently
+
+- **The websocket caps a subscription between 700 and 800 asset ids.** At 700 you
+  get 698 book snapshots; at 800 you get *ten*, with no error, no close, and a
+  connection that looks healthy. Subscribing a whole universe at once records
+  about 1% of the market while appearing to work. Shard at 450 across concurrent
+  connections — 13 × 450 gave 99.8% coverage of 5,766 tokens. `pmlive_collect.py`
+  asserts the shard size and logs a coverage figure every minute for this reason.
+- **`price_change` has no top-level `asset_id`.** It carries `price_changes[]`
+  and *each entry* names its own asset, so one message spans several tokens. Code
+  that reads `msg["asset_id"]` silently drops every incremental update and keeps
+  only the subscribe-time snapshots — the books then look static forever. This
+  mistake cost a full round of sizing here: it under-reported updates as 80/min
+  when the true figure is 2,804/min.
+- **`gamma /events?limit=150` silently returns 100.** The ceiling is 100; page by
+  `offset`.
+- **`gamma /markets?condition_ids=` takes repeated params only.** A comma-joined
+  list returns `[]` with HTTP 200 — a retirement loop written that way never
+  retires anything. The batch caps at 100; 150 raises a loud HTTP 422.
+- **That route returns only active markets.** A tracked id that comes back absent
+  is `active=false`; `closed=true` and `archived=true` do not recover it, and the
+  CLOB `404`s those tokens. Absent means stop tracking.
+- **`POST /books` returns fewer books than tokens sent** — 478 in, 216 out. The
+  missing ones are exactly the `active=false` and `closed=true` tokens, so filter
+  on `active && !closed` first and the counts reconcile.
+- **Cloudflare 403s python's default User-Agent** on every polymarket host. curl
+  works, `urllib` does not, until you set any UA string.
+- **`data-api /trades` offset is capped at 10000** (loud 400 past it). Deeper
+  markets need time-window paging, as in §1's vendor puller.
+
+### Universe policy
+
+Sticky with a sports cap: an event entering the top 150 by 24h volume is tracked
+until its markets stop quoting, so the panel has no survivorship hole from
+re-ranking. Sports events are capped at 40 tokens because a single NFL game ships
+~660 prop tokens — 53 sports events carried 3,800 of 5,766 tokens at the same 24h
+volume as Politics' 744. The cap takes the top markets by liquidity and brings the
+universe to ~3,092 tokens. **84 of 150 events end within 7 days**, so discovery
+must re-run on a cycle; `run_pmlive.sh` does it every 6 hours.

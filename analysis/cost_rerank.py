@@ -37,6 +37,7 @@ def sharpe(v, periods=252):
 
 
 def main():
+    out = {}
     runs = {}
     for f in sorted(glob.glob(os.path.join(ART, "runs", "*.json"))):
         d = json.load(open(f))
@@ -67,11 +68,25 @@ def main():
         for a in arms:
             print(f"{a:<20}" + "".join(f"{ranks[k][a]:>14d}" for k in RATES))
         base = "paper 10bp"
+        moves = {}
         for k in RATES:
             if k == base:
                 continue
             moved = sum(ranks[k][a] != ranks[base][a] for a in arms)
+            moves[k] = moved
             print(f"  '{k}' vs '{base}': {moved}/{len(arms)} arms move rank")
+        out[period] = dict(
+            rates=RATES, n_arms=len(arms), base=base, moved=moves, ranks=ranks,
+            n_seeds={a: len(ds) for a, ds in runs.items()},
+            turnover={a: float(np.mean([d[period]["turnover"] for d in runs[a]])) for a in arms},
+            sharpe=tbl)
+
+
+    # the figure and RESULTS.md sec.2.3 both read this, so neither can go stale
+    # when the sweep grows a seed
+    p = os.path.join(ART, "cost_rerank.json")
+    json.dump(out, open(p, "w"), indent=1)
+    print(f"\nwrote {p}")
 
 
 if __name__ == "__main__":

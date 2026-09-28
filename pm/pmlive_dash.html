@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polymarket Capture</title>
+<style>
+:root{
+  color-scheme: light;
+  --plane:#f9f9f7; --surface:#fcfcfb;
+  --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,0.10);
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --plane:#0d0d0d; --surface:#1a1a19;
+    --ink:#ffffff; --ink2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.10);
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --plane:#0d0d0d; --surface:#1a1a19;
+  --ink:#ffffff; --ink2:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.10);
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--plane);color:var(--ink);
+  font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding:24px 16px 64px}
+header{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+h1{font-size:20px;font-weight:600;margin:0;letter-spacing:-0.01em}
+.sub{color:var(--ink2);font-size:13px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;
+  font-size:12px;font-weight:600;border:1px solid var(--border)}
+.pill svg{width:12px;height:12px;flex:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:20px 0 16px}
+button,select,input{font:inherit;color:var(--ink);background:var(--surface);
+  border:1px solid var(--border);border-radius:8px;padding:6px 12px}
+button{cursor:pointer}
+button[aria-pressed="true"]{background:var(--ink);color:var(--plane);border-color:var(--ink)}
+input{min-width:220px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.tile .k{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font-size:26px;font-weight:600;letter-spacing:-0.02em;margin-top:4px;
+  font-variant-numeric:tabular-nums}
+.tile .n{color:var(--ink2);font-size:12px;margin-top:2px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+@media(max-width:900px){.cards{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{font-size:14px;font-weight:600;margin:0 0 2px}
+.card .cap{color:var(--ink2);font-size:12px;margin-bottom:12px}
+.full{grid-column:1/-1}
+svg{display:block;width:100%;overflow:visible}
+.gl{stroke:var(--grid);stroke-width:1}
+.ax{stroke:var(--axis);stroke-width:1}
+.tick{fill:var(--muted);font-size:11px}
+.line{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px;font-size:12px;color:var(--ink2)}
+.legend i{display:inline-block;width:14px;height:2px;border-radius:1px;vertical-align:middle;margin-right:6px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:600;color:var(--ink2);font-size:12px;
+  border-bottom:1px solid var(--axis);padding:8px 10px;white-space:nowrap;cursor:pointer}
+td{padding:7px 10px;border-bottom:1px solid var(--grid);white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+td.t{white-space:normal;min-width:240px}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+tbody tr[aria-selected="true"]{background:color-mix(in srgb,var(--s1) 12%,transparent)}
+.scroll{max-height:420px;overflow:auto}
+.tag{font-size:11px;color:var(--ink2);border:1px solid var(--border);
+  border-radius:999px;padding:1px 8px}
+.empty{color:var(--muted);padding:28px 8px;text-align:center;font-size:13px}
+.tip{position:fixed;pointer-events:none;z-index:9;background:var(--surface);
+  border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:12px;
+  box-shadow:0 4px 16px rgba(0,0,0,.14);opacity:0;transition:opacity .08s}
+.tip b{font-size:13px;font-variant-numeric:tabular-nums}
+.tip .r{display:flex;align-items:center;gap:8px;margin-top:3px}
+.tip .r i{width:12px;height:2px;border-radius:1px;flex:none}
+.tip .r span{color:var(--ink2)}
+.hair{stroke:var(--axis);stroke-width:1}
+.dot{stroke:var(--surface);stroke-width:2}
+.bar{fill:var(--s1)}
+.muted{color:var(--muted)}
+.err{color:var(--crit)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Polymarket Capture</h1>
+    <span id="pill" class="pill"></span>
+    <span class="sub" id="sub"></span>
+    <span style="flex:1"></span>
+    <button id="theme" title="Toggle theme">Theme</button>
+  </header>
+
+  <div class="tiles" id="tiles"></div>
+
+  <div class="row" role="group" aria-label="Time range">
+    <span class="muted" style="font-size:12px">Range</span>
+    <button data-h="1">1h</button>
+    <button data-h="6">6h</button>
+    <button data-h="24" aria-pressed="true">24h</button>
+    <button data-h="168">7d</button>
+    <button data-h="720">30d</button>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h2>Book coverage</h2>
+      <div class="cap">Share of subscribed tokens with a live book. A sustained drop
+        means a dead shard or the websocket subscription cap &mdash; not a quiet market.</div>
+      <div id="cov"></div>
+    </div>
+    <div class="card">
+      <h2>Messages per minute</h2>
+      <div class="cap">Websocket throughput across all shards.</div>
+      <div id="msg"></div>
+    </div>
+
+    <div class="card full">
+      <h2>Tracked tokens by category</h2>
+      <div class="cap">Sports events are capped at 40 tokens; without the cap a single
+        NFL game contributes ~660.</div>
+      <div id="cat"></div>
+    </div>
+
+    <div class="card full">
+      <h2>Collected events</h2>
+      <div class="cap">Sticky universe &mdash; an event stays until its markets stop
+        quoting. Select a row to load its book history.</div>
+      <div class="row" style="margin:0 0 12px">
+        <input id="q" type="search" placeholder="Filter events by title&hellip;" aria-label="Filter events">
+        <select id="sort" aria-label="Sort events">
+          <option value="rank">Best rank</option>
+          <option value="vol">Peak 24h volume</option>
+          <option value="tokens">Tokens</option>
+          <option value="new">Newest</option>
+        </select>
+        <span class="muted" id="evn" style="font-size:12px"></span>
+      </div>
+      <div class="scroll"><table id="evt"><thead><tr>
+        <th>#</th><th>Event</th><th>Category</th><th>Mkts</th>
+        <th>Tokens</th><th>Live</th><th>Peak 24h vol</th><th>First seen</th>
+      </tr></thead><tbody></tbody></table></div>
+      <div class="empty" id="eve" hidden>No events yet &mdash; run pm/pmlive_universe.py.</div>
+    </div>
+
+    <div class="card full">
+      <h2 id="sertitle">Book history</h2>
+      <div class="cap" id="sercap">Select an event above to plot its outcome
+        probabilities over the selected range.</div>
+      <div id="serleg" class="legend"></div>
+      <div id="ser"></div>
+      <div class="row" style="margin:12px 0 0">
+        <button id="tbl" aria-pressed="false">Table view</button>
+      </div>
+      <div class="scroll" id="sertbl" hidden style="margin-top:12px"></div>
+    </div>
+  </div>
+</div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+const $=s=>document.querySelector(s), tip=$("#tip");
+const C=()=>getComputedStyle(document.documentElement);
+const SER=()=>[C().getPropertyValue("--s1").trim(),C().getPropertyValue("--s2").trim(),
+               C().getPropertyValue("--s3").trim()];
+let HOURS=24, EVENTS=[], SEL=null, SERIES=null, SERLBL=[];
+
+const fmt=(n,d=0)=>n==null?"—":n.toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d});
+const bytes=b=>{if(b==null)return "—";const u=["B","KB","MB","GB","TB"];let i=0;
+  while(b>=1024&&i<u.length-1){b/=1024;i++}return b.toFixed(b<10&&i>0?1:0)+" "+u[i]};
+const hhmm=t=>new Date(t*1000).toISOString().slice(11,16);
+const dayt=t=>new Date(t*1000).toISOString().slice(5,16).replace("T"," ");
+
+async function j(u){const r=await fetch(u);if(!r.ok)throw new Error(r.status);return r.json()}
+
+/* ---------- status ---------- */
+function icon(ok){return ok
+  ? '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>'
+  : '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4v5"/><circle cx="8" cy="12" r=".6" fill="currentColor"/></svg>';}
+
+async function status(){
+  let s; try{ s=await j("/api/status") }catch(e){ return }
+  const run=s.running, h=s.health;
+  const p=$("#pill");
+  p.style.color = run?"var(--good)":"var(--crit)";
+  p.innerHTML = icon(run);
+  p.append(run?"Capturing":"Stopped");
+  const span=(s.first&&s.last)?`${dayt(s.first)} → ${dayt(s.last)} UTC`:"no bars yet";
+  $("#sub").textContent = span;
+  const mins = (s.first&&s.last)?Math.round((s.last-s.first)/60)+1:0;
+  const days = mins/1440;
+  const perDay = days>0.02 ? s.bytes/days : null;
+  const tiles=[
+    ["Tokens tracked", fmt(s.tracking), `${fmt(s.lifetime)} seen lifetime`],
+    ["Events", fmt(s.events), `${fmt(s.markets)} markets · ${fmt(s.capped)} capped`],
+    ["Coverage", h?h.cov.toFixed(1)+"%":"—",
+      h?`${fmt(h.books)} of ${fmt(h.sub)} books`:"awaiting first flush"],
+    ["Shards up", h?fmt(h.shards):"—", h?`${fmt(h.drops)} reconnects`:""],
+    ["Minutes captured", fmt(mins), `${fmt(s.rows)} bars · ${fmt(s.files)} file${s.files===1?"":"s"}`],
+    ["On disk", bytes(s.bytes), perDay?`${bytes(perDay)}/day · ${bytes(perDay*90)}/90d`:"—"],
+    ["Disk free", bytes(s.disk_free), "on /"],
+  ];
+  $("#tiles").innerHTML = tiles.map(([k,v,n])=>
+    `<div class="tile"><div class="k"></div><div class="v"></div><div class="n"></div></div>`).join("");
+  [...document.querySelectorAll("#tiles .tile")].forEach((el,i)=>{
+    el.querySelector(".k").textContent=tiles[i][0];
+    el.querySelector(".v").textContent=tiles[i][1];
+    el.querySelector(".n").textContent=tiles[i][2]||"";
+  });
+}
+
+/* ---------- chart primitives ---------- */
+function frame(host,{h=190,padL=44,padR=16,padT=10,padB=26}={}){
+  host.innerHTML="";
+  const w=Math.max(320,host.clientWidth||640);
+  const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+  svg.setAttribute("viewBox",`0 0 ${w} ${h}`); svg.setAttribute("height",h);
+  host.appendChild(svg);
+  return {svg,w,h,padL,padR,padT,padB,iw:w-padL-padR,ih:h-padT-padB};
+}
+const el=(p,n,a)=>{const e=document.createElementNS("http://www.w3.org/2000/svg",n);
+  for(const k in a) e.setAttribute(k,a[k]); p.appendChild(e); return e};
+function axes(f,xt,yt,fmtY){
+  yt.forEach(v=>{
+    const y=f.padT+f.ih-(v.p*f.ih);
+    el(f.svg,"line",{x1:f.padL,x2:f.padL+f.iw,y1:y,y2:y,class:"gl"});
+    el(f.svg,"text",{x:f.padL-8,y:y+4,class:"tick","text-anchor":"end"}).textContent=fmtY(v.v);
+  });
+  el(f.svg,"line",{x1:f.padL,x2:f.padL+f.iw,y1:f.padT+f.ih,y2:f.padT+f.ih,class:"ax"});
+  xt.forEach(t=>{
+    el(f.svg,"text",{x:f.padL+t.p*f.iw,y:f.h-8,class:"tick","text-anchor":"middle"})
+      .textContent=t.l;
+  });
+}
+function showTip(ev,html){
+  tip.innerHTML=""; tip.append(html); tip.style.opacity=1;
+  const r=tip.getBoundingClientRect();
+  let x=ev.clientX+14, y=ev.clientY-10;
+  if(x+r.width>innerWidth-8) x=ev.clientX-r.width-14;
+  if(y+r.height>innerHeight-8) y=innerHeight-r.height-8;
+  tip.style.left=x+"px"; tip.style.top=Math.max(8,y)+"px";
+}
+const hideTip=()=>tip.style.opacity=0;
+function tipNode(title,rows){
+  const d=document.createElement("div");
+  const b=document.createElement("b"); b.textContent=title; d.appendChild(b);
+  rows.forEach(([c,lab,val])=>{
+    const r=document.createElement("div"); r.className="r";
+    if(c){const i=document.createElement("i"); i.style.background=c; r.appendChild(i);}
+    const s=document.createElement("span"); s.textContent=lab; r.appendChild(s);
+    const v=document.createElement("b"); v.textContent=val; r.appendChild(v);
+    d.appendChild(r);
+  });
+  return d;
+}
+
+/* ---------- line chart with crosshair ---------- */
+function lineChart(host,series,opt){
+  /* Reserve right-hand room for the direct labels so they never clip the card. */
+  const wantLab = opt.label!==false && series.length;
+  const labW = wantLab ? Math.min(150, Math.max(...series.map(s=>
+                 (s.name||"").length*6.1))+14) : 0;
+  const f=frame(host,{h:opt.h||190,padR:16+labW});
+  if(!series.length||!series[0].pts.length){
+    host.innerHTML='<div class="empty">'+(opt.empty||"No data in range")+'</div>'; return;
+  }
+  const xs=series.flatMap(s=>s.pts.map(p=>p[0]));
+  const x0=Math.min(...xs), x1=Math.max(...xs), xr=(x1-x0)||1;
+  let y0=opt.y0!=null?opt.y0:Math.min(...series.flatMap(s=>s.pts.map(p=>p[1])));
+  let y1=opt.y1!=null?opt.y1:Math.max(...series.flatMap(s=>s.pts.map(p=>p[1])));
+  if(y1-y0<1e-9){y1=y0+1}
+  if(opt.pad){const d=(y1-y0)*0.12;y0-=d;y1+=d}
+  const X=t=>f.padL+((t-x0)/xr)*f.iw, Y=v=>f.padT+f.ih-((v-y0)/(y1-y0))*f.ih;
+  const ny=4, yt=[...Array(ny+1)].map((_,i)=>({p:i/ny,v:y0+(y1-y0)*i/ny}));
+  const nx=Math.min(5,Math.max(2,Math.floor(f.iw/110)));
+  const xt=[...Array(nx+1)].map((_,i)=>({p:i/nx,l:(opt.xfmt||hhmm)(x0+xr*i/nx)}));
+  axes(f,xt,yt,opt.yfmt||(v=>fmt(v,opt.yd||0)));
+  series.forEach((s,i)=>{
+    const d=s.pts.map((p,k)=>(k?"L":"M")+X(p[0]).toFixed(1)+" "+Y(p[1]).toFixed(1)).join(" ");
+    el(f.svg,"path",{d,class:"line",stroke:s.color});
+    if(s.pts.length===1) el(f.svg,"circle",{cx:X(s.pts[0][0]),cy:Y(s.pts[0][1]),r:4,fill:s.color});
+  });
+  /* Direct labels at each series' last point, dodged apart so near-equal
+     series (common here: several outcomes pinned near 0) stay legible. */
+  if(opt.label!==false && series.length){
+    const MIN=13;
+    const lab=series.map(s=>{const p=s.pts[s.pts.length-1];
+      return {name:s.name,y:Y(p[1]),x:f.padL+f.iw+8}});
+    lab.sort((a,b)=>a.y-b.y);
+    for(let i=1;i<lab.length;i++)
+      if(lab[i].y-lab[i-1].y<MIN) lab[i].y=lab[i-1].y+MIN;
+    const over=lab.length?lab[lab.length-1].y-(f.padT+f.ih):0;
+    if(over>0) lab.forEach(l=>l.y-=over);
+    lab.forEach(l=>el(f.svg,"text",{x:l.x,y:l.y+4,class:"tick",
+      fill:"var(--ink2)"}).textContent=l.name);
+  }
+  const hair=el(f.svg,"line",{class:"hair",y1:f.padT,y2:f.padT+f.ih,x1:-99,x2:-99,opacity:0});
+  const dots=series.map(s=>el(f.svg,"circle",{r:4,fill:s.color,class:"dot",opacity:0}));
+  const hit=el(f.svg,"rect",{x:f.padL,y:f.padT,width:f.iw,height:f.ih,fill:"transparent"});
+  hit.style.cursor="crosshair";
+  const move=ev=>{
+    const bb=f.svg.getBoundingClientRect();
+    const px=(ev.clientX-bb.left)/bb.width*f.w;
+    const t=x0+((px-f.padL)/f.iw)*xr;
+    let best=null;
+    const rows=series.map((s,i)=>{
+      let k=0,bd=Infinity;
+      s.pts.forEach((p,n)=>{const d=Math.abs(p[0]-t); if(d<bd){bd=d;k=n}});
+      const p=s.pts[k];
+      if(!best||Math.abs(p[0]-t)<Math.abs(best[0]-t)) best=p;
+      dots[i].setAttribute("cx",X(p[0])); dots[i].setAttribute("cy",Y(p[1]));
+      dots[i].setAttribute("opacity",1);
+      return [s.color,s.name,(opt.yfmt||(v=>fmt(v,opt.yd||0)))(p[1])];
+    });
+    hair.setAttribute("x1",X(best[0])); hair.setAttribute("x2",X(best[0]));
+    hair.setAttribute("opacity",1);
+    showTip(ev,tipNode((opt.tfmt||dayt)(best[0]),rows));
+  };
+  hit.addEventListener("pointermove",move);
+  hit.addEventListener("pointerleave",()=>{hideTip();hair.setAttribute("opacity",0);
+    dots.forEach(d=>d.setAttribute("opacity",0))});
+  f.svg.setAttribute("tabindex","0");
+  f.svg.addEventListener("focus",()=>{const b=f.svg.getBoundingClientRect();
+    move({clientX:b.left+b.width-2,clientY:b.top+10})});
+  f.svg.addEventListener("blur",hideTip);
+}
+
+/* ---------- bar chart ---------- */
+function barChart(host,rows,opt){
+  if(!rows.length){host.innerHTML='<div class="empty">Nothing yet</div>';return}
+  const n=rows.length, rowH=26, h=n*rowH+28;
+  const f=frame(host,{h,padL:0,padT:6,padB:22});
+  const labW=Math.min(190,Math.max(90,...rows.map(r=>r.label.length*7)));
+  const iw=f.w-labW-58, max=Math.max(...rows.map(r=>r.value))||1;
+  rows.forEach((r,i)=>{
+    const y=6+i*rowH, bw=Math.max(2,(r.value/max)*iw);
+    el(f.svg,"text",{x:labW-10,y:y+15,class:"tick","text-anchor":"end",
+      fill:"var(--ink2)"}).textContent=r.label;
+    const rc=el(f.svg,"rect",{x:labW,y:y+4,width:bw,height:14,rx:4,class:"bar"});
+    el(f.svg,"text",{x:labW+bw+8,y:y+15,class:"tick",fill:"var(--ink2)"})
+      .textContent=fmt(r.value);
+    const hit=el(f.svg,"rect",{x:labW,y,width:Math.max(bw,10)+52,height:rowH-2,fill:"transparent"});
+    hit.addEventListener("pointermove",e=>{rc.setAttribute("opacity",.78);
+      showTip(e,tipNode(r.label,[[C().getPropertyValue("--s1").trim(),opt.unit||"tokens",fmt(r.value)]]
+        .concat(r.extra?[[null,r.extra[0],r.extra[1]]]:[])))});
+    hit.addEventListener("pointerleave",()=>{rc.setAttribute("opacity",1);hideTip()});
+  });
+}
+
+/* ---------- panels ---------- */
+async function health(){
+  let d=[]; try{ d=await j("/api/health?hours="+HOURS) }catch(e){}
+  const c1=SER()[0];
+  lineChart($("#cov"),[{name:"coverage",color:c1,
+    pts:d.map(r=>[r.t,r.cov])}],
+    {y0:0,y1:100,yfmt:v=>v.toFixed(0)+"%",label:false,
+     empty:"No health samples yet — start the collector",
+     xfmt:HOURS>48?dayt:hhmm,tfmt:dayt});
+  lineChart($("#msg"),[{name:"messages",color:c1,
+    pts:d.map(r=>[r.t,r.msgs])}],
+    {y0:0,pad:false,label:false,empty:"No health samples yet",
+     xfmt:HOURS>48?dayt:hhmm,tfmt:dayt,yfmt:v=>fmt(v)});
+}
+
+async function cats(){
+  let d=[]; try{ d=await j("/api/categories") }catch(e){}
+  d=d.filter(r=>r.tokens>0).slice(0,12);
+  barChart($("#cat"),d.map(r=>({label:r.category||"none",value:r.tokens,
+    extra:["events",fmt(r.events)]})),{unit:"tokens"});
+}
+
+function evRow(e,i){
+  const tr=document.createElement("tr");
+  tr.tabIndex=0; tr.dataset.id=e.event_id;
+  const cells=[String(e.best_rank??""),e.title||"",e.category||"",fmt(e.nmkt),
+    fmt(e.ntok),fmt(e.nlive),"$"+fmt(e.max_vol24),(e.first_seen||"").slice(5,16).replace("T"," ")];
+  cells.forEach((v,k)=>{const td=document.createElement("td");
+    if(k===1){td.className="t";
+      const s=document.createElement("span"); s.textContent=v; td.appendChild(s);
+      if(e.capped){const g=document.createElement("span");g.className="tag";
+        g.textContent="capped";g.style.marginLeft="8px";td.appendChild(g)}
+    } else td.textContent=v;
+    tr.appendChild(td)});
+  const pick=()=>selectEvent(e);
+  tr.addEventListener("click",pick);
+  tr.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();pick()}});
+  return tr;
+}
+async function events(){
+  const q=$("#q").value.trim(), s=$("#sort").value;
+  let d=[]; try{ d=await j(`/api/events?limit=500&sort=${s}&q=${encodeURIComponent(q)}`)}catch(e){}
+  EVENTS=d;
+  const tb=$("#evt").querySelector("tbody"); tb.innerHTML="";
+  d.forEach((e,i)=>tb.appendChild(evRow(e,i)));
+  $("#evn").textContent=d.length?`${d.length} events`:"";
+  $("#eve").hidden=d.length>0; $("#evt").hidden=!d.length;
+  if(!SEL&&d.length) selectEvent(d[0]);
+}
+
+async function selectEvent(e){
+  SEL=e;
+  [...$("#evt").querySelectorAll("tbody tr")].forEach(tr=>
+    tr.setAttribute("aria-selected",tr.dataset.id===e.event_id));
+  $("#sertitle").textContent=e.title||"Book history";
+  let d={}; try{ d=await j("/api/event?id="+encodeURIComponent(e.event_id)) }catch(x){}
+  const mk=(d.markets||[]);
+  /* one token per market (the first outcome), richest markets first, capped at 3 */
+  SERLBL=[];
+  const toks=[];
+  for(const m of mk){
+    const t=m.tokens[0]; if(!t) continue;
+    toks.push(t.tok);
+    SERLBL.push((m.group_title||m.question||"market").slice(0,28));
+    if(toks.length>=3) break;
+  }
+  $("#sercap").textContent = mk.length>3
+    ? `Showing 3 of ${mk.length} markets (first outcome each) — the palette validates to three series.`
+    : `${mk.length} market${mk.length===1?"":"s"}, first outcome each.`;
+  await drawSeries(toks);
+}
+
+async function drawSeries(toks){
+  const host=$("#ser");
+  if(!toks||!toks.length){host.innerHTML='<div class="empty">No tokens for this event</div>';
+    $("#serleg").innerHTML="";SERIES=null;return}
+  host.style.opacity=.45;
+  let d={series:[]};
+  try{ d=await j(`/api/series?toks=${toks.join(",")}&hours=${HOURS}`) }catch(e){}
+  host.style.opacity=1;
+  const cols=SER();
+  const byTok={}; d.series.forEach(s=>byTok[s.tok]=s.points);
+  const series=toks.map((t,i)=>({name:SERLBL[i]||("tok "+t),color:cols[i],
+    pts:(byTok[t]||[]).map(p=>[p[0],p[1]])})).filter(s=>s.pts.length);
+  SERIES=series;
+  $("#serleg").innerHTML="";
+  series.forEach(s=>{const d2=document.createElement("span");
+    const i=document.createElement("i"); i.style.background=s.color;
+    d2.appendChild(i); d2.appendChild(document.createTextNode(s.name));
+    $("#serleg").appendChild(d2)});
+  lineChart(host,series,{h:240,y0:0,y1:1,yd:2,yfmt:v=>v.toFixed(2),
+    empty:"No bars captured in this range yet",
+    xfmt:HOURS>48?dayt:hhmm,tfmt:dayt});
+  if($("#tbl").getAttribute("aria-pressed")==="true") drawTable();
+}
+
+function drawTable(){
+  const host=$("#sertbl");
+  if(!SERIES||!SERIES.length){host.innerHTML='<div class="empty">Nothing to tabulate</div>';return}
+  const stamps=[...new Set(SERIES.flatMap(s=>s.pts.map(p=>p[0])))].sort((a,b)=>b-a).slice(0,400);
+  const t=document.createElement("table");
+  const thead=document.createElement("thead"), hr=document.createElement("tr");
+  ["Time (UTC)",...SERIES.map(s=>s.name)].forEach(h=>{
+    const th=document.createElement("th"); th.textContent=h; th.style.cursor="default";
+    hr.appendChild(th)});
+  thead.appendChild(hr); t.appendChild(thead);
+  const tb=document.createElement("tbody");
+  const maps=SERIES.map(s=>new Map(s.pts));
+  stamps.forEach(ts=>{
+    const tr=document.createElement("tr"); tr.style.cursor="default";
+    const td=document.createElement("td"); td.textContent=dayt(ts); tr.appendChild(td);
+    maps.forEach(m=>{const c=document.createElement("td");
+      c.textContent=m.has(ts)?m.get(ts).toFixed(3):"—"; tr.appendChild(c)});
+    tb.appendChild(tr)});
+  t.appendChild(tb); host.innerHTML=""; host.appendChild(t);
+}
+
+/* ---------- wiring ---------- */
+document.querySelectorAll("[data-h]").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("[data-h]").forEach(o=>o.setAttribute("aria-pressed",o===b));
+  HOURS=+b.dataset.h; health(); if(SEL) selectEvent(SEL);
+}));
+$("#tbl").addEventListener("click",()=>{
+  const on=$("#tbl").getAttribute("aria-pressed")==="true";
+  $("#tbl").setAttribute("aria-pressed",!on); $("#sertbl").hidden=on;
+  if(!on) drawTable();
+});
+let qt; $("#q").addEventListener("input",()=>{clearTimeout(qt);qt=setTimeout(events,220)});
+$("#sort").addEventListener("change",events);
+$("#theme").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme");
+  const dark=cur?cur==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme",dark?"light":"dark");
+  try{localStorage.setItem("pmlive-theme",dark?"light":"dark")}catch(e){}
+  health(); cats(); if(SEL) selectEvent(SEL);
+});
+try{const t=localStorage.getItem("pmlive-theme"); if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}
+
+let RT;
+function tick(){ status(); health(); }
+addEventListener("resize",()=>{clearTimeout(RT);RT=setTimeout(()=>{
+  health();cats();if(SEL)selectEvent(SEL)},200)});
+status(); health(); cats(); events();
+setInterval(tick,30000);
+setInterval(()=>{ if(SEL) selectEvent(SEL) },120000);
+</script>
+</body>
+</html>

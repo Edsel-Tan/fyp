@@ -1,0 +1,208 @@
+{
+ "test2021": {
+  "rates": {
+   "gross (0bp)": 0.0,
+   "paper 10bp": 0.001,
+   "30bp": 0.003,
+   "60bp": 0.006
+  },
+  "n_arms": 6,
+  "base": "paper 10bp",
+  "moved": {
+   "gross (0bp)": 2,
+   "30bp": 0,
+   "60bp": 4
+  },
+  "ranks": {
+   "gross (0bp)": {
+    "hrt_paper_ep": 1,
+    "hrt_paper": 2,
+    "ppo_causal": 3,
+    "ddpg_causal": 4,
+    "hrt_causal_ep": 5,
+    "hrt_causal": 6
+   },
+   "paper 10bp": {
+    "hrt_paper_ep": 1,
+    "hrt_paper": 2,
+    "ppo_causal": 3,
+    "ddpg_causal": 4,
+    "hrt_causal": 5,
+    "hrt_causal_ep": 6
+   },
+   "30bp": {
+    "hrt_paper_ep": 1,
+    "hrt_paper": 2,
+    "ppo_causal": 3,
+    "ddpg_causal": 4,
+    "hrt_causal": 5,
+    "hrt_causal_ep": 6
+   },
+   "60bp": {
+    "ppo_causal": 1,
+    "ddpg_causal": 2,
+    "hrt_paper_ep": 3,
+    "hrt_paper": 4,
+    "hrt_causal": 5,
+    "hrt_causal_ep": 6
+   }
+  },
+  "n_seeds": {
+   "ddpg_causal": 10,
+   "hrt_causal_ep": 10,
+   "hrt_causal": 10,
+   "hrt_paper_ep": 10,
+   "hrt_paper": 10,
+   "ppo_causal": 10
+  },
+  "turnover": {
+   "ddpg_causal": 0.003984063295498475,
+   "hrt_causal": 0.1954549625909638,
+   "hrt_causal_ep": 0.22606153892882572,
+   "hrt_paper": 0.3304552350278397,
+   "hrt_paper_ep": 0.37547569835096434,
+   "ppo_causal": 0.004131665519378892
+  },
+  "sharpe": {
+   "ddpg_causal": {
+    "gross (0bp)": 2.031841190413388,
+    "paper 10bp": 2.0237003161109706,
+    "30bp": 2.007418567506128,
+    "60bp": 1.9829959445989265
+   },
+   "hrt_causal": {
+    "gross (0bp)": 1.971063394528748,
+    "paper 10bp": 1.5926292451427497,
+    "30bp": 0.8357609463707536,
+    "60bp": -0.29954150178715533
+   },
+   "hrt_causal_ep": {
+    "gross (0bp)": 1.9969806114474864,
+    "paper 10bp": 1.5538849677706001,
+    "30bp": 0.6676936804168305,
+    "60bp": -0.6615932506137575
+   },
+   "hrt_paper": {
+    "gross (0bp)": 5.3531361364630845,
+    "paper 10bp": 4.687772733497283,
+    "30bp": 3.357045927565602,
+    "60bp": 1.360955718668224
+   },
+   "hrt_paper_ep": {
+    "gross (0bp)": 6.472869335259633,
+    "paper 10bp": 5.704778553234208,
+    "30bp": 4.168596989183341,
+    "60bp": 1.8643246431070373
+   },
+   "ppo_causal": {
+    "gross (0bp)": 2.1900270326883,
+    "paper 10bp": 2.1814025620417,
+    "30bp": 2.1641536207484395,
+    "60bp": 2.1382802088085633
+   }
+  }
+ },
+ "test2022": {
+  "rates": {
+   "gross (0bp)": 0.0,
+   "paper 10bp": 0.001,
+   "30bp": 0.003,
+   "60bp": 0.006
+  },
+  "n_arms": 6,
+  "base": "paper 10bp",
+  "moved": {
+   "gross (0bp)": 3,
+   "30bp": 3,
+   "60bp": 3
+  },
+  "ranks": {
+   "gross (0bp)": {
+    "hrt_paper_ep": 1,
+    "hrt_paper": 2,
+    "hrt_causal_ep": 3,
+    "hrt_causal": 4,
+    "ddpg_causal": 5,
+    "ppo_causal": 6
+   },
+   "paper 10bp": {
+    "hrt_paper_ep": 1,
+    "hrt_paper": 2,
+    "hrt_causal_ep": 3,
+    "ddpg_causal": 4,
+    "ppo_causal": 5,
+    "hrt_causal": 6
+   },
+   "30bp": {
+    "hrt_paper_ep": 1,
+    "hrt_paper": 2,
+    "ddpg_causal": 3,
+    "ppo_causal": 4,
+    "hrt_causal_ep": 5,
+    "hrt_causal": 6
+   },
+   "60bp": {
+    "hrt_paper_ep": 1,
+    "hrt_paper": 2,
+    "ddpg_causal": 3,
+    "ppo_causal": 4,
+    "hrt_causal_ep": 5,
+    "hrt_causal": 6
+   }
+  },
+  "n_seeds": {
+   "ddpg_causal": 10,
+   "hrt_causal_ep": 10,
+   "hrt_causal": 10,
+   "hrt_paper_ep": 10,
+   "hrt_paper": 10,
+   "ppo_causal": 10
+  },
+  "turnover": {
+   "ddpg_causal": 0.003999996780644166,
+   "hrt_causal": 0.21150073361846183,
+   "hrt_causal_ep": 0.24473079650710755,
+   "hrt_paper": 0.35019126639455234,
+   "hrt_paper_ep": 0.4110299611259027,
+   "ppo_causal": 0.004132623964296495
+  },
+  "sharpe": {
+   "ddpg_causal": {
+    "gross (0bp)": -0.3276894603488626,
+    "paper 10bp": -0.3322272315406155,
+    "30bp": -0.341302773924102,
+    "60bp": -0.35491608749932024
+   },
+   "hrt_causal": {
+    "gross (0bp)": -0.1965735436900102,
+    "paper 10bp": -0.4376788216697728,
+    "30bp": -0.9198893776293252,
+    "60bp": -1.6432052115686595
+   },
+   "hrt_causal_ep": {
+    "gross (0bp)": 0.04915770718692074,
+    "paper 10bp": -0.2304170517947966,
+    "30bp": -0.7895665697582344,
+    "60bp": -1.6282908467033816
+   },
+   "hrt_paper": {
+    "gross (0bp)": 2.8193639770503482,
+    "paper 10bp": 2.35835911758561,
+    "30bp": 1.4363493986560683,
+    "60bp": 0.05333482026176391
+   },
+   "hrt_paper_ep": {
+    "gross (0bp)": 3.241235447277023,
+    "paper 10bp": 2.7206993326480076,
+    "30bp": 1.6796271033900083,
+    "60bp": 0.11801875950295371
+   },
+   "ppo_causal": {
+    "gross (0bp)": -0.4245186057600573,
+    "paper 10bp": -0.4291692627324782,
+    "30bp": -0.43847057667732814,
+    "60bp": -0.4524225475946152
+   }
+  }
+ }
+}

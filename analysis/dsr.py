@@ -95,8 +95,15 @@ def main():
                          psr(sr, 0.0, n, g3, g4), psr(sr, sr_star, n, g3, g4)))
         for a, m, sa, sr, g3, g4, p0, d in sorted(rows, key=lambda r: -r[2]):
             print(f"{a:<28}{m:>3}{sa:>9.2f}{sr:>9.4f}{g3:>8.2f}{g4:>8.2f}{p0:>9.3f}{d:>9.3f}")
-        json.dump([dict(zip(("arm", "n_seeds", "sharpe_ann_repo", "sharpe_daily",
-                             "skew", "kurtosis", "psr_vs_0", "dsr"), r)) for r in rows],
+        # K and SR*_0 travel with the table: every figure and every quoted
+        # threshold must move when the sweep grows, and hard-coding them is how
+        # a results chapter goes stale without anyone noticing.
+        json.dump(dict(K=K, n_valid=len(valid),
+                       sigma_sr_daily=math.sqrt(sr_var),
+                       sr_star_daily=sr_star, sr_star_ann=sr_star * math.sqrt(252),
+                       arms=[dict(zip(("arm", "n_seeds", "sharpe_ann_repo", "sharpe_daily",
+                                       "skew", "kurtosis", "psr_vs_0", "dsr"), r))
+                             for r in rows]),
                   open(os.path.join(ART, f"dsr_{period}.json"), "w"), indent=1)
 
     print(f"\nwrote {ART}/dsr_test20*.json")

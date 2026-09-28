@@ -164,7 +164,7 @@ tested: `nv` immediate, `h100-96` ~25 min, `a100-80` ~1 h, `a100-40` ~2 h.
 
 ## 5. Running it
 
-Four stages in `hrt/slurm/`. Submit from the repo root — SLURM's working
+Five stages in `hrt/slurm/`. Submit from the repo root — SLURM's working
 directory is the submission directory, and the `--output` paths are relative to
 it.
 
@@ -173,6 +173,7 @@ sbatch hrt/slurm/01_prepare.sbatch        # CPU only, ~15 min
 sbatch hrt/slurm/02_forecast.sbatch       # 1 GPU, ~5 min
 sbatch hrt/slurm/03_sweep.sbatch          # 1 GPU, the long one
 sbatch hrt/slurm/04_report.sbatch         # CPU, ~1 min
+sbatch hrt/slurm/05_sweep_null.sbatch     # 1 GPU, the falsification audit
 ```
 
 | Script | Does | Resources |
@@ -182,6 +183,15 @@ sbatch hrt/slurm/04_report.sbatch         # CPU, ~1 min
 | `03_sweep` | all 60 RL jobs on one GPU (finished runs skipped) | 1 GPU, 48 CPU, 128 GB |
 | `03_sweep_array` | *alternative*: one run per array task, `%8` concurrent | 1 GPU each, 4 CPU, 8 GB |
 | `04_report` | aggregate + regenerate the HTML report | 4 CPU, 16 GB |
+| `05_sweep_null` | 4 null panels + 8 forecasters + 4 floors, then the same 25-run sweep on them | 1 GPU, 52 CPU, 96 GB |
+
+`05_sweep_null` depends on `01_prepare` (it needs `panel.npz`) but not on
+`02_forecast` — it builds its own forecasts and its own floors, all
+skip-if-present. It is the falsification audit of `RESULTS.md` §4.1, and it is
+resumable at run granularity in the same way `03_sweep` is. Measured here:
+**111 GPU-hours over 25 runs** (mean 4.45 h, max 5.07 h), so `--time=06:00:00`
+with `PARALLEL=25` fits in one allocation. Score it afterwards with
+`python analysis/null_sweep.py`, which is CPU-only and takes two seconds.
 
 Chain them so each waits for the last:
 
@@ -362,10 +372,18 @@ Better uses of the hardware, in order:
    4.4 points of gross edge, 6.33 points of commission. Add a turnover penalty
    and a non-constant cost model and measure whether the edge survives. Report
    net *and* gross — that split is where the story lives.
-2. ~~**More seeds.**~~ **Done / running.** `jobs.txt` now spans seeds 0–9 for
-   every arm — 60 jobs, of which the 25 committed runs are skipped and 35 are
-   new. Dispersion was wide (HRT-FR 2022 spans ~20 points across seeds) on 4
-   seeds; this brings it to the paper's 10.
+2. ~~**More seeds.**~~ **Done, 2026-09-15.** `jobs.txt` spans seeds 0–9 for every
+   arm — 60 jobs, of which the 25 committed runs were skipped and 35 were new,
+   189 GPU-hours in total. Dispersion was wide (HRT-FR 2022 spans ~20 points
+   across seeds) on 4 seeds; this brings it to the paper's 10. It also changed
+   two conclusions: every leak-free arm's deflated Sharpe fell by roughly
+   two-thirds as K went 35 → 70, and the equity cost re-ranking count fell from
+   2–6 of 6 arms to 0–4 of 6.
+2b. ~~**The null-panel sweep.**~~ **Done, 2026-09-15** — `05_sweep_null.sbatch`,
+   111 GPU-hours. `RESULTS.md` §4.1. The next thing worth this hardware is the
+   mirror image: a block-bootstrap or CPCV resampling of the **real** panel
+   through the same sweep, so the real side of that comparison has a dispersion
+   too. Same shape of job, same order of cost.
 3. **Fix survivorship.** Needs CRSP, Sharadar or Norgate for delisted prices.
    Until then the 370-name universe is the acquired-and-survived cohort and the
    12.3-point gap is a lower bound.
@@ -377,12 +395,14 @@ Better uses of the hardware, in order:
 ```
 hrt/
   README.md            the science: ambiguities, the PPO trap, data gaps
-  slurm/               00_env.sh + four sbatch scripts
+  slurm/               00_env.sh + five sbatch scripts
   universe.py          point-in-time S&P 500 from the Wikipedia change log
   data.py              panel + 158 Alpha158 features (reads bundle or SQLite)
   forecast.py          Transformer forward-return model  --label causal|paper
   env.py agents.py     trading environment; PPO (factored) and DDPG
-  train.py             phased alternating training  --signal, --alpha_unit
+  train.py             phased alternating training  --signal, --alpha_unit,
+                       --fr, --runs_dir (the last two exist for 05_sweep_null)
+  passive.py           do-nothing floor measured INSIDE the env  --panel/--fr/--out
   run_sweep.sh         resumable driver; PARALLEL / STEPS / JOBS / RESUME
   jobs.txt             the 2×2 + baselines, seeds 0–9 (60 jobs)
   report.py            aggregate -> summary.json + console tables
@@ -391,7 +411,11 @@ hrt/
   portable.py          bundle loaders  |  export_bundle.py  rebuilds the bundle
   artifacts/
     prices_bundle.npz  15 MB, replaces the 2 GB mirror
-    runs/              the 25 runs behind the tables
+    runs/              the 60 runs behind the tables (6 arms x seeds 0-9)
+    runs_null/         the 25 runs of the falsification audit, trained on
+                       panel_synth_s{0..3}.npz — score with analysis/null_sweep.py,
+                       NOT report.py, which compares against the real baselines
+    passive_synth_s*.json  the in-env floor for each null panel
     runs_invalid/      10 runs from the defective PPO — evidence only,
                        DO NOT aggregate (report.py reads runs/ only)
 ```
