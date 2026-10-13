@@ -7,6 +7,8 @@ Models:
   gold+prior    the same plus prior_logit * (1, m, m^2), so the prior's weight can fade with time
   lr all        every stat and the prior logit, each interacted with (1, m, m^2)
   gbm all       lightgbm on every stat, clock and the prior logit
+  lr v2         `lr all` with the out-of-fold `prior_new` of eval_pregame2 (draft, lane/league Elo, champion strength) as the
+                prior; the primary model since directions 1-5 (= eval_ingame2's `prior_new oof`)
 Scores: per-frame log loss by game-minute bucket, and a per-game mean (each game weighted equally),
 with match-clustered bootstrap CIs vs `gold`.
 NULL_SEED=k runs the shuffled-outcome null: train labels permuted across train games; outputs get a _null{k} suffix.
@@ -39,6 +41,8 @@ def design(f, cols, poly=True):
 def main():
     f = pd.read_parquet(f'{D}/ingame.parquet')
     f = f[(f.t_start >= BURN) & (f.state != 'finished')].reset_index(drop=True)
+    f = f.merge(pd.read_parquet(f'{D}/prior2.parquet')[['game_id', 'prior_new']], on='game_id', how='left')
+    assert f.prior_new.notna().all()
     y = f.blue_win.astype(int).to_numpy()
     tr = (f.t_start < SPLIT).to_numpy()
     te = ~tr
@@ -57,7 +61,8 @@ def main():
     Q = {'prior': 1 / (1 + np.exp(-f.prior_logit[te].to_numpy()))}
     for name, X in [('gold', design(f, ['gold'])),
                     ('gold+prior', design(f, ['gold', 'prior'])),
-                    ('lr all', design(f, STATS + ['prior']))]:
+                    ('lr all', design(f, STATS + ['prior'])),
+                    ('lr v2', design(f.assign(prior_logit=f.prior_new), STATS + ['prior']))]:
         m = make_pipeline(StandardScaler(), LogisticRegression(C=1.0, max_iter=5000)).fit(X[tr], yf[tr])
         Q[name] = m.predict_proba(X[te])[:, 1]
     import lightgbm as lgb

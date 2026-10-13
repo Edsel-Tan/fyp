@@ -1,0 +1,18 @@
+backgrounds 175 (val 29), device cuda
+0 loss 4.603 val recall 0.000 precision 0.000 0.0 min
+500 loss 0.267 val recall 0.875 precision 1.000 3.0 min
+1000 loss 0.151 val recall 0.975 precision 0.975 6.1 min
+1500 loss 0.187 val recall 0.889 precision 0.976 9.2 min
+2000 loss 0.318 val recall 0.979 precision 1.000 12.3 min
+2500 loss 0.024 val recall 0.913 precision 1.000 15.4 min
+3000 loss 0.101 val recall 0.943 precision 1.000 18.5 min
+3500 loss 0.118 val recall 0.947 precision 0.923 21.5 min
+4000 loss 0.148 val recall 0.947 precision 0.947 24.4 min
+4500 loss 0.146 val recall 0.939 precision 1.000 27.2 min
+5000 loss 0.096 val recall 0.978 precision 0.957 29.9 min
+5500 loss 0.068 val recall 1.000 precision 1.000 32.7 min
+6000 loss 0.010 val recall 1.000 precision 1.000 35.5 min
+6500 loss 0.005 val recall 0.955 precision 0.977 38.2 min
+7000 loss 0.155 val recall 0.971 precision 1.000 40.9 min
+7500 loss 0.036 val recall 0.977 precision 1.000 43.5 min
+7999 loss 0.011 val recall 0.932 precision 1.000 46.2 min

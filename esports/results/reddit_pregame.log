@@ -1,0 +1,29 @@
+/home/aimer/fyp/.venv/lib/python3.12/site-packages/lightgbm/sklearn.py:1106: LGBMDeprecationWarning: The argument 'eval_set' is deprecated, use 'eval_X' and 'eval_y' instead.
+  eval_set = _validate_eval_set_Xy(eval_set=eval_set, eval_X=eval_X, eval_y=eval_y)
+== 1. pre-game: train 8932 (val 3060)  test 10584 (to Aug-25 1984, Sep-25 on 8600)  intl 310; lgbm trees 323
+                                 model      C  test_ll    auc       d      lo      hi  ll_to_aug25  ll_sep25_on  intl_ll  d_intl            intl_ci
+              v4 prior (prior_new set) 0.0300   0.6043 0.7313  0.0000  0.0000  0.0000       0.5967       0.6060   0.6035  0.0000 [+0.0000, +0.0000]
+    v4 prior (prior_new set) [monthly] 0.0300   0.6026 0.7321 -0.0016 -0.0026 -0.0007       0.5972       0.6039   0.6049  0.0014 [-0.0043, +0.0075]
+                   reddit ratings only 0.0030   0.6151 0.7173  0.0108  0.0069  0.0146       0.6096       0.6164   0.6138  0.0103 [-0.0096, +0.0300]
+         reddit ratings only [monthly] 0.0030   0.6148 0.7169  0.0105  0.0064  0.0144       0.6095       0.6160   0.6160  0.0125 [-0.0086, +0.0348]
+                      reddit pre-draft 0.0030   0.6125 0.7206  0.0083  0.0046  0.0119       0.6065       0.6139   0.6106  0.0071 [-0.0106, +0.0249]
+            reddit pre-draft [monthly] 0.0030   0.6121 0.7203  0.0079  0.0041  0.0117       0.6064       0.6135   0.6126  0.0091 [-0.0101, +0.0283]
+                     reddit post-draft 0.0030   0.6099 0.7239  0.0056  0.0017  0.0093       0.6034       0.6113   0.6108  0.0073 [-0.0104, +0.0256]
+           reddit post-draft [monthly] 0.0030   0.6095 0.7233  0.0052  0.0015  0.0091       0.6032       0.6109   0.6131  0.0096 [-0.0098, +0.0280]
+          v4 prior + reddit post-draft 0.0100   0.5997 0.7349 -0.0046 -0.0069 -0.0023       0.5963       0.6005   0.5954 -0.0081 [-0.0227, +0.0072]
+v4 prior + reddit post-draft [monthly] 0.0100   0.5983 0.7360 -0.0060 -0.0083 -0.0037       0.5964       0.5987   0.5964 -0.0071 [-0.0223, +0.0097]
+     reddit post-draft, LightGBM stack    NaN   0.6144 0.7189  0.0101  0.0061  0.0140       0.6077       0.6159   0.6210  0.0175 [-0.0030, +0.0387]
+
+reddit post-draft, standardised coefficients: {'kal_z': 0.128, 'kal_0': 0.108, 'kal_1': 0.115, 'kal_2': 0.126, 'kal_3': 0.042, 'kal_4': 0.091, 'lane_0': 0.054, 'lane_1': 0.052, 'lane_2': 0.07, 'lane_3': 0.023, 'lane_4': 0.057, 'dmg_0': 0.025, 'dmg_1': 0.042, 'dmg_2': 0.044, 'dmg_3': 0.097, 'dmg_4': -0.051, 'bt': 0.257, 'draft_wr': 0.127, 'draft_gd': -0.012}
+
+== market pre-game price (Polymarket per-game markets, test games with pm_pre) ==
+games 1520, matches 710
+  market                                                  ll 0.6019  minus market +0.0000 [+0.0000, +0.0000]  minus v4 prior +0.0041 [-0.0111, +0.0204]
+  v4 prior (prior_new set)                                ll 0.5978  minus market -0.0041 [-0.0199, +0.0112]  minus v4 prior +0.0000 [+0.0000, +0.0000]
+  v4 prior (prior_new set) [monthly]                      ll 0.5955  minus market -0.0064 [-0.0226, +0.0088]  minus v4 prior -0.0023 [-0.0044, -0.0001]
+  reddit post-draft                                       ll 0.6072  minus market +0.0054 [-0.0114, +0.0207]  minus v4 prior +0.0094 [-0.0014, +0.0201]
+  reddit post-draft [monthly]                             ll 0.6058  minus market +0.0040 [-0.0132, +0.0200]  minus v4 prior +0.0080 [-0.0024, +0.0181]
+  reddit pre-draft                                        ll 0.6100  minus market +0.0081 [-0.0086, +0.0234]  minus v4 prior +0.0122 [+0.0016, +0.0224]
+  v4 prior + reddit post-draft                            ll 0.5946  minus market -0.0072 [-0.0233, +0.0074]  minus v4 prior -0.0032 [-0.0104, +0.0035]
+  50/50 logit blend: market + v4 prior (prior_new set)    ll 0.5907  minus market -0.0111 [-0.0200, -0.0031]  minus v4 prior -0.0071 [-0.0142, +0.0009]
+  50/50 logit blend: market + reddit post-draft           ll 0.5950  minus market -0.0068 [-0.0158, +0.0009]  minus v4 prior -0.0028 [-0.0134, +0.0073]

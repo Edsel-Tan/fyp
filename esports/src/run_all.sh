@@ -4,12 +4,16 @@ set -euo pipefail
 cd "$(dirname "$0")"
 P=~/fyp/.venv/bin/python
 {
-  for step in "label_games.py raw" "label_games.py" "pregame.py" "eval_pregame.py" "ingame_data.py" "eval_ingame.py" \
+  for step in "label_games.py raw" "label_games.py" "pregame.py" "eval_pregame.py" "pregame2.py" "eval_pregame2.py" "team_resid.py" "eval_team_resid.py" "ingame_data.py" "eval_ingame.py" \
               "pm_map.py" "market_compare.py 0 30 60 120 300" "backtest.py 0 5 15 30 60 120" "follow_wallets.py 0 5 15 30 60"; do
+    echo "== $step"; $P $step || { echo "FAILED: $step"; exit 1; }
+  done
+  # v4 candidates (PROGRESS "v4"); the backtest and live parts are `python v4/eval_v4.py 34`
+  for step in "v4/features.py" "v4/pregame_f.py" "v4/eval_pregame_f.py" "v4/test_features.py" "v4/eval_v4.py 152"; do
     echo "== $step"; $P $step || { echo "FAILED: $step"; exit 1; }
   done
   for s in 1 2 3 4 5; do
     NULL_SEED=$s $P eval_ingame.py > /dev/null
-    echo "== null seed $s"; PREDS_SFX=_null$s $P backtest.py 0 30 | grep -E "^ +(0|30) +B|^ +(0|30) +A"
+    echo "== null seed $s"; PREDS_SFX=_null$s $P backtest.py 0 30 | grep -E "^ *(0|30) +[AB]"
   done
 } 2>&1 | grep -v -E "Warning|warnings.warn|bs = |return s.sum" | tee ../results/run_all.log

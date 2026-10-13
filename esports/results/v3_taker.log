@@ -1,0 +1,12 @@
+drake/elder: frames 2327 games 399 blue share 0.451
+   feed              log loss 0.6178 AUC 0.702  per-game vs feed +0.0000 [+0.0000, +0.0000]
+   feed + minimap    log loss 0.5948 AUC 0.732  per-game vs feed -0.0201 [-0.0311, -0.0095]
+   feed + distances  log loss 0.5994 AUC 0.733  per-game vs feed -0.0171 [-0.0281, -0.0061]
+   feed + both       log loss 0.5914 AUC 0.738  per-game vs feed -0.0242 [-0.0368, -0.0121]
+   distance model coefs per SD: {'v2_logit': np.float64(0.291), 'gold': np.float64(0.281), 'alive': np.float64(0.274), 'kills': np.float64(0.277), 'd_drk': np.float64(0.063), 'd1_drk': np.float64(0.376), 'dd_miss': np.float64(0.025), 'mm_wdrk': np.float64(0.158), 'mm_adv': np.float64(0.063)}
+baron: frames 2522 games 379 blue share 0.533
+   feed              log loss 0.4682 AUC 0.860  per-game vs feed +0.0000 [+0.0000, +0.0000]
+   feed + minimap    log loss 0.4654 AUC 0.862  per-game vs feed -0.0046 [-0.0092, +0.0000]
+   feed + distances  log loss 0.4655 AUC 0.862  per-game vs feed -0.0040 [-0.0091, +0.0013]
+   feed + both       log loss 0.4661 AUC 0.861  per-game vs feed -0.0035 [-0.0085, +0.0016]
+   distance model coefs per SD: {'v2_logit': np.float64(2.342), 'gold': np.float64(-0.375), 'alive': np.float64(0.264), 'kills': np.float64(-0.098), 'd_bar': np.float64(0.207), 'd1_bar': np.float64(-0.155), 'dd_miss': np.float64(0.088), 'mm_wbar': np.float64(0.127), 'mm_adv': np.float64(0.199)}

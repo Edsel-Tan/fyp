@@ -1,0 +1,9 @@
+/home/aimer/fyp/esports/src/v3/eval_v3b.py:34: RuntimeWarning: overflow encountered in exp
+  g = X.T @ (1 / (1 + np.exp(-z)) - y)
+stage A (13 params, 19365 games)
+  train: v2 0.4346  A fit-on-train 0.4344  A fit-on-all (live) 0.4353
+  test : v2 0.4255  A fit-on-train 0.4252  A fit-on-all (live) 0.4250
+stage B (9 params, 463 games, 15650 frames)
+  L2 0.1  : v2 0.4528  stage A only 0.4521  B in-sample 0.4517  B 5-fold CV 0.4522
+  L2 0.01 : v2 0.4528  stage A only 0.4521  B in-sample 0.4515  B 5-fold CV 0.4526
+  L2 0.0  : v2 0.4528  stage A only 0.4521  B in-sample 0.4515  B 5-fold CV 0.4528

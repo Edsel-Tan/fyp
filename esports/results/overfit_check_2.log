@@ -1,0 +1,62 @@
+
+== 2-3. backtest at the live lag (22 s): last trade vs mid proxy, by league and quarter ==
+  median proxy spread 0.020; frames with a mid proxy 80%
+  [all PM test games, market = last trade] games 1638 matches 734 rows 42579
+    q_v2         0.4094   minus mkt -0.0133 [-0.0232, -0.0044]
+    q_gold       0.4688   minus mkt +0.0462 [+0.0347, +0.0576]
+  [same frames, market = mid proxy] games 1447 matches 660 rows 33922
+    mkt          0.4302   minus mid +0.0010 [-0.0019, +0.0044]
+    q_v2         0.4322   minus mid +0.0031 [-0.0061, +0.0120]
+    q_gold       0.4952   minus mid +0.0660 [+0.0532, +0.0785]
+  [live leagues only ['cblol-brazil', 'emea_masters', 'lcs']] games 304 matches 138 rows 8994
+    q_v2         0.4451   minus mkt +0.0210 [+0.0030, +0.0393]
+    games by league: {'emea_masters': 149, 'lcs': 84, 'cblol-brazil': 71}
+  [quarter 2025Q4] games 49 matches 20 rows 1576
+    q_v2         0.4340   minus mkt +0.0201 [-0.0127, +0.0587]
+  [quarter 2026Q1] games 1066 matches 452 rows 26631
+    q_v2         0.4130   minus mkt -0.0149 [-0.0280, -0.0020]
+  [quarter 2026Q2] games 523 matches 262 rows 14372
+    q_v2         0.3997   minus mkt -0.0130 [-0.0280, +0.0026]
+
+== 4. live: with vs without a real prior ==
+  [all live games] games 75 matches 33 rows 3395
+    q_v2         0.4327   minus mid +0.0505 [-0.0119, +0.1216]
+    q_v1         0.4317   minus mid +0.0494 [-0.0157, +0.1274]
+    q_gold       0.4752   minus mid +0.0929 [+0.0213, +0.1776]
+    q_prior      0.5664   minus mid +0.1841 [+0.1075, +0.2528]
+  [real prior (team_games_min >= 20)] games 69 matches 30 rows 3127
+    q_v2         0.4068   minus mid +0.0290 [-0.0186, +0.0837]
+    q_v1         0.4025   minus mid +0.0247 [-0.0229, +0.0757]
+    q_gold       0.4460   minus mid +0.0681 [+0.0136, +0.1322]
+    q_prior      0.5691   minus mid +0.1913 [+0.1151, +0.2652]
+  [no real prior (team_games_min < 20)] games 6 matches 3 rows 268
+    q_v2         0.7309   minus mid +0.2977 [-0.2029, +0.6549]
+    q_v1         0.7665   minus mid +0.3332 [-0.2118, +0.7273]
+    q_gold       0.8110   minus mid +0.3777 [-0.2220, +0.7672]
+    q_prior      0.5350   minus mid +0.1017 [-0.1605, +0.6362]
+  [real prior, EMEA Masters] games 45 matches 19 rows 2139
+    q_v2         0.3866   minus mid +0.0289 [-0.0279, +0.1081]
+    q_v1         0.3941   minus mid +0.0365 [-0.0204, +0.1076]
+    q_gold       0.4645   minus mid +0.1068 [+0.0508, +0.1803]
+    q_prior      0.5286   minus mid +0.1709 [+0.0640, +0.2690]
+  [real prior, not EMEA Masters] games 24 matches 11 rows 988
+    q_v2         0.4447   minus mid +0.0291 [-0.0431, +0.0877]
+    q_v1         0.4183   minus mid +0.0027 [-0.0576, +0.0666]
+    q_gold       0.4112   minus mid -0.0044 [-0.0762, +0.1094]
+    q_prior      0.6451   minus mid +0.2296 [+0.1608, +0.3426]
+  [real prior, minute ticks only] games 69 matches 30 rows 1682
+    q_v2         0.4254   minus mid +0.0283 [-0.0185, +0.0824]
+    q_v1         0.4247   minus mid +0.0277 [-0.0160, +0.0782]
+    q_gold       0.4723   minus mid +0.0752 [+0.0227, +0.1377]
+    q_prior      0.5691   minus mid +0.1721 [+0.1104, +0.2378]
+  [ticks with v2f (since 10-03)] games 32 matches 11 rows 1384
+    q_v2         0.3847   minus mid +0.0234 [-0.0343, +0.0704]
+    q_v2f        0.3892   minus mid +0.0280 [-0.0245, +0.0743]
+  [ticks with v2f, real prior] games 32 matches 11 rows 1384
+    q_v2         0.3847   minus mid +0.0234 [-0.0326, +0.0732]
+    q_v2f        0.3892   minus mid +0.0280 [-0.0235, +0.0749]
+  low-prior games: ['asian_games']; q_v3 ticks: 0
+
+== 5. live gap vs the backtest distribution ==
+  backtest v2 - mkt at 22 s: mean +0.0020 (games 1447); live v2 - mid +0.0290 (n 69); P(backtest 69-game mean >= live) = 0.112
+  backtest v2 - mid at 22 s: mean +0.0031 (games 1447); live v2 - mid +0.0290 (n 69); P(backtest 69-game mean >= live) = 0.112

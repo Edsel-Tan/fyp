@@ -1,0 +1,118 @@
+  warnings.warn(
+train games: all 8783, major 3692
+
+== 1. test split, per-game log loss ==
+  [all test games] games 10582 matches 4700
+    q_v2major      0.4266   minus q_v2 +0.0011 [+0.0006, +0.0017]
+    q_v2major_p    0.4270   minus q_v2 +0.0015 [+0.0006, +0.0024]
+  [major-league test games] games 4041 matches 1551
+    q_v2major      0.4472   minus q_v2 +0.0008 [-0.0000, +0.0016]
+    q_v2major_p    0.4466   minus q_v2 +0.0002 [-0.0013, +0.0016]
+  [non-major test games] games 6541 matches 3149
+    q_v2major      0.4138   minus q_v2 +0.0013 [+0.0006, +0.0020]
+    q_v2major_p    0.4149   minus q_v2 +0.0023 [+0.0011, +0.0035]
+  [emea_masters test games] games 586 matches 310
+    q_v2major      0.4283   minus q_v2 +0.0007 [-0.0018, +0.0033]
+    q_v2major_p    0.4366   minus q_v2 +0.0091 [+0.0041, +0.0143]
+
+== 2. vs the market ==
+  [lag 0s, all PM games, last trade] games 1625 matches 732
+    q_v2           0.4154   minus mkt -0.0255 [-0.0371, -0.0148]
+    q_v2major      0.4156   minus mkt -0.0253 [-0.0367, -0.0147]
+  [lag 0s, major PM games, last trade] games 880 matches 384
+    q_v2           0.4477   minus mkt -0.0044 [-0.0148, +0.0061]
+    q_v2major      0.4490   minus mkt -0.0032 [-0.0136, +0.0070]
+  [lag 0s, all PM games, two-sided frames vs mid proxy] games 1448 matches 663
+    q_v2           0.4324   minus mid -0.0074 [-0.0173, +0.0023]
+    q_v2major      0.4322   minus mid -0.0076 [-0.0179, +0.0025]
+  [lag 0s, major PM games, two-sided frames vs mid proxy] games 878 matches 383
+    q_v2           0.4464   minus mid -0.0026 [-0.0128, +0.0074]
+    q_v2major      0.4476   minus mid -0.0015 [-0.0125, +0.0090]
+  [lag 22s, all PM games, last trade] games 1638 matches 734
+    q_v2           0.4094   minus mkt -0.0133 [-0.0229, -0.0044]
+    q_v2major      0.4096   minus mkt -0.0131 [-0.0226, -0.0033]
+  [lag 22s, major PM games, last trade] games 881 matches 384
+    q_v2           0.4471   minus mkt +0.0030 [-0.0077, +0.0133]
+    q_v2major      0.4482   minus mkt +0.0041 [-0.0061, +0.0145]
+  [lag 22s, all PM games, two-sided frames vs mid proxy] games 1447 matches 660
+    q_v2           0.4322   minus mid +0.0031 [-0.0057, +0.0118]
+    q_v2major      0.4322   minus mid +0.0031 [-0.0062, +0.0123]
+  [lag 22s, major PM games, two-sided frames vs mid proxy] games 879 matches 383
+    q_v2           0.4470   minus mid +0.0046 [-0.0058, +0.0147]
+    q_v2major      0.4482   minus mid +0.0058 [-0.0046, +0.0159]
+
+== 3. trading backtest (eval months from 2026-02; gate theta chosen on selection months) ==
+ L scope       sig        strat     n  games  gross_pp  ci_lo  ci_hi  fee_regime_net_pp
+ 0   all   q_lr v2         clip 20719   1029      2.52   0.71   4.40              -1.06
+ 0   all   q_lr v2  gate th=0.3   299    155     11.40   1.84  21.34               7.38
+ 0   all q_v2major         clip 20733   1032      2.19   0.29   4.23              -1.60
+ 0   all q_v2major  gate th=0.3   294    163     11.53   2.29  21.11               6.09
+ 0 major   q_lr v2         clip 17506    658      2.19   0.15   4.34              -1.60
+ 0 major   q_lr v2  gate th=0.3   190     90     13.23   0.33  26.20              11.84
+ 0 major q_v2major         clip 17507    657      1.77  -0.31   3.91              -2.29
+ 0 major q_v2major  gate th=0.3   192    102     12.12  -0.09  24.20               6.56
+ 5   all   q_lr v2         clip 20700   1031      2.35   0.45   4.25              -1.14
+ 5   all   q_lr v2  gate th=0.3   259    136      8.65  -2.25  19.33               3.05
+ 5   all q_v2major         clip 20683   1034      2.14   0.18   4.12              -1.54
+ 5   all q_v2major  gate th=0.3   241    134      7.82  -1.78  19.00              -0.73
+ 5 major   q_lr v2         clip 17491    658      1.98   0.01   4.04              -1.72
+ 5 major   q_lr v2  gate th=0.3   170     80     11.91  -1.58  26.96               9.77
+ 5 major q_v2major         clip 17470    657      1.72  -0.34   3.92              -2.20
+ 5 major q_v2major  gate th=0.3   157     79      9.70  -4.72  24.19               1.16
+15   all   q_lr v2         clip 20705   1036      1.91   0.06   3.75              -1.55
+15   all   q_lr v2 gate th=0.15  2638    581      5.45  -0.10  10.71               1.10
+15   all q_v2major         clip 20677   1037      1.89   0.02   3.91              -1.77
+15   all q_v2major gate th=0.15  2523    573      5.76   0.36  11.33               1.30
+15 major   q_lr v2         clip 17464    657      1.58  -0.43   3.67              -2.02
+15 major   q_lr v2  gate th=0.2   894    238      9.61   1.39  18.22               7.67
+15 major q_v2major         clip 17451    657      1.49  -0.70   3.55              -2.32
+15 major q_v2major gate th=0.15  1869    376      5.87  -1.12  12.97               2.28
+30   all   q_lr v2         clip 20609   1025      1.99   0.17   3.97              -1.37
+30   all   q_lr v2  gate th=0.3   295    145      6.97  -2.79  17.06               4.24
+30   all q_v2major         clip 20590   1028      1.77  -0.12   3.76              -1.76
+30   all q_v2major  gate th=0.3   275    145      5.70  -3.21  15.17               1.89
+30 major   q_lr v2         clip 17438    657      1.62  -0.40   3.59              -1.89
+30 major   q_lr v2  gate th=0.3   215    100      8.21  -3.67  20.28               6.75
+30 major q_v2major         clip 17430    657      1.30  -0.84   3.48              -2.43
+30 major q_v2major  gate th=0.3   200    101      6.25  -5.14  18.12               3.00
+
+== 4. live tracker games, rescored from saved feeds ==
+  rescored ticks 3393 of 3395; recomputed v2 vs the stored q_v2: median |diff| 0.0118, share > 0.02: 41.8%
+  [all live games] games 75 matches 33
+    q_v2           0.4326   minus mid +0.0504 [-0.0104, +0.1260]
+    q_v2re         0.4429   minus mid +0.0607 [+0.0005, +0.1352]
+    q_v2major      0.4436   minus mid +0.0614 [+0.0022, +0.1311]
+  [real prior (team_games_min >= 20)] games 69 matches 30
+    q_v2           0.4067   minus mid +0.0289 [-0.0169, +0.0875]
+    q_v2re         0.4176   minus mid +0.0399 [-0.0063, +0.0935]
+    q_v2major      0.4168   minus mid +0.0390 [-0.0061, +0.0920]
+  [no real prior] games 6 matches 3
+    q_v2           0.7309   minus mid +0.2977 [-0.2029, +0.6549]
+    q_v2re         0.7334   minus mid +0.3001 [-0.1907, +0.6414]
+    q_v2major      0.7522   minus mid +0.3189 [-0.1547, +0.6338]
+  [real prior, major leagues] games 11 matches 3
+    q_v2           0.5161   minus mid -0.0123 [-0.1546, +0.0908]
+    q_v2re         0.5280   minus mid -0.0004 [-0.1466, +0.1183]
+    q_v2major      0.5088   minus mid -0.0196 [-0.1533, +0.0704]
+  [real prior, EMEA Masters] games 45 matches 19
+    q_v2           0.3865   minus mid +0.0289 [-0.0262, +0.1078]
+    q_v2re         0.3983   minus mid +0.0407 [-0.0170, +0.1159]
+    q_v2major      0.4021   minus mid +0.0445 [-0.0137, +0.1144]
+  [real prior, other non-major] games 13 matches 8
+    q_v2           0.3841   minus mid +0.0640 [+0.0108, +0.1071]
+    q_v2re         0.3912   minus mid +0.0711 [+0.0224, +0.1115]
+    q_v2major      0.3895   minus mid +0.0694 [+0.0216, +0.1144]
+  [real prior: v2-major-leagues minus v2 (same features)] games 69 matches 30
+    q_v2major      0.4168   minus q_v2re -0.0009 [-0.0083, +0.0062]
+  [real prior, other non-major] games 13 matches 8
+    q_v2           0.3841   minus mid +0.0640 [+0.0110, +0.1062]
+    q_v2re         0.3912   minus mid +0.0711 [+0.0261, +0.1103]
+    q_v2major      0.3895   minus mid +0.0694 [+0.0174, +0.1131]
+  [real prior: v2-major-leagues minus v2 (same features)] games 69 matches 30
+    q_v2major      0.4168   minus q_v2re -0.0009 [-0.0084, +0.0062]
+  exact-frame ticks: 697; recomputed v2 vs stored: median |diff| 0.0000
+  [real prior, exact-frame ticks only] games 69 matches 30
+    q_v2           0.4362   minus mid +0.0295 [-0.0189, +0.0841]
+    q_v2major      0.4385   minus mid +0.0319 [-0.0145, +0.0907]
+  [real prior, exact-frame ticks: v2-major-leagues minus stored v2] games 69 matches 30
+    q_v2major      0.4385   minus q_v2 +0.0023 [-0.0062, +0.0094]

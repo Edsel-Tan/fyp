@@ -1,0 +1,6 @@
+frames 640138; float available 100.0%
+v2                     0.4255  vs v2 +0.0000 [+0.0000, +0.0000]  by 10-min bucket {0: 0.0, 10: 0.0, 20: 0.0, 30: 0.0}
+v2 + float             0.4252  vs v2 -0.0003 [-0.0007, +0.0002]  by 10-min bucket {0: 0.0001, 10: -0.0003, 20: -0.0002, 30: -0.0009}
+v2 + fl_team, fl_d1    0.4252  vs v2 -0.0003 [-0.0006, +0.0000]  by 10-min bucket {0: -0.0001, 10: -0.0002, 20: -0.0003, 30: -0.0012}
+  fl_team: logit per +1k at 10/20/30 min [np.float64(-0.033), np.float64(-0.017), np.float64(-0.015)]  (gold lead per +1k: [np.float64(0.157), np.float64(0.104), np.float64(0.06)] )
+  fl_d1: logit per +1k at 10/20/30 min [np.float64(-0.015), np.float64(-0.014), np.float64(-0.004)]  (gold lead per +1k: [np.float64(0.157), np.float64(0.104), np.float64(0.06)] )

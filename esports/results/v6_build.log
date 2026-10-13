@@ -1,0 +1,48 @@
+pre-game blend on 277 selection games (53 cross-league): w0 -0.059 (0.184), w1 (cross) +0.516 (0.568)
+persistence term on 277 selection games: CV frame LL 0.4462 vs 0.4417 without -> dropped; g0 -1.388 g1 +1.274
+drift refits: 13 months; last (2026-09) coefs +0.027 -0.075 -0.049 -0.048 +0.041 +0.031 +0.014 -0.003 -0.017
+== test split, per-game log loss (stages are cumulative: x = cross-league prior, pm = + market pre-game price, pers = + persistence, drift = + drift; v6 = the chosen stage) ==
+  [all test] 10582 games: q_v5 0.4216
+    q_v6_x     0.4216  minus q_v5 -0.0000 [-0.0000, +0.0000]
+    q_v6_pm    0.4215  minus q_v5 -0.0001 [-0.0004, +0.0001]
+    q_v6_pers  0.4215  minus q_v5 -0.0001 [-0.0004, +0.0001]
+    q_v6_drift 0.4222  minus q_v5 +0.0006 [-0.0001, +0.0013]
+    q_v6       0.4215  minus q_v5 -0.0001 [-0.0004, +0.0001]
+  [eval months 2026-02+] 7085 games: q_v5 0.4199
+    q_v6_x     0.4199  minus q_v5 -0.0000 [-0.0000, +0.0000]
+    q_v6_pm    0.4197  minus q_v5 -0.0002 [-0.0005, +0.0002]
+    q_v6_pers  0.4197  minus q_v5 -0.0002 [-0.0005, +0.0001]
+    q_v6_drift 0.4208  minus q_v5 +0.0009 [-0.0001, +0.0018]
+    q_v6       0.4197  minus q_v5 -0.0002 [-0.0005, +0.0002]
+  [eval months, games with a pre-game price] 1305 games: q_v5 0.4283
+    q_v6_x     0.4283  minus q_v5 -0.0000 [-0.0000, +0.0000]
+    q_v6_pm    0.4273  minus q_v5 -0.0010 [-0.0029, +0.0009]
+    q_v6_pers  0.4273  minus q_v5 -0.0010 [-0.0027, +0.0008]
+    q_v6_drift 0.4298  minus q_v5 +0.0015 [-0.0015, +0.0046]
+    q_v6       0.4273  minus q_v5 -0.0010 [-0.0028, +0.0008]
+  [eval months, cross-league] 925 games: q_v5 0.4036
+    q_v6_x     0.4036  minus q_v5 -0.0000 [-0.0000, +0.0000]
+    q_v6_pm    0.4018  minus q_v5 -0.0019 [-0.0043, +0.0007]
+    q_v6_pers  0.4018  minus q_v5 -0.0019 [-0.0044, +0.0007]
+    q_v6_drift 0.4035  minus q_v5 -0.0002 [-0.0040, +0.0034]
+    q_v6       0.4018  minus q_v5 -0.0019 [-0.0045, +0.0006]
+  [2026-05+ (no archive price; drift only)] 4432 games: q_v5 0.4256
+    q_v6_x     0.4256  minus q_v5 -0.0000 [-0.0000, +0.0000]
+    q_v6_pm    0.4256  minus q_v5 -0.0001 [-0.0003, +0.0001]
+    q_v6_pers  0.4256  minus q_v5 -0.0001 [-0.0003, +0.0001]
+    q_v6_drift 0.4264  minus q_v5 +0.0008 [-0.0002, +0.0019]
+    q_v6       0.4256  minus q_v5 -0.0001 [-0.0003, +0.0001]
+live period: 527 games, prior_x_m present 100.0%, pm_pre for 165 games
+  [live period, all games] 527 games: q_v5 0.4109
+    q_v6_x     0.4109  minus q_v5 -0.0000 [-0.0000, +0.0000]
+    q_v6_pm    0.4101  minus q_v5 -0.0007 [-0.0035, +0.0025]
+    q_v6_pers  0.4101  minus q_v5 -0.0007 [-0.0038, +0.0025]
+    q_v6_drift 0.4108  minus q_v5 -0.0001 [-0.0039, +0.0038]
+    q_v6       0.4101  minus q_v5 -0.0007 [-0.0036, +0.0025]
+  [live period, games with a captured pre-game price] 165 games: q_v5 0.4167
+    q_v6_x     0.4167  minus q_v5 +0.0000 [+0.0000, +0.0000]
+    q_v6_pm    0.4144  minus q_v5 -0.0023 [-0.0112, +0.0076]
+    q_v6_pers  0.4144  minus q_v5 -0.0023 [-0.0113, +0.0078]
+    q_v6_drift 0.4150  minus q_v5 -0.0017 [-0.0109, +0.0091]
+    q_v6       0.4144  minus q_v5 -0.0023 [-0.0115, +0.0077]
+live drift fit on 5494 games to 2026-10-11: +0.017 -0.089 -0.030 -0.074 +0.011 +0.039 +0.007 +0.000 -0.009

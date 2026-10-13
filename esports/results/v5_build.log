@@ -1,0 +1,6 @@
+test per-game log loss: v5 0.4216  v4 0.4248  v2 0.4255  v5 - v4 -0.0032 [-0.0044, -0.0020]
+  null 1: test per-game log loss 0.6810
+  null 2: test per-game log loss 0.7009
+  null 3: test per-game log loss 0.6904
+  null 4: test per-game log loss 0.6810
+  null 5: test per-game log loss 0.6926

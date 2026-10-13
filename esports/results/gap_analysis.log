@@ -1,0 +1,61 @@
+== 1. timing ==
+frames 4455, games 142 (every offset -5..+3 present)
+  q_v2    0.4500   minus mid_same +0.0106 [-0.0208, +0.0418]
+  q_v4    0.4505   minus mid_same +0.0111 [-0.0230, +0.0445]
+  q_v5    0.4446   minus mid_same +0.0052 [-0.0294, +0.0383]
+  mid_-5  0.4943   minus mid_same +0.0550 [+0.0432, +0.0664]
+  mid_-4  0.4855   minus mid_same +0.0462 [+0.0377, +0.0545]
+  mid_-3  0.4733   minus mid_same +0.0339 [+0.0277, +0.0405]
+  mid_-2  0.4617   minus mid_same +0.0224 [+0.0182, +0.0267]
+  mid_-1  0.4490   minus mid_same +0.0096 [+0.0079, +0.0113]
+  mid_0   0.4357   minus mid_same -0.0037 [-0.0055, -0.0020]
+  mid_1   0.4229   minus mid_same -0.0165 [-0.0207, -0.0124]
+  mid_2   0.4106   minus mid_same -0.0287 [-0.0352, -0.0225]
+  mid_3   0.3981   minus mid_same -0.0413 [-0.0493, -0.0324]
+  frames with 3 later frames (4029): q_v5_ahead0 0.4820  q_v5_ahead1 0.4682  q_v5_ahead2 0.4514  q_v5_ahead3 0.4325  mid_-1 0.4785  mid_same 0.4692  mid_0 0.4659  mid_1 0.4530  mid_2 0.4398
+
+== 2. by phase (tradable, mid_same) ==
+frames 4491, games 142;  v5 - mid_same +0.0052 [-0.0308, +0.0382];  v5 - mid_0 (market up to 60 s newer) +0.0091 [-0.0265, +0.0421]
+  (0, 10]   n  1212  v5 - mid +0.0305 [-0.0094, +0.0748]  mid LL 0.551;  encompassing: market +1.08 (0.37), v5 +0.00 (0.32)
+  (10, 20]  n  1378  v5 - mid +0.0269 [-0.0104, +0.0659]  mid LL 0.454;  encompassing: market +1.06 (0.39), v5 +0.03 (0.33)
+  (20, 30]  n  1264  v5 - mid -0.0192 [-0.0492, +0.0111]  mid LL 0.323;  encompassing: market +0.43 (0.30), v5 +0.79 (0.26)
+  (30, 60]  n   637  v5 - mid -0.0412 [-0.1201, +0.0325]  mid LL 0.418;  encompassing: market +0.23 (0.25), v5 +0.77 (0.22)
+  same-league  games  73: v5 - mid -0.0303 [-0.0866, +0.0218]
+  cross-league games  69: v5 - mid +0.0447 [+0.0121, +0.0772]
+  by league: cblol-brazil (10) +0.0091 [-0.1238, +0.1231]; demacia_cup (15) +0.0309 [-0.0323, +0.0771]; emea_masters (53) +0.0463 [+0.0016, +0.0877]; lcs (22) -0.0526 [-0.1310, +0.0132]; lcs_promotion (12) +0.0409 [-0.0807, +0.1999]; lec (10) -0.1592 [-0.3714, -0.0290]
+
+== 3. pre-game price vs prior ==
+live, 135 games: market 0.5573, v5 prior 0.5875, blend 0.5650; prior - market +0.0302 [-0.0158, +0.0794]; corr(logits) 0.90
+  same -league  71 games: prior - market -0.0037 [-0.0688, +0.0721]; blend - market -0.0083 [-0.0400, +0.0253]
+  cross-league  64 games: prior - market +0.0677 [+0.0041, +0.1361]; blend - market +0.0253 [-0.0034, +0.0551]
+  encompassing: market +1.16 (0.45), prior +0.01 (0.44)
+  |prior - market| > 0.5 logit: 40 games, the market's side won 0.70
+historical (study test with a pre-game price, 1520 games): prior - market -0.0098 [-0.0254, +0.0040]
+  same -league 1187 games: -0.0159 [-0.0349, +0.0014]
+  cross-league  333 games: +0.0122 [-0.0145, +0.0382]
+  cross-league, non-international (EMEA Masters, LCP, promotion, ...) 269: +0.0157 [-0.0156, +0.0445]; EMEA Masters +0.0231 [-0.0174, +0.0602]
+  cross minus same: +0.0282 [-0.0019, +0.0599]
+
+== 4. v5 with the market's pre-game price as its prior (frozen coefficients) ==
+  q_v5     0.4506  minus mid_same +0.0066 [-0.0294, +0.0416]
+  q_v5_pm  0.4419  minus mid_same -0.0021 [-0.0265, +0.0225]
+  q_v5_bl  0.4432  minus mid_same -0.0008 [-0.0304, +0.0272]
+  (0, 10]   q_v5 +0.0318 [-0.0085, +0.0770]  q_v5_pm +0.0085 [-0.0102, +0.0280]  q_v5_bl +0.0142 [-0.0079, +0.0376]
+  (10, 20]  q_v5 +0.0299 [-0.0084, +0.0667]  q_v5_pm +0.0232 [-0.0078, +0.0552]  q_v5_bl +0.0235 [-0.0079, +0.0559]
+  (20, 30]  q_v5 -0.0182 [-0.0527, +0.0126]  q_v5_pm -0.0176 [-0.0482, +0.0082]  q_v5_bl -0.0193 [-0.0495, +0.0074]
+  (30, 60]  q_v5 -0.0448 [-0.1222, +0.0293]  q_v5_pm -0.0475 [-0.1231, +0.0211]  q_v5_bl -0.0466 [-0.1277, +0.0294]
+  same      q_v5 -0.0304 [-0.0875, +0.0229]  q_v5_pm -0.0217 [-0.0636, +0.0180]  q_v5_bl -0.0287 [-0.0736, +0.0157]
+  cross     q_v5 +0.0489 [+0.0135, +0.0805]  q_v5_pm +0.0203 [-0.0012, +0.0427]  q_v5_bl +0.0312 [+0.0070, +0.0550]
+
+== 5. implied weights: OLS of logit(price) on the state (tradable, 0.03 < mid < 0.97) ==
+  (0, 10]   n 1184: gold_k mkt +0.29 v5 +0.74 (t -5.6) | kills mkt +0.11 v5 -0.02 (t +3.0) | drakes mkt +0.09 v5 +0.29 (t -5.2) | level mkt -0.01 v5 +0.03 (t -3.2) | hp_al mkt +0.21 v5 +0.88 (t -5.4) | alive mkt -0.07 v5 +0.07 (t -3.5) | prior_union_m mkt +0.17 v5 +0.91 (t -14.2) | pm_lg mkt +0.81 v5 +0.04 (t +15.7)
+  (10, 20]  n 1253: gold_k mkt +0.26 v5 +0.40 (t -4.3) | kills mkt +0.11 v5 +0.05 (t +3.2) | drakes mkt +0.19 v5 +0.31 (t -5.4) | level mkt +0.04 v5 +0.10 (t -3.7) | hp_al mkt +0.24 v5 +0.67 (t -2.8) | alive mkt -0.11 v5 +0.08 (t -6.8) | prior_union_m mkt +0.31 v5 +0.77 (t -6.0) | pm_lg mkt +0.59 v5 +0.02 (t +7.0)
+  (20, 30]  n 977: gold_k mkt +0.21 v5 +0.27 (t -1.4) | kills mkt +0.06 v5 +0.04 (t +1.4) | drakes mkt +0.21 v5 +0.33 (t -4.7) | level mkt +0.06 v5 +0.13 (t -3.4) | hp_al mkt -0.18 v5 +0.38 (t -3.8) | alive mkt -0.14 v5 +0.14 (t -10.3) | prior_union_m mkt +0.17 v5 +0.59 (t -5.3) | pm_lg mkt +0.49 v5 +0.01 (t +4.7)
+  (30, 60]  n 495: gold_k mkt +0.20 v5 +0.19 (t +0.1) | kills mkt -0.00 v5 +0.01 (t -0.3) | drakes mkt +0.27 v5 +0.29 (t -0.3) | level mkt +0.13 v5 +0.20 (t -1.9) | hp_al mkt -0.37 v5 +0.90 (t -4.2) | alive mkt -0.10 v5 +0.35 (t -9.1) | prior_union_m mkt +0.06 v5 +0.30 (t -1.2) | pm_lg mkt +0.44 v5 +0.21 (t +1.1)
+
+== 6. season drift: offset-logit residual of v5 (coef per unit, x m = clock / 600 s) ==
+  study test 2025-07..12    2865 games: gold_k +0.146 (0.082) x m -0.046 (0.025) | kills -0.046 (0.047) x m +0.016 (0.015) | towers -0.014 (0.084) x m -0.007 (0.028) | alive -0.091 (0.041) x m +0.025 (0.017)
+  study test 2026-01..04+   7717 games: gold_k -0.084 (0.042) x m +0.035 (0.013) | kills -0.034 (0.027) x m +0.009 (0.009) | towers -0.002 (0.052) x m -0.021 (0.017) | alive +0.031 (0.025) x m -0.017 (0.010)
+  live period                243 games: gold_k -0.396 (0.236) x m +0.129 (0.077) | kills +0.104 (0.138) x m -0.022 (0.038) | towers +0.025 (0.222) x m -0.049 (0.067) | alive -0.144 (0.134) x m +0.069 (0.063)
+  correction fitted on 2026 study-test games before the live period, applied to all live-period frames: -0.0031 [-0.0074, +0.0007]
+  tradable, vs mid_same: v5 +0.0052 [-0.0326, +0.0406], corrected +0.0057 [-0.0278, +0.0386]

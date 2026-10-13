@@ -1,0 +1,17 @@
+== 1. v2 overfitting: in-sample vs CV vs test ==
+  params 52, train frames 290716 games 8783
+  train in-sample per-game ll 0.4333   train 5-fold CV 0.4345   test (fit on train) 0.4255
+  test per-game ll by quarter: {'2025Q3': np.float64(0.4272), '2025Q4': np.float64(0.4435), '2026Q1': np.float64(0.4245), '2026Q2': np.float64(0.4213), '2026Q3': np.float64(0.4266)}
+
+== 2-3. backtest at the live lag (22 s): last trade vs mid proxy, by league and quarter ==
+Traceback (most recent call last):
+  File "/home/aimer/fyp/esports/src/overfit_check.py", line 171, in <module>
+    fr = part2(set(t.league))
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/home/aimer/fyp/esports/src/overfit_check.py", line 107, in part2
+    fr = mid_proxy(fr, fills, LAG)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aimer/fyp/esports/src/overfit_check.py", line 85, in mid_proxy
+    p = np.where(i >= 0, g.p_blue.to_numpy()[np.maximum(i, 0)], np.nan)
+                         ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0

@@ -1,0 +1,96 @@
+
+== 2. in-game: v4 (sel window) with the reddit prior ==
+  v4 reproduces the stored `sel window`: max |diff| 0.00e+00   (rechecked by array; the first run aligned on index)
+  [all test games] games 10582 matches 4700
+    q_v4 rd          0.4260   minus q_v4 +0.0012 [-0.0007, +0.0032]
+    q_v4 rd monthly  0.4261   minus q_v4 +0.0013 [-0.0007, +0.0034]
+    q_v4 union prior 0.4219   minus q_v4 -0.0029 [-0.0042, -0.0016]
+    q_v4 + rd prior term 0.4234   minus q_v4 -0.0015 [-0.0023, -0.0006]
+  [international test games] games 310 matches 116
+    q_v4 rd          0.4288   minus q_v4 +0.0068 [-0.0030, +0.0163]
+    q_v4 rd monthly  0.4306   minus q_v4 +0.0087 [-0.0018, +0.0191]
+    q_v4 union prior 0.4165   minus q_v4 -0.0055 [-0.0138, +0.0026]
+    q_v4 + rd prior term 0.4233   minus q_v4 +0.0014 [-0.0027, +0.0059]
+    per-frame minus v4 by 10-min bucket v4 rd                {0: 0.0029, 10: 0.0, 20: -0.0005, 30: -0.0004}
+    per-frame minus v4 by 10-min bucket v4 rd monthly        {0: 0.0027, 10: 0.0005, 20: -0.0001, 30: -0.0002}
+    per-frame minus v4 by 10-min bucket v4 union prior       {0: -0.0045, 10: -0.0037, 20: -0.0019, 30: -0.001}
+    per-frame minus v4 by 10-min bucket v4 + rd prior term   {0: -0.0025, 10: -0.0019, 20: -0.0009, 30: 0.0002}
+
+== 3. vs the market (Polymarket per-game markets, test period) ==
+  [lag 0s, all PM frames vs last trade] games 1625 matches 732
+    q_v4             0.4150   minus mkt -0.0259 [-0.0374, -0.0156]
+    q_v4 rd          0.4198   minus mkt -0.0212 [-0.0327, -0.0103]
+    q_v4 rd monthly  0.4193   minus mkt -0.0216 [-0.0326, -0.0107]
+    q_v4 union prior 0.4125   minus mkt -0.0284 [-0.0401, -0.0175]
+    q_v4 + rd prior term 0.4149   minus mkt -0.0260 [-0.0367, -0.0153]
+  [lag 0s, all PM frames, arm minus v4] games 1625 matches 732
+    q_v4 rd          0.4198   minus q_v4 +0.0048 [-0.0002, +0.0101]
+    q_v4 rd monthly  0.4193   minus q_v4 +0.0043 [-0.0009, +0.0098]
+    q_v4 union prior 0.4125   minus q_v4 -0.0025 [-0.0060, +0.0011]
+    q_v4 + rd prior term 0.4149   minus q_v4 -0.0001 [-0.0024, +0.0022]
+  [lag 0s, two-sided frames vs mid proxy] games 1448 matches 663
+    q_v4             0.4318   minus mid -0.0080 [-0.0180, +0.0023]
+    q_v4 rd          0.4354   minus mid -0.0044 [-0.0146, +0.0054]
+    q_v4 rd monthly  0.4350   minus mid -0.0048 [-0.0153, +0.0059]
+    q_v4 union prior 0.4294   minus mid -0.0104 [-0.0204, -0.0003]
+    q_v4 + rd prior term 0.4311   minus mid -0.0087 [-0.0187, +0.0012]
+  [lag 22s, all PM frames vs last trade] games 1638 matches 734
+    q_v4             0.4090   minus mkt -0.0137 [-0.0236, -0.0044]
+    q_v4 rd          0.4136   minus mkt -0.0091 [-0.0185, +0.0001]
+    q_v4 rd monthly  0.4132   minus mkt -0.0094 [-0.0185, +0.0001]
+    q_v4 union prior 0.4067   minus mkt -0.0160 [-0.0250, -0.0066]
+    q_v4 + rd prior term 0.4089   minus mkt -0.0138 [-0.0235, -0.0049]
+  [lag 22s, all PM frames, arm minus v4] games 1638 matches 734
+    q_v4 rd          0.4136   minus q_v4 +0.0046 [-0.0004, +0.0097]
+    q_v4 rd monthly  0.4132   minus q_v4 +0.0042 [-0.0010, +0.0092]
+    q_v4 union prior 0.4067   minus q_v4 -0.0023 [-0.0059, +0.0012]
+    q_v4 + rd prior term 0.4089   minus q_v4 -0.0001 [-0.0023, +0.0023]
+  [lag 22s, two-sided frames vs mid proxy] games 1447 matches 660
+    q_v4             0.4319   minus mid +0.0027 [-0.0066, +0.0117]
+    q_v4 rd          0.4360   minus mid +0.0068 [-0.0023, +0.0158]
+    q_v4 rd monthly  0.4355   minus mid +0.0063 [-0.0025, +0.0156]
+    q_v4 union prior 0.4299   minus mid +0.0007 [-0.0079, +0.0099]
+    q_v4 + rd prior term 0.4314   minus mid +0.0023 [-0.0067, +0.0112]
+
+== 4. trading backtest (eval months from 2026-02; gate theta chosen on the selection months) ==
+ L                  sig        strat     n  games  gross_pp  ci_lo  ci_hi  fee_regime_net_pp
+ 0                 q_v4         clip 20724   1029      2.54   0.89   4.33              -1.12
+ 0                 q_v4  gate th=0.3   332    181     13.81   5.17  22.15               9.79
+ 0              q_v4 rd         clip 20751   1032      2.25   0.52   4.03              -0.55
+ 0              q_v4 rd gate th=0.25   625    277      7.43  -0.04  14.87               4.88
+ 0      q_v4 rd monthly         clip 20745   1031      2.26   0.55   3.95              -0.74
+ 0      q_v4 rd monthly gate th=0.25   623    270      7.94   0.96  15.65               6.02
+ 0     q_v4 union prior         clip 20729   1030      2.86   1.10   4.58               0.25
+ 0     q_v4 union prior gate th=0.25   612    274     12.47   4.78  20.68               9.05
+ 0 q_v4 + rd prior term         clip 20723   1031      2.50   0.79   4.25              -0.78
+ 0 q_v4 + rd prior term  gate th=0.2  1291    429      9.31   2.85  15.33               5.86
+ 5                 q_v4         clip 20687   1032      2.30   0.41   4.15              -1.29
+ 5                 q_v4  gate th=0.3   274    153      9.78  -0.31  19.81               4.51
+ 5              q_v4 rd         clip 20691   1033      2.11   0.41   3.84              -0.55
+ 5              q_v4 rd gate th=0.25   562    260      6.34  -1.32  14.19               2.61
+ 5      q_v4 rd monthly         clip 20694   1032      2.27   0.61   4.06              -0.57
+ 5      q_v4 rd monthly  gate th=0.2  1151    406      6.36  -0.22  12.57               3.84
+ 5     q_v4 union prior         clip 20677   1033      2.79   1.17   4.54               0.24
+ 5     q_v4 union prior  gate th=0.2  1215    422      6.71   0.17  13.10               2.97
+ 5 q_v4 + rd prior term         clip 20656   1032      2.26   0.51   4.07              -0.89
+ 5 q_v4 + rd prior term  gate th=0.2  1166    394      7.95   1.20  14.46               4.26
+15                 q_v4         clip 20676   1035      2.06   0.20   3.89              -1.36
+15                 q_v4  gate th=0.2  1278    398      7.53   0.77  14.02               3.26
+15              q_v4 rd         clip 20695   1035      1.66  -0.12   3.44              -1.03
+15              q_v4 rd  gate th=0.2  1092    371      4.98  -1.11  11.48               1.87
+15      q_v4 rd monthly         clip 20699   1034      1.71  -0.02   3.47              -1.12
+15      q_v4 rd monthly  gate th=0.2  1076    367      4.76  -1.96  11.00               1.89
+15     q_v4 union prior         clip 20691   1034      2.45   0.64   4.33              -0.05
+15     q_v4 union prior  gate th=0.2  1090    376      4.98  -1.64  11.97               0.41
+15 q_v4 + rd prior term         clip 20649   1036      1.95   0.26   3.74              -1.01
+15 q_v4 + rd prior term  gate th=0.2  1088    367      6.11  -0.51  12.78               1.71
+30                 q_v4         clip 20536   1027      1.77  -0.05   3.63              -1.58
+30                 q_v4  gate th=0.3   281    152      5.75  -4.44  16.52               1.93
+30              q_v4 rd         clip 20573   1034      1.59  -0.17   3.31              -1.00
+30              q_v4 rd  gate th=0.2  1149    390      3.66  -2.21   9.88               1.32
+30      q_v4 rd monthly         clip 20588   1033      1.62  -0.15   3.37              -1.11
+30      q_v4 rd monthly  gate th=0.2  1126    385      4.40  -1.58  11.01               2.91
+30     q_v4 union prior         clip 20576   1027      2.13   0.42   3.89              -0.32
+30     q_v4 union prior gate th=0.25   512    237      8.33  -0.14  16.78               5.62
+30 q_v4 + rd prior term         clip 20533   1029      1.89   0.19   3.59              -1.10
+30 q_v4 + rd prior term  gate th=0.2  1141    388      4.82  -1.41  11.72               1.55

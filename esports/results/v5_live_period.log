@@ -1,0 +1,6 @@
+extended table: 22710 games, 279 from lollive, last 2026-10-11 12:15:20.614000+00:00
+/home/aimer/fyp/esports/src/v5/live_period.py:66: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  x = b[[f'gd15_{k}' for k in range(5)]].sum(1).to_numpy()[:, None] / 1000
+new games: e_gold 279/279, damage 279/279
+prior check on 10584 study test games: |prior_new - study| max 0.0000 median 0.00000;  union_m vs study prior_both_m max 0.0000 median 0.00000
+live period: 527 games, 16613 frames; per-game log loss v2 0.4149 v4 0.4155 v5 0.4109 (v5 fixed prior 0.4127)

@@ -1,0 +1,10 @@
+frames 640138, without objective state 0 (filled 0)
+v2 0.4255  v2+obj 0.4254  diff -0.0000 [-0.0001, +0.0001]
+  drake_up=1 frames  77848: v2 0.4851 v2+obj 0.4853 (+0.0002)
+  baron_up=1 frames  72217: v2 0.4025 v2+obj 0.4025 (-0.0001)
+  elder_up=1 frames   2193: v2 0.2422 v2+obj 0.2422 (+0.0000)
+mean |next-60 s change in v2 logit|, by objective state (frames 15-35 min):
+  drake_up: {0: {'mean': 0.529, 'median': 0.336, 'size': 155130}, 1: {'mean': 0.639, 'median': 0.439, 'size': 26920}}
+  baron_up: {0: {'mean': 0.54, 'median': 0.343, 'size': 115933}, 1: {'mean': 0.553, 'median': 0.36, 'size': 66117}}
+  elder_up: {0: {'mean': 0.542, 'median': 0.348, 'size': 181218}, 1: {'mean': 1.315, 'median': 1.118, 'size': 832}}
+  soul_up: {0: {'mean': 0.534, 'median': 0.344, 'size': 176716}, 1: {'mean': 0.947, 'median': 0.711, 'size': 5334}}

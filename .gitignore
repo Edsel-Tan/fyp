@@ -1,3 +1,10 @@
+cookies.txt
 data
 hrt
 .venv
+.env
+.ssh
+__pycache__/
+# >100MB, exceed GitHub's file limit; regenerable
+crypto/artifacts/panel_*.npz
+esports/results/viz/*.mp4

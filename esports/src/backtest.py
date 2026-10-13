@@ -8,8 +8,8 @@ prices cannot fill us (memory: pm-execution-accounting). Positions are held to
 resolution, 1 share each; pnl per share = y - px for a buy and px - y for a sell.
 
 Signals q (P(blue)):
-  model    q_lr all              gold  q_gold (PLAN's simple model)
-  comb     sigma(a logit(mid) + b logit(q_lr all) + c), fit on the selection months only
+  v2       q_lr v2 (primary)     v1  q_lr all              gold  q_gold (PLAN's simple model)
+  comb     sigma(a logit(mid) + b logit(q_lr v2) + c), fit on the selection months only
 Strategies:
   A clip   every frame, trade 1 share toward q (buy if q > mid, else sell)
   B gate   trade only if q - ask > theta (buy) or bid - q > theta (sell); theta picked on the selection months
@@ -129,17 +129,17 @@ def main(lags):
     for L in lags:
         q = quotes(fr, fills, L)
         sel, ev = q[q.t_start < SEL_END], q[q.t_start >= SEL_END]
-        X = lambda d: np.c_[logit(d.mid), logit(d['q_lr all'])]
+        X = lambda d: np.c_[logit(d.mid), logit(d['q_lr v2'])]
         cm = LogisticRegression(C=1e6, max_iter=1000).fit(X(sel), sel.blue_win.astype(int))
         q['q_comb'] = cm.predict_proba(X(q))[:, 1]
         sel, ev = q[q.t_start < SEL_END], q[q.t_start >= SEL_END]
-        for sig in ['q_lr all', 'q_gold', 'q_comb']:
+        for sig in ['q_lr v2', 'q_lr all', 'q_gold', 'q_comb']:
             rows.append(dict(L=L, strat='A', sig=sig, **summarize(run(ev, sig, 'A'), 'eval')))
             best = max(((summarize(run(sel, sig, 'B', th), 'sel').get('gross_pp', -99), th)
                         for th in THETAS), key=lambda z: z[0] if not np.isnan(z[0]) else -99)
             rows.append(dict(L=L, strat=f'B th={best[1]}', sig=sig, sel_gross_pp=best[0], **summarize(run(ev, sig, 'B', best[1]), 'eval')))
         if L == 0:
-            for sig in ['q_lr all']:
+            for sig in ['q_lr v2']:
                 curve = [dict(theta=th, **summarize(run(ev, sig, 'B', th), 'eval')) for th in THETAS]
                 print('eval theta curve (sensitivity only; theta is chosen on selection months):')
                 print(pd.DataFrame(curve)[['theta', 'n', 'games', 'gross_pp', 'ci_lo', 'ci_hi']].to_string(index=False, float_format=lambda x: f'{x:.3f}'))

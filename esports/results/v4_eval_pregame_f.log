@@ -1,0 +1,18 @@
+train 8932 (val 3060)  test 10584  intl 310  fearless game 2+ 5822
+                            model      C  val_ll  test_ll    auc       d      lo     hi  d_intl            intl_ci  d_fearless_g2plus              fl_ci
+     v2 prior (all new minus h2h) 0.0300  0.6094   0.6043 0.7313  0.0000  0.0000 0.0000  0.0000 [+0.0000, +0.0000]             0.0000 [+0.0000, +0.0000]
++ series: mp, prev_loser, dec_elo 0.0300  0.6101   0.6050 0.7308  0.0007  0.0004 0.0010 -0.0002 [-0.0016, +0.0013]             0.0012 [+0.0007, +0.0017]
+                 + same-side form 0.0300  0.6090   0.6041 0.7312 -0.0002 -0.0007 0.0004  0.0017 [-0.0018, +0.0057]             0.0003 [-0.0005, +0.0010]
+  + fearless: pool, pool_dep, dep 0.0300  0.6096   0.6047 0.7309  0.0004 -0.0001 0.0009  0.0012 [-0.0004, +0.0028]             0.0005 [-0.0001, +0.0010]
+                          + all F 0.0100  0.6099   0.6049 0.7307  0.0006 -0.0002 0.0015  0.0022 [-0.0027, +0.0070]             0.0017 [+0.0004, +0.0028]
+
++ all F, standardized coefficients of the F terms: {'dec_elo': -0.025, 'dep': -0.002, 'mp': 0.023, 'pool': 0.132, 'pool_dep': -0.024, 'prev_loser': -0.035, 'ss_ewm': -0.103, 'ss_res': 0.113}
+
+== market pre-game price (Polymarket per-game markets, test games with pm_pre) ==
+games 1520, matches 710, n_min_games < 20: 228; full-sample blend: w_v2 0.618 w_mkt 0.454 intercept -0.030
+  q_v2       ll 0.5978 auc 0.740  minus v2 prior +0.0000 [+0.0000, +0.0000]   low-history games +0.0000 [+0.0000, +0.0000]
+  q_f        ll 0.5977 auc 0.741  minus v2 prior -0.0001 [-0.0024, +0.0023]   low-history games +0.0001 [-0.0053, +0.0054]
+  q_mkt      ll 0.6019 auc 0.743  minus v2 prior +0.0041 [-0.0118, +0.0201]   low-history games +0.0083 [-0.0380, +0.0578]
+  q_blend50  ll 0.5907 auc 0.748  minus v2 prior -0.0071 [-0.0145, +0.0007]   low-history games -0.0092 [-0.0311, +0.0144]
+  q_blendcv  ll 0.5929 auc 0.746  minus v2 prior -0.0049 [-0.0117, +0.0021]   low-history games -0.0097 [-0.0289, +0.0137]
+  q_guard    ll 0.5990 auc 0.740  minus v2 prior +0.0013 [-0.0056, +0.0086]   low-history games +0.0083 [-0.0337, +0.0550]

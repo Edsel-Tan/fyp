@@ -15,8 +15,8 @@ D = '../data'
 B, R = range(1, 6), range(6, 11)
 
 
-def one(gid):
-    d = pd.read_parquet(f'{D}/frames60/{gid}.parquet')
+def one(gid, src='frames60'):
+    d = pd.read_parquet(f'{D}/{src}/{gid}.parquet')
     if any(f'p{i}_currentHealth' not in d for i in range(1, 11)):
         return None
     d = d[d.state.isin(['in_game', 'paused', 'finished'])]

@@ -1,0 +1,3 @@
+1. test split reproduces: v4 0.4248 vs v2 0.4255 per-game log loss (10582 games)
+2. live code path vs eval_v4 rescoring: 33 ticks, max |diff| 1.05e-15 (124 ticks skipped: saved-feed clock differs from the trader's)
+wrote /home/aimer/fyp-pmlive/lollive/data/v4/v4_model.pkl and /home/aimer/fyp-pmlive/lollive/src/v4feat.py

@@ -1,0 +1,25 @@
+games train 20 test 380; frames 13535; minimap found on 88.9%
+CV mode: 5 folds grouped by match, all minimap games (v2_logit is out-of-sample for all of them)
+v2               0.4508  vs v2 +0.0000 [+0.0000, +0.0000]
+v2+obj           0.4540  vs v2 +0.0032 [+0.0017, +0.0049]
+v3               0.4576  vs v2 +0.0068 [+0.0039, +0.0101]
+v3 minimap only  0.4541  vs v2 +0.0033 [+0.0007, +0.0059]
+  drake/elder up                 n   2867: v3 - v2 frame log loss +0.0156
+  baron up                       n   3004: v3 - v2 frame log loss +0.0136
+  objective up & pit contested   n   2164: v3 - v2 frame log loss +0.0112
+v3 minimap coefficients (per unit, at m = 0 / 1 / 2 i.e. 0 / 10 / 20 min):
+               0      1      2
+mm_vis     0.025  0.008  0.011
+mm_adv    -0.667  0.130  0.352
+mm_deep    0.045  0.015  0.012
+mm_drk    -0.198 -0.088  0.010
+mm_bar    -0.158 -0.116 -0.060
+mm_group   0.050  0.014 -0.002
+mm_w       0.003 -0.015 -0.023
+mm_wdeep  -0.068 -0.011  0.021
+mm_wdrk    0.042  0.026  0.030
+mm_wbar    0.062 -0.072 -0.084
+drk_x_up   0.244  0.192  0.051
+wdrk_x_up  0.022  0.041  0.002
+bar_x_up   0.371  0.271  0.194
+wbar_x_up -0.001  0.083  0.102

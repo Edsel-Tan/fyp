@@ -61,7 +61,7 @@ def main(lag=0):
         d, lo, hi = boot_diff(per[c].to_numpy(), per['mkt'].reindex(per[c].index).to_numpy(), g2m.reindex(per[c].index).to_numpy())
         print(f'  {c:14s} per-game ll {per[c].mean():.4f}   minus market {d:+.4f} [{lo:+.4f}, {hi:+.4f}]')
     # encompassing: does the model carry information beyond the price?
-    for c in ['q_lr all', 'q_gold', 'q_prior']:
+    for c in ['q_lr v2', 'q_lr all', 'q_gold', 'q_prior']:
         X = np.c_[logit(fr.mkt), logit(fr[c])]
         w = LogisticRegression(C=1e6, max_iter=1000).fit(X, y).coef_[0]
         mids = fr.match_id.unique()
