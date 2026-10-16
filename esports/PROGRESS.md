@@ -1,4 +1,4 @@
-# LoL win-probability study — progress (updated 2026-10-13)
+# LoL win-probability study — progress (updated 2026-10-16)
 
 Executing `~/fyp/PLAN.md`. Everything lives in `~/fyp/esports/`, which git does not track. `esports/data/` is also
 covered by the `data` pattern in `.gitignore`, so a branch checkout leaves all of it in place.
@@ -854,3 +854,324 @@ Trading (net pp, 79 games):
 - v6m_gate is the only gate at or above zero, on 19 games, so nothing is established.
 
 Rerun: `python v6/prior.py && python v6/build.py && python v6/drift_exp.py && python v6/backtest_v6.py && python v6/book_sim_v6.py && python v6/build_live_v6.py check` (from `esports/src`).
+
+## Worlds 2026 pick'ems with v6 (2026-10-15, `src/pickems/`, data `data/pickems/`, results `results/pickems_*.log`)
+
+User request: use the current best model (v6) for Worlds pick'ems.
+- `priors.py` (run with lollive's venv): v6live.features with one hypothetical row per ordered pair of the 19 teams (latest domestic roster; DK's WSCI academy games skipped), October refit.
+  Pick'ems are pre-draft, so the union logistic is refit without the draft columns (champ_*, lane_mu, pc_*, draft_*). October OOS LL: pre-draft 0.6026 vs full 0.6036 (225 games). Side-averaged.
+- `sim.py`: Play-In (double elim Bo5) → Swiss (R1 tier 1v4 / 2v3 with no same-region pair; random same-record pairing after that, no rematches; Bo3 at 2 wins or 2 losses) → knockout (3-0 teams v 3-2 teams, Bo5). Games are i.i.d. within a series.
+  v6's market blend (w0 −0.06, w1 0.52 cross-league) uses team ratings fitted so the simulator reproduces Polymarket's outright odds. Only teams at ≥ 0.6 % are fitted (LYON's 0.4 % is too rare to fit at n = 40k).
+- `picks.py`: play-in series odds; marginal-leader Swiss picks; title odds.
+- Result (v6, n = 200k): KC 86 % to win the Play-In. 3-0: GEN .36, BLG .32, HLE .32. 0-3: CFO .62, TSW .35, LOS .33.
+  3-1/3-2: DK .61, T1 .61, AL .60, HLE .57, then IG/G2 .48. Title: GEN .26, BLG .25, HLE .20, T1 .13, DK .09.
+  The model is higher than the market on BLG and DK, and lower on G2, TLAW and KC.
+- Rerun after the Swiss R1 draw (Oct 18) and before knockout picks (Nov 3). Fixing the drawn pairings in `one()` is not built yet.
+
+## Draft and series updating (2026-10-16, `src/draftseries/`, results `results/draftseries_*.log`)
+
+User questions: (1) how the draft moves each model, how to use it, and whether it moves the market; (2) how models and market update across a series
+(MVK 3-0 FUR, Worlds Play-In, MVK blue all three games), and whether momentum / on-the-day form helps.
+Scripts (from `esports/src`): `priors.py` (monthly union / v2 / reddit priors with and without the 7 draft columns; un_full reproduces prior_union_m to 7e-16),
+`draft.py 123`, `market_draft.py`, `series.py`, `worlds_priors.py` (lollive venv, from lollive/src), `mvkfur.py`.
+
+**Draft, models** (test 2025-07..2026-10-13, 10,875 games):
+- Pre-game, full − pre-draft LL: v2/v4 prior −0.0020 [−0.0034, −0.0007], reddit −0.0026, union (v5/v6) −0.0025 [−0.0039, −0.0010].
+  Shift SD 0.16 logit; median |Δp| 2.2 pp, p90 5.9 pp, > 10 pp in 0.7 % of games. Calibration slope on the shift 0.91 (0.13), so it is weighted right.
+- Value is in game 1 (−0.0043) and same-league games (−0.0029). Game 2+ −0.0011 (ns), fearless game 3+ −0.0005, cross-league −0.0003, 2026Q3 −0.0004.
+- In-game: the prior's weight is 1.0 / 0.87 / 0.69 / 0.49 / 0.26 at 0/10/20/30/40 min (v5). v5 full − pre −0.0022 [−0.0030, −0.0014] per game; −0.003 per frame to 20 min, 0 after 30.
+- New draft inputs on top of the union, all ≤ 0.0003: 30-day recency-weighted champion model −0.0002, pro pick-rate meta −0.0002 [−0.0004, −0.0000], bot/jg-mid duo synergy 0.0000,
+  Data Dragon damage profile +0.0001, player comfort / off-pool picks 0.0000 (comfort alone corr +0.175 with the result, but Elo/pc_exp already hold it).
+
+**Draft, market** (archive minute VWAP 1,506 games; captured books 166):
+- The market's move over champ select (t0−15 → t0−1) has SD 0.29 logit (median 1.8 pp), but its correlation with our draft shift d is only +0.07 (game 1 +0.12, game 2+ +0.05).
+  The correlation rises to +0.13–0.14 by t0+0..+2 min, so the market absorbs the draft late, around lock-in, loading and the first minute.
+- Outcome on top of the price: the coefficient on d is 1.24 (0.44) at t0−15 and 1.18 (0.39) at t0−1 (LL −0.0036, borderline), then 0.80 at t0 and 0.59 (0.37) at t0+1 (LL −0.0004).
+  So the market prices about half of the model's draft read once the game starts. The market's own draft move is right-sized (coefficient 0.94 (0.26)).
+- Buying the draft-favoured side at the t0−1 VWAP: +2 to +5 pp gross by |d| quartile (se 2.5). That is about the cost floor, and our feed only shows the champions at t0.
+- Books: n 152, every coefficient ns.
+
+**Series updating** (k ≥ 2 games, test 6,043; extended prior from 2024-10):
+- Between games, per unit of surprise (y − p) in the previous game, the model's pre-draft prior moves +0.34–0.36 logit and the market (t0−1 → next t0−15) +0.21 (0.03).
+  Outcome-implied update: +0.48 (0.19) on top of the market and +0.56 (0.19) on top of the model, on the same 693 games.
+- Leftover on top of the model's own prior: ~0. res +0.079 (t 1.4); by period +0.26 / −0.07 / +0.14. Calibration by series state is within ±2.6 pp.
+  Cross-league res +0.30 / +0.02 / +0.44 across the three periods; pooled res × cross +0.255 (t 1.9). OOS (fit 2024-10..2025-06, score test) cross-league −0.0029 [−0.0093, +0.0037], ns.
+- Leftover on top of the market (t0−1 price): sd +0.14 (t 1.8), last +0.13–0.17, gold +0.19–0.23 (t 1.8–2.3), dom (mean in-game v5 P − prior) +0.73–0.86 (t 1.6–2.0), res_mkt +0.31 (t 1.9).
+  The market under-reacts within series. Betting on it at the t0−1 VWAP: previous winner +2.7 pp (se 1.6), series leader +3.7 (1.7). Net of the ~3 c cost floor that is ≈ 0.
+- On-the-day / tournament form on top of the model: same-day other games +1.04 (t 2.2) but OOS +0.0074 worse; event form (21-day same-league residual) t 3.2 in-sample, OOS −0.0003 [−0.0006, −0.0001] (tiny).
+- v6's market blend weight by game number: game 1 0.61 (0.16), game 2+ 0.26 (0.14); same-league 0.51 → 0.13; cross-league 0.80 → 0.68.
+  v6's constant blend therefore imports the market's sluggish in-series update.
+
+**MVK–FUR** (P(MVK) per game; the market is captured minute bars):
+
+| Game (score) | v2 | union (v6u) | union pre-draft | draft | v6 (blend) | market t0−15 | t0−1 | t0+1 | series-implied p |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 (0-0) | .279 | .410 | .364 | +4.6 pp | .384 | – | .375 | .445 | .349 |
+| 2 (1-0) | .350 | .430 | .436 | −0.7 | .404 | .385 | .315 | .305 | .356 |
+| 3 (2-0) | .485 | .545 | .542 | +0.3 | .495 | .415 | .405 | .395 | .418 |
+
+- The pre-draft prior moved +7 pp and then +11 pp. The main movers were Kalman, team/player Elo, league Elo (−57 → −20) and series_diff (+0.069 logit per win). The BT rating (−0.33 logit, the largest term) is frozen within the week.
+- The market's per-game price moved +1 pp and +3 pp. Before g3 it still had FUR 58.5 % (series 0.80).
+- g1 was a comeback: the mid was 0.10 at 25 min and v6 0.35. g2 and g3 were MVK-dominant, and the models led the mid (g2 at 15 min v6 0.76 vs mid 0.53).
+- Tick LL: v6 1.17 / 0.26 / 0.10 vs mid 1.31 / 0.48 / 0.15.
+
+**Reading.**
+- Draft is worth ~0.0025 LL, ~2 pp per game, gone by 30 min. Champion-strength features capture it; more draft features add nothing.
+- The market prices about half of it, late. The only unexploited draft input is timing (seeing picks before t0, e.g. the broadcast's champ-select overlay).
+- Within series the model updates about right on average. The market updates ~0.6× as much as it should; that matters for the v6 blend, though it is not tradable net.
+- Candidates, if pursued:
+  - lower the market weight in games 2+ (or add res_mkt), checked on held-out months
+  - a Kalman league offset, so cross-league series move more
+  - update BT per game
+
+## Surprise / dominance terms for later games (2026-10-16, `src/draftseries/surprise.py`, results `results/draftseries_surprise.log`)
+
+User request: a surprise term from earlier same-day games that measures how dominant a game was (a persistent gold lead vs a lucky comeback), carried into later games, in several formulations.
+
+**Per game** (blue view, 60 s grid, 19,642 games):
+- Gold-based: `g_area` = mean tanh(gold diff / 5k); `lead` = share of minutes ahead by > 1k minus share behind by > 1k; `gd15`; deepest deficit / largest lead.
+- State-based, from v5's in-game model with a zero prior: `s_area` = mean state P − 0.5; `s_minw` = the winner's lowest state P.
+- Result-based: `win` = y − p, plus luck-adjusted results (win × clean-win weight, win × lead persistence, win/dominance mix).
+- Each stat is converted to a surprise: stat − E[stat | prior].
+- Sanity: winners led by > 1k for 71 % of minutes; 16.3 % of wins were comebacks (the winner's state P fell below 0.2).
+- Aggregated per later game as A − B over: the same series (`ser_`), the last 12 h (`day_`), and decayed sums with 2-day / 7-day half-life (`d2_` / `d7_`).
+
+**Offset on the union prior** (2024-10.. extended prior; OOS = fit 2024-10..2025-06, score 2025-07+):
+- In-sample every term is positive, t 2.5–5.5. Dominance beats the raw result: in `ser_win + ser_s_area`, win falls to +0.006 (t 0.2) while s_area stays +0.16 (t 2.3).
+- Cross-league coefficients are 2.5–3× larger.
+- Out of sample, as a bolt-on offset: −0.0007…+0.0015, none helps.
+
+**As columns of the union logistic** (monthly refit):
+- Overall about −0.0002.
+- Cross-league: `day_s_area` −0.0010 [−0.0017, −0.0004], `day_win_dom` −0.0011 [−0.0017, −0.0005], `day_g_area` −0.0009, `day_win` −0.0006.
+- Interactions with cross add nothing.
+
+**Inside v7** (below):
+- On top of the team/league Kalman, `day_dom` (the gold-based same-day surprise) adds nothing (validation 0.60253 vs 0.60248) and is dropped.
+- The form that survives is a dominance-weighted rating update: the Kalman learns from 0.5·win + 0.5·σ(3·g_area) instead of win/loss.
+  - Validation 0.60248 vs 0.60262 for win/loss-only; λ 0.25–0.5 are flat.
+  - Test −0.0010 vs −0.0009 for win/loss-only.
+
+## v7 (2026-10-16, `src/v7/`, results `results/v7_*.log`, `results/backtest_v7*`, `results/book_sim_v7*`)
+
+User request: build changes 2 and 3 from "Draft and series updating" (a Kalman league offset so cross-league series move more; BT updated per game), plus the surprise term if it helps, into v7. Backtest it and add it to the live tracker.
+
+**Design.** `v7/v7feat.py` (shared verbatim with lollive):
+- `kalman`: a team within-league rating plus a home-league offset.
+  - Diagonal EKF; variances grow q per day, capped at v0.
+  - Leagues that rarely meet keep a large variance, so cross-league results move them.
+  - Updates use the dominance-weighted result.
+- `bt_online`: reddit's weekly BT kept as the anchor, plus an exact per-game Newton step (Sherman-Morrison on the fit's Hessian) for every game finished inside the week.
+  - The weekly part reproduces the study's `bt` exactly.
+  - An incremental mode (`since`) gives the identical numbers in 1.7 s instead of 40 s.
+- `surprise`: day / ser / d2 dominance surprises.
+
+`v7/prior.py`:
+- Kalman settings come from a validation grid (`results/v7_kgrid.log`): q_t 0.5 (fast team ratings), q_l 1e-4, v 1 / 1, λ 0.5. Faster team noise kept helping up to 0.5.
+- The arm is chosen on validation (fit < 2025-04, score 2025-04..06); then every arm is scored on test once.
+
+| Arm (test 2025-07..2026-10-13, 10,875 games) | LL − union | cross-league (1,673) | international (310) |
+|---|---|---|---|
+| bt → bt7 | −0.0008 [−0.0016, +0.0000] | −0.0023 | +0.0031 |
+| + Kalman | −0.0005 | −0.0030 | −0.0017 |
+| **bt7 + Kalman (v7, the validation choice)** | **−0.0010 [−0.0022, +0.0001]** | −0.0039 [−0.0099, +0.0024] | +0.0036 (ns) |
+| bt7 + Kalman, win/loss-only updates | −0.0009 | −0.0033 | |
+| bt7 + Kalman + day_dom | −0.0010 | −0.0040 | |
+
+**v7/build.py**: v6's recipe on the new prior.
+- Blend on the selection months: w0 −0.10 (0.19), **w1 +0.92 (0.68)**; v6 had 0.52.
+- Persistence: dropped again by CV.
+- In-game, v7 − v6:
+  - test −0.0003 [−0.0009, +0.0004]
+  - eval months −0.0004
+  - cross-league −0.0009
+  - live period 09-17..10-11 (527 games) −0.0022 [−0.0068, +0.0029]
+- The prior gain fades in-game, as with v6.
+
+**Historical backtest** (`v7/backtest_v7.py`; v6's protocol, gross pp):
+
+| Strategy | L=0 | L=30 | DSR (L=0 / L=30) |
+|---|---|---|---|
+| v7 gate | +10.7 [1.5, 20.0] (θ .30) | +8.7 | 0.72 / 0.51 |
+| v6 gate | +12.7 | +8.4 | 0.81 / 0.49 |
+| v7m gate | +14.6 [3.4, 26.0] | +11.0 | 0.84 / 0.66 |
+| v6m gate | +15.2 | +12.2 | 0.85 / 0.72 |
+
+- Eval-month frame LL: v7 0.4904 vs v6 0.4905; v7m 0.4877 vs v6m 0.4874.
+
+**Captured books** (79 games 10-01..10-11, L 22 s):
+- Per-game LL vs v5: v7 −0.0084, v6 −0.0064, v7m −0.0161, v6m −0.0154. The decision mid is still better (v7m − mid +0.028).
+- Gates: v7m gate_guard +6.8 pp (v6m +2.8), v7 gate30 −14.9 (v6 −16.3). All CIs span 0.
+
+**Tracker replay** (155 games since 09-30, quoted ticks, logged else backfilled, team guard ≥ 20):
+- Per-game tick LL v7 − v6: −0.0017 [−0.0056, +0.0024]; v7m − v6m −0.0006.
+- Worlds (8 games): v7 0.560 vs v6 0.565, mid 0.622.
+- Dashboard strategy replay: v7_gate_guard −$653 (43 trades) vs v6 −$615; v7m_gate +$145 (26) vs v6m +$181.
+
+**MVK–FUR, P(MVK):**
+- The unblended v7 prior moved fast: g1 .46 → g2 .515 → g3 .638 (the union prior was .41 / .43 / .545).
+- The refit blend (w1 0.92) pulls each game to the market: v7 .373 / .399 / .472.
+- So with this blend, v7's faster series update barely reaches the blended prior on cross-league games.
+- The untested next step is change 1: a lower market weight in games 2+ (0.26 vs 0.61 historically), refit on held-out months.
+
+**Reading.**
+- v7's prior is the best so far, but the gain is small and not significant (−0.0010; cross-league −0.0039).
+- Dominance information helps most as a soft result in the rating update, not as a separate same-day term.
+- Forecasts and trading are indistinguishable from v6 in every backtest.
+
+**Live** (lollive README "v7"):
+- `src/v7live.py` (V7 subclasses V6, own spawned pool, ~2.5 min per batch). Strategies `v7_gate_guard` (θ .30 + guard) and `v7m_gate` (θ .25 + guard). Ticks `q_v7` / `q_v7m`; games `v7_prior_u` / `v7_prior`.
+- `v7/build_live_v7.py check`: the tracker reproduces `prior_v7_m` on all 202 October games (max diff 0.0).
+- Two bugs were found by that check and fixed:
+  - the study fit included the pre-BURN burn-in games;
+  - the g_area seed lacked them.
+- `src/backfill_v7.py` fills every earlier tick. The Models / Worlds / Backtest tabs read the backfill.
+- Trader restarted 2026-10-16 06:25 UTC.
+
+Rerun: `python draftseries/surprise.py build && python v7/prior.py && python v7/build.py && python v7/backtest_v7.py && python v7/book_sim_v7.py && python v7/build_live_v7.py check` (from `esports/src`).
+
+## v8 candidate: time-varying coefficients, input decay, Baron / Elder buffs (2026-10-16, `src/v8/`, results `results/v8_*.log`, `results/backtest_v8.*`)
+
+User request:
+1. Coefficients should drift with patches (e.g. top-lane ratings count more on a top-buffed patch). Try weighted least squares / EWMA weighting and check.
+2. A Baron / Elder holder's win rate should be elevated while the buff lasts and drop back when it ends. Measure how much, tracking who holds it.
+3. Write a full specification of v7: `esports/V7_MODEL.md` (every equation, input, source, loss, fit).
+
+Protocol: each choice (h, half-life, arm) is made on the selection months 2025-07..2026-01 or the validation slice. The eval months 2026-02.. are scored once.
+
+### 1. Time-weighted refits and input decay
+
+**Pre-game logistic** (`v8/decay_prior.py`, `results/v8_decay_prior.log`):
+- Sample weights 0.5^(age/h), monthly or weekly refit, plus a current-patch boost.
+- Reproduction of prior_v7_m: 6e-13.
+
+| Arm (eval months, 7,377 games) | LL − v7 |
+|---|---|
+| h 30 d, monthly | +0.0125 [+0.0085, +0.0168] |
+| h 90 d, monthly | +0.0038 |
+| h 180 d, monthly | +0.0012 |
+| h 365 d, monthly | +0.0003 |
+| h 730 d, monthly | +0.0000 |
+| equal weight, **weekly** | **−0.0004 [−0.0007, −0.0001]** |
+| h 365 d, weekly (selection choice) | −0.0004 [−0.0012, +0.0004] |
+| patch boost ×2 / ×4, weekly | −0.0005 / −0.0006 (ns) |
+
+- Every decay is worse, and more so the shorter it is. The only gain is refit cadence (weekly vs monthly), not weighting.
+- **Do role coefficients move across patches?** 23 patches with ≥ 150 test games, offset = the v7 prior, one slope per role per patch for role_elo / lane_elo / kal / lane.
+  - Cochran's Q: 2 of 20 at p < 0.05 (kal top 0.036, kal mid 0.040); Holm-adjusted minimum 0.71.
+  - Excess spread τ ≤ 0.13 per SD; lag-1 autocorrelation across patches −0.15…+0.45 (no consistent sign).
+  - The per-patch spread of the slopes is what sampling noise predicts. No patch-specific role tilt is detectable, let alone predictable from the previous patch.
+
+**In-game logistic** (`v8/decay_ingame.py`, `results/v8_decay_ingame.log`). v7's in-game model is frozen at 2025-06; here it is refit monthly.
+
+| Arm | selection | eval months | 2026-05..09 | live period (527) |
+|---|---|---|---|---|
+| expanding, equal weight | −0.0008 | **−0.0006 [−0.0012, +0.0000]** | −0.0009 [−0.0017, −0.0000] | −0.0018 (ns) |
+| h 90 d (selection choice) | −0.0022 | **+0.0016 [+0.0003, +0.0028]** | +0.0006 | −0.0001 |
+| h 180 d | −0.0021 | +0.0002 | −0.0004 | −0.0015 |
+| h 365 d | −0.0015 | −0.0003 | −0.0008 | −0.0019 |
+| h 730 d | −0.0012 | −0.0005 | −0.0009 | −0.0020 |
+
+- The short half-life wins in the selection months and loses out of sample (the v6 drift trap again).
+- The expanding refit's gain is late-game (30+ min −0.005 per frame), from more late-game data, not recency.
+- Per-patch per-role gold slopes on top of q_v7 (frames 10–25 min): Q p 0.09–0.97, τ ≈ 0. The mean slopes are slightly negative (top −0.06, mid −0.08, sup −0.11 logit per 1k), the known 2026 gold drift.
+
+**Input half-lives** (`v8/decay_inputs.py`, `v8/decay_inputs_champ.py`). Each family's EWMA half-life swept with the others at 120 d; the 120-d rebuild reproduces exactly.
+
+| Family | Half-lives tried | Selection choice | Eval vs 120 d |
+|---|---|---|---|
+| champion tables (champ_all, champ_patch, lane_mu, pc_*, side_patch, conv) | 7–480 d | **30 d** | **−0.0005 [−0.0009, −0.0001]** (7 d −0.0008, 15 d −0.0008: the eval months like it even faster) |
+| player lane / damage ratings | 30–480 d | 120 d | 0 |
+| Bradley–Terry weights | 30–480 d | 240 d | +0.0002 (ns) |
+
+- The patch-cycle intuition holds where it should: champion strength goes stale within weeks.
+- Player and team strength does not; fast decay there only adds noise.
+
+### 2. Baron / Elder buffs (`v8/buffs.py`, `v8/buff_eval.py`, `v8/buff_shape.py`)
+
+**Features** (per 60 s frame; the kill is dated at the midpoint of the frame gap, ±30 s):
+- `bar_t` / `eld_t`: buff time left / 180 s (150 s for Elder), blue − red.
+- `bar_n` / `eld_n`: the same × the share of holders still alive. Holders = alive at the first frame showing the kill with no death since the previous frame; each holder drops out at their next death.
+- `bar_on`, `bar_post` (the 180 s after expiry), and the age since each side's latest kill.
+- Counts: 28,947 Barons (median 5 holders) and 2,272 Elders.
+
+**Base model already misses** (`buff_shape`; offset logit on the refit `sel window`, holder-signed bins by seconds since the kill):
+
+| s since kill | Baron train | Baron test | Elder train | Elder test |
+|---|---|---|---|---|
+| 0–60 | +0.06 (0.04) | +0.08 (0.04) | +0.19 (0.13) | +0.22 (0.14) |
+| 60–120 | **+0.16 (0.04)** | **+0.12 (0.04)** | +0.26 (0.14) | +0.15 (0.15) |
+| 120–180 | +0.02 | −0.02 | −0.11 | −0.09 |
+| 180–300 | −0.02 | −0.07 | −0.19…−0.28 | −0.11 |
+| 300–600 | −0.04…−0.11 | −0.08…−0.30 | −0.22…−0.29 | −0.15…−0.52 |
+
+- Elevated while the buff runs, gone at 2–3 min, slightly *over*-credited afterwards. The cumulative `barons` / `elders` counts spread the transient value over the rest of the game.
+- **Causal event study** (frames dropped only once another kill is known): q_base residual +0.11 / +0.15 / 0.00 / −0.07 logit in the 0–60 / 60–120 / 120–180 / 180–240 s bins. With `bar_n` / `eld_n`: −0.06 / +0.07 / +0.04 / −0.05.
+- Trap: the bins *before* a kill show +1.2 logit (Elder +1.9). That conditions on a future event: the team about to take Baron is winning. The first event study also dropped events with later kills (future conditioning) and inflated every bin; it was replaced.
+
+**How much the buff is worth** (the buff terms inside the in-game logistic, train fit; logit for the holder, 20–40 min):
+
+| Term | Value |
+|---|---|
+| Baron, full buff (5 holders, 180 s left) | **+0.35…+0.50**, falling linearly to 0 at expiry |
+| Elder, full buff | **+0.9…+1.0**, to 0 at 150 s |
+| Post-Baron 0–3 min | +0.13 → +0.04 |
+| Post-Elder 0–3 min | ≈ 0 |
+| Cumulative `barons` once the buff is modelled | +0.02 → −0.18 (the Baron's lasting value is the gold/towers it buys, already in the state) |
+| Cumulative `elders` once the buff is modelled | +0.1…+0.2 (from +0.5) |
+
+In probability:
+- Full Baron: holder 0.50 → 0.60, 0.70 → 0.78, 0.85 → 0.89.
+- Full Elder: 0.50 → 0.73, 0.70 → 0.86, 0.85 → 0.94.
+
+**Who holds it:**
+- Buffed holders × time left (`bar_n`) fits the same as time left alone (test −0.00015 vs −0.00014).
+- Baron-live residual by the holder share still alive: full +0.10 (0.05), part +0.07 (0.05); not separable.
+- Holder count at the kill (2–5): residual ≈ 0 in every group.
+
+**Test split vs the refit base:**
+- +time left −0.00014 [−0.00020, −0.00007]; +holders × time left −0.00015 [−0.00022, −0.00009]; +buff on (the validation choice; validation differences ≤ 0.00007) −0.00008 [−0.00016, −0.00001].
+- On buff / post-buff frames −0.0008; on 30+ min frames −0.0012.
+
+**Uncertainty** (test, by window):
+- The 60 s logit change has SD 1.35 while a buff is live, vs 0.86 on non-buff frames ≥ 20 min. So the forecast moves ~1.6× faster during a buff.
+- Calibration slope: buff live 0.95 (0.02), post-buff 0–3 min **0.89 (0.02)**, no buff 0.94. The model is most overconfident just after a buff expires.
+- The buff terms raise the post-buff slope only to 0.90–0.91.
+
+### 3. v8 candidate = the survivors combined (`v8/build.py`, `results/v8_build.log`)
+
+Champion tables 30 d + weekly prior refit + the blend refit (w0 −0.09, w1 +0.87) + monthly expanding in-game refit + `bar_on` / `eld_on`.
+
+| Per-game LL − q_v7 | test | eval months | cross-league | live period 09-17..10-11 |
+|---|---|---|---|---|
+| prior only (frozen in-game) | −0.0005 [−0.0007, −0.0002] | −0.0005 | −0.0003 | −0.0006 |
+| + monthly in-game refit | −0.0012 | −0.0012 | −0.0010 | −0.0026 |
+| **+ buff on (v8)** | **−0.0013 [−0.0018, −0.0008]** | **−0.0013 [−0.0021, −0.0006]** | −0.0013 | **−0.0027 [−0.0057, +0.0000]** |
+| + holders × time left instead (v8_n) | −0.0014 | −0.0014 | −0.0012 | −0.0028 |
+
+- The unblended prior: −0.0008 [−0.0012, −0.0004] on test (weekly −0.0004, champ 30 d −0.0004; additive).
+- By phase (eval, per frame): −0.0011 / −0.0004 / −0.0014 / −0.0067 at 0–10 / 10–20 / 20–30 / 30+ min.
+
+**Historical backtest** (`v8/backtest_v8.py`, gross pp):
+
+| Signal | gate L=0 | gate L=30 |
+|---|---|---|
+| v8 | +11.2 [1.7, 21.4] | +9.2 |
+| v7 | +10.7 | +8.7 |
+| v8m | +13.5 | +13.6 |
+| v7m | +14.6 | +11.0 |
+
+- Every pair is within noise; the clip strategies are net ≤ 0.
+- Archive eval frame LL: v8 0.4896 vs v7 0.4904, but v8m 0.4883 vs v7m 0.4877.
+
+**Reading.**
+- (1) Recency weighting of the regressions does not help: decay hurts, and patch tilts in role coefficients are not detectable. What helps is fresher fits (weekly prior, monthly in-game) and faster-decaying champion tables.
+- (2) The buff hypothesis is right in shape: about +0.4 logit (Baron) and +1.0 (Elder) at the kill, decaying to zero at expiry. But v7 already holds most of it in the cumulative counts, so it is worth only 0.00015 per game (0.0008 on buff frames).
+- v8 is the largest single-step forecasting gain since v5 (−0.0013 vs v7's −0.0003 over v6), but trading stays indistinguishable.
+
+**Not done:**
+- v8 is not in the live tracker (the user's call). It would need v8feat parity checks (buff features from the dense feed: holder deaths are exact there), a weekly prior refit and a monthly in-game refit in v7live.
+- The v8m weights for the live books (book_sim) are not refit.
+
+Rerun (from `esports/src`): `python v8/buffs.py && python v8/decay_prior.py && python v8/decay_ingame.py && python v8/decay_inputs.py && python v8/decay_inputs_champ.py && python v8/buff_eval.py && python v8/buff_shape.py && python v8/build.py && python v8/backtest_v8.py`
+(buff_eval caches its fits in `data/v8/buff_fits.pkl`; the first run's validation table is in `results/v8_buff_eval_run1.log`. Run heavy steps with `OPENBLAS_NUM_THREADS` limited: unthreaded pools pushed the load to 570.)

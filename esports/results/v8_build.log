@@ -1,0 +1,46 @@
+extended-table champion columns at 120 d vs prior_feats: 22722 of 22722 games, max |diff| 0.00e+00
+
+== pre-game, log loss minus v7 (unblended priors) ==
+  weekly refit, 120 d            test  (10875) -0.00038 [-0.00060, -0.00015]
+  weekly refit, 120 d            eval  ( 7377) -0.00040 [-0.00066, -0.00015]
+  weekly refit, 120 d            cross ( 1673) -0.00050 [-0.00115, +0.00012]
+  monthly, champ 30 d            test  (10875) -0.00044 [-0.00082, -0.00008]
+  monthly, champ 30 d            eval  ( 7377) -0.00049 [-0.00086, -0.00010]
+  monthly, champ 30 d            cross ( 1673) -0.00004 [-0.00096, +0.00090]
+  v8 prior: weekly + champ 30 d  test  (10875) -0.00079 [-0.00123, -0.00038]
+  v8 prior: weekly + champ 30 d  eval  ( 7377) -0.00086 [-0.00132, -0.00039]
+  v8 prior: weekly + champ 30 d  cross ( 1673) -0.00052 [-0.00167, +0.00059]
+pre-game blend on 277 selection games (53 cross-league): w0 -0.085 (0.191), w1 (cross) +0.869 (0.666)
+live period: 527 games; buff features for 100.0% of frames; z8 for 100.0%
+
+== in-game, per-game log loss minus q_v7 (stages cumulative) ==
+  [all test] 10582 games: q_v7 0.4212
+    q_v8_pre   0.4207  minus q_v7 -0.0005 [-0.0007, -0.0002]
+    q_v8_refit 0.4200  minus q_v7 -0.0012 [-0.0017, -0.0007]
+    q_v8       0.4199  minus q_v7 -0.0013 [-0.0018, -0.0008]
+    q_v8_n     0.4198  minus q_v7 -0.0014 [-0.0019, -0.0009]
+  [selection months] 3497 games: q_v7 0.4251
+    q_v8_pre   0.4247  minus q_v7 -0.0004 [-0.0008, +0.0001]
+    q_v8_refit 0.4239  minus q_v7 -0.0012 [-0.0018, -0.0005]
+    q_v8       0.4238  minus q_v7 -0.0013 [-0.0020, -0.0007]
+    q_v8_n     0.4237  minus q_v7 -0.0014 [-0.0020, -0.0007]
+  [eval months 2026-02+] 7085 games: q_v7 0.4193
+    q_v8_pre   0.4188  minus q_v7 -0.0005 [-0.0008, -0.0003]
+    q_v8_refit 0.4181  minus q_v7 -0.0012 [-0.0018, -0.0005]
+    q_v8       0.4180  minus q_v7 -0.0013 [-0.0021, -0.0006]
+    q_v8_n     0.4179  minus q_v7 -0.0014 [-0.0021, -0.0007]
+  [cross-league] 1453 games: q_v7 0.4040
+    q_v8_pre   0.4037  minus q_v7 -0.0003 [-0.0009, +0.0003]
+    q_v8_refit 0.4029  minus q_v7 -0.0010 [-0.0024, +0.0003]
+    q_v8       0.4027  minus q_v7 -0.0013 [-0.0026, +0.0001]
+    q_v8_n     0.4028  minus q_v7 -0.0012 [-0.0025, +0.0001]
+  [live period 09-17..10-11] 527 games: q_v7 0.4079
+    q_v8_pre   0.4074  minus q_v7 -0.0006 [-0.0015, +0.0004]
+    q_v8_refit 0.4054  minus q_v7 -0.0026 [-0.0056, +0.0002]
+    q_v8       0.4053  minus q_v7 -0.0027 [-0.0057, +0.0000]
+    q_v8_n     0.4051  minus q_v7 -0.0028 [-0.0058, +0.0001]
+  by phase, eval months, per-frame LL minus q_v7:
+    q_v8_pre   0-10 -0.00092  10-20 -0.00054  20-30 -0.00028  30+ -0.00006
+    q_v8_refit 0-10 -0.00115  10-20 -0.00035  20-30 -0.00131  30+ -0.00548
+    q_v8       0-10 -0.00111  10-20 -0.00037  20-30 -0.00135  30+ -0.00665
+    q_v8_n     0-10 -0.00121  10-20 -0.00047  20-30 -0.00135  30+ -0.00649

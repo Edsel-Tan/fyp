@@ -1,0 +1,48 @@
+/home/aimer/fyp/esports/src/v8/decay_inputs.py:44: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  x = b[[f'gd15_{k}' for k in range(5)]].sum(1).to_numpy()[:, None] / 1000
+/home/aimer/fyp/esports/src/v8/decay_inputs.py:44: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  x = b[[f'gd15_{k}' for k in range(5)]].sum(1).to_numpy()[:, None] / 1000
+/home/aimer/fyp/esports/src/v8/decay_inputs.py:44: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  x = b[[f'gd15_{k}' for k in range(5)]].sum(1).to_numpy()[:, None] / 1000
+/home/aimer/fyp/esports/src/v8/decay_inputs.py:44: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  x = b[[f'gd15_{k}' for k in range(5)]].sum(1).to_numpy()[:, None] / 1000
+/home/aimer/fyp/esports/src/v8/decay_inputs.py:44: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  x = b[[f'gd15_{k}' for k in range(5)]].sum(1).to_numpy()[:, None] / 1000
+19516 games; rebuild check at 120 d: champ max |diff| 0.00e+00
+  player max |diff| 4.19e-04
+  bt7 max |diff| 3.55e-15
+  scored champ 30
+  scored champ 60
+  scored champ 120
+  scored champ 240
+  scored champ 480
+  scored player 30
+  scored player 60
+  scored player 120
+  scored player 240
+  scored player 480
+  scored bt 30
+  scored bt 60
+  scored bt 120
+  scored bt 240
+  scored bt 480
+
+test games 10580 (selection 3498, eval 7082); log loss minus the 120-day rebuild (match-clustered CI)
+  champ  HL  30 d: sel 0.60618 (-0.00033)   eval 0.59212 -0.00052 [-0.00093, -0.00011]
+  champ  HL  60 d: sel 0.60631 (-0.00020)   eval 0.59245 -0.00020 [-0.00044, +0.00005]
+  champ  HL 120 d: sel 0.60651 (+0.00000)   eval 0.59265 +0.00000 [+0.00000, +0.00000]
+  champ  HL 240 d: sel 0.60666 (+0.00015)   eval 0.59270 +0.00005 [-0.00021, +0.00033]
+  champ  HL 480 d: sel 0.60673 (+0.00021)   eval 0.59264 -0.00001 [-0.00045, +0.00043]
+  champ: selection-month choice HL 30 d
+  player HL  30 d: sel 0.60705 (+0.00054)   eval 0.59314 +0.00049 [-0.00035, +0.00132]
+  player HL  60 d: sel 0.60659 (+0.00007)   eval 0.59280 +0.00016 [-0.00033, +0.00064]
+  player HL 120 d: sel 0.60651 (+0.00000)   eval 0.59265 +0.00000 [+0.00000, +0.00000]
+  player HL 240 d: sel 0.60680 (+0.00028)   eval 0.59248 -0.00017 [-0.00057, +0.00024]
+  player HL 480 d: sel 0.60707 (+0.00056)   eval 0.59241 -0.00024 [-0.00083, +0.00037]
+  player: selection-month choice HL 120 d
+  bt     HL  30 d: sel 0.60682 (+0.00031)   eval 0.59262 -0.00002 [-0.00094, +0.00091]
+  bt     HL  60 d: sel 0.60653 (+0.00001)   eval 0.59240 -0.00025 [-0.00079, +0.00029]
+  bt     HL 120 d: sel 0.60651 (+0.00000)   eval 0.59265 +0.00000 [+0.00000, +0.00000]
+  bt     HL 240 d: sel 0.60651 (-0.00001)   eval 0.59279 +0.00015 [-0.00022, +0.00048]
+  bt     HL 480 d: sel 0.60658 (+0.00006)   eval 0.59285 +0.00020 [-0.00031, +0.00073]
+  bt: selection-month choice HL 240 d

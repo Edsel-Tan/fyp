@@ -1,0 +1,82 @@
+frames: train 290716 (validation 96789), test 349422 (10582 games)
+bar_t == v4 bar_buf: max |diff| 1.00e+00; eld_t == eld_buf: 1.00e+00
+/home/aimer/fyp/.venv/lib/python3.12/site-packages/statsmodels/genmod/generalized_linear_model.py:1486: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  wls_results = wls_model.fit(method=wls_method2)
+
+== 2. buff terms in the in-game logistic ==
+  validation (fit on train minus the last 91 days), per-game log loss:
+    base (v5 sel window)                     0.41992  (+0.00000)
+    + time left (bar_t, eld_t)               0.41995  (+0.00003)
+    + holders x time left (bar_n, eld_n)     0.41990  (-0.00002)
+    + buff on (bar_on, eld_on)               0.41989  (-0.00003)
+    + holders x time left + post-buff        0.41993  (+0.00000)
+    + time left + holders x time left        0.41999  (+0.00007)
+  validation choice: + buff on (bar_on, eld_on)
+  base arm with z7 == q_v7: max |diff| 6.87e-04
+  test split, log loss minus q_v7 (match-clustered CI): per game | per frame on buff / post-buff frames | per frame >= 30 min
+    base (v5 sel window)                     0.42121 -0.00000 [-0.00000, +0.00000] | buff (64218 fr) -0.00000 [-0.00001, -0.00000] | 30+ -0.00000 [-0.00001, -0.00000]
+    + time left (bar_t, eld_t)               0.42108 -0.00014 [-0.00020, -0.00007] | buff (64218 fr) -0.00082 [-0.00114, -0.00051] | 30+ -0.00123 [-0.00173, -0.00073]
+    + holders x time left (bar_n, eld_n)     0.42106 -0.00015 [-0.00022, -0.00009] | buff (64218 fr) -0.00082 [-0.00121, -0.00041] | 30+ -0.00121 [-0.00181, -0.00062]
+    + buff on (bar_on, eld_on)               0.42113 -0.00008 [-0.00016, -0.00001] | buff (64218 fr) -0.00081 [-0.00119, -0.00042] | 30+ -0.00122 [-0.00181, -0.00066]
+    + holders x time left + post-buff        0.42106 -0.00015 [-0.00023, -0.00007] | buff (64218 fr) -0.00085 [-0.00127, -0.00043] | 30+ -0.00120 [-0.00183, -0.00055]
+    + time left + holders x time left        0.42107 -0.00014 [-0.00022, -0.00006] | buff (64218 fr) -0.00077 [-0.00118, -0.00039] | 30+ -0.00094 [-0.00156, -0.00027]
+
+  partial effects (logit, holder minus no buff, per unit of the term) at 20 / 25 / 30 / 35 / 40 min:
+    + time left (bar_t, eld_t)                bar_t: +0.43/+0.37/+0.35/+0.35/+0.39  eld_t: +1.02/+1.01/+0.98/+0.93/+0.87
+    + holders x time left (bar_n, eld_n)      bar_n: +0.40/+0.37/+0.37/+0.42/+0.50  eld_n: +0.89/+0.94/+0.97/+0.99/+0.99
+    + buff on (bar_on, eld_on)                bar_on: +0.23/+0.21/+0.20/+0.21/+0.23  eld_on: +0.34/+0.35/+0.36/+0.38/+0.40
+    + holders x time left + post-buff         bar_n: +0.40/+0.37/+0.38/+0.44/+0.55  eld_n: +0.72/+0.80/+0.87/+0.92/+0.96  bar_post: +0.13/+0.08/+0.05/+0.04/+0.04  eld_post: -0.04/-0.02/-0.00/+0.02/+0.04
+    + time left + holders x time left         bar_t: +0.76/+0.51/+0.24/-0.04/-0.34  eld_t: +2.18/+1.76/+1.25/+0.64/-0.06  bar_n: -0.34/-0.17/+0.09/+0.44/+0.87  eld_n: -1.58/-1.05/-0.44/+0.25/+1.02
+    base: cumulative counts  barons: +0.11/+0.02/-0.04/-0.09/-0.13  elders: +0.54/+0.51/+0.48/+0.46/+0.44
+
+== 1. event study around kills (test split, holder view): outcome vs q_v7 and the validation-chosen arm ==
+
+  Baron: 9162 clean events in test games (no other Baron / Elder kill from -4 to +10 min)
+  seconds since kill frames win (holder)      q_v7 q[+ buff on (bar_on, eld_on)]   logit corr q_v7 (se) logit corr q[+ buff on (bar_on, eld_on)] (se)
+          -240..-180   9316        0.908     0.764     0.763   +1.764 (0.046)      +1.763 (0.046)     
+          -180..-120   9318        0.908     0.773     0.772   +1.696 (0.045)      +1.695 (0.045)     
+           -120..-60   9344        0.908     0.779     0.778   +1.671 (0.045)      +1.672 (0.045)     
+             -60..+0   9360        0.908     0.828     0.828   +1.153 (0.045)      +1.149 (0.045)     
+             +0..+60   9786        0.909     0.879     0.884   +0.526 (0.044)      +0.450 (0.044)     
+           +60..+120   9713        0.914     0.887     0.892   +0.557 (0.047)      +0.445 (0.046)     
+          +120..+180   7724        0.898     0.882     0.887   +0.344 (0.051)      +0.228 (0.051)     
+          +180..+240   5259        0.858     0.846     0.842   +0.205 (0.062)      +0.267 (0.061)     
+          +240..+300   3842        0.833     0.821     0.817   +0.181 (0.062)      +0.233 (0.062)     
+          +300..+360   2883        0.809     0.797     0.794   +0.162 (0.070)      +0.212 (0.069)     
+          +360..+480   3489        0.765     0.762     0.759   +0.041 (0.113)      +0.089 (0.113)     
+          +480..+600   1150        0.661     0.698     0.693   -0.354 (0.129)      -0.301 (0.129)     
+
+  Elder: 282 clean events in test games (no other Baron / Elder kill from -4 to +10 min)
+  seconds since kill frames win (holder)      q_v7 q[+ buff on (bar_on, eld_on)]   logit corr q_v7 (se) logit corr q[+ buff on (bar_on, eld_on)] (se)
+Traceback (most recent call last):
+  File "/home/aimer/fyp/esports/src/v8/buff_eval.py", line 224, in <module>
+    main()
+  File "/home/aimer/fyp/esports/src/v8/buff_eval.py", line 210, in main
+    ES = event_study(ft, ev, qc)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aimer/fyp/esports/src/v8/buff_eval.py", line 94, in event_study
+    fits[c] = sm.GLM(R.y.to_numpy(), D_.to_numpy(), family=sm.families.Binomial(), offset=lg(R[c].to_numpy())).fit(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aimer/fyp/.venv/lib/python3.12/site-packages/statsmodels/genmod/generalized_linear_model.py", line 1269, in fit
+    return self._fit_irls(
+           ^^^^^^^^^^^^^^^
+  File "/home/aimer/fyp/.venv/lib/python3.12/site-packages/statsmodels/genmod/generalized_linear_model.py", line 1488, in _fit_irls
+    glm_results = GLMResults(
+                  ^^^^^^^^^^^
+  File "/home/aimer/fyp/.venv/lib/python3.12/site-packages/statsmodels/genmod/generalized_linear_model.py", line 1905, in __init__
+    get_robustcov_results(
+  File "/home/aimer/fyp/.venv/lib/python3.12/site-packages/statsmodels/base/covtype.py", line 360, in get_robustcov_results
+    res.cov_params_default = sw.cov_cluster(
+                             ^^^^^^^^^^^^^^^
+  File "/home/aimer/fyp/.venv/lib/python3.12/site-packages/statsmodels/stats/sandwich_covariance.py", line 762, in cov_cluster
+    xu, hessian_inv = _get_sandwich_arrays(results, cov_type="clu")
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aimer/fyp/.venv/lib/python3.12/site-packages/statsmodels/stats/sandwich_covariance.py", line 347, in _get_sandwich_arrays
+    hessian_inv = np.linalg.inv(results.model.hessian(results.params))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aimer/fyp/.venv/lib/python3.12/site-packages/numpy/linalg/_linalg.py", line 659, in inv
+    ainv = _umath_linalg.inv(a, signature=signature)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aimer/fyp/.venv/lib/python3.12/site-packages/numpy/linalg/_linalg.py", line 144, in _raise_linalgerror_singular
+    raise LinAlgError("Singular matrix")
+numpy.linalg.LinAlgError: Singular matrix

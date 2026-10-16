@@ -1,0 +1,7 @@
+v2: 33 cols, 5 draft
+rd: 19 cols, 2 draft
+un: 52 cols, 7 draft
+check un_full vs v6 prior_union_m on 10875 games: max |diff| 6.66e-16
+v2: full 0.6025 pre 0.6045  full - pre -0.0020 [-0.0034, -0.0007]
+rd: full 0.6098 pre 0.6124  full - pre -0.0026 [-0.0040, -0.0013]
+un: full 0.5980 pre 0.6005  full - pre -0.0025 [-0.0039, -0.0010]

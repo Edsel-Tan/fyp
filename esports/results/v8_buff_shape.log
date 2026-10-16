@@ -1,0 +1,27 @@
+/home/aimer/fyp/esports/src/v8/buff_shape.py:69: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  on = (X[te].abs().sum(1) > 0).to_numpy()
+frames: train 290716, test 349422; nonzero dummy frames: bar_0_60 25620, bar_60_120 25174, bar_120_180 21317, bar_180_240 16669, bar_240_300 14086, bar_300_420 21773, bar_420_600 12558, eld_0_60 2082, eld_60_120 1542, eld_120_180 1080, eld_180_240 696, eld_240_300 564, eld_300_420 823, eld_420_600 363
+
+logit the base model misses for the holder, by seconds since the kill (cluster se):
+  term                        train             test   P(holder) at base 0.50 / 0.70 / 0.85 (train coef)
+  bar_0_60         +0.056 (0.041)   +0.084 (0.037)   0.514 / 0.712 / 0.857
+  bar_60_120       +0.159 (0.042)   +0.115 (0.038)   0.540 / 0.732 / 0.869
+  bar_120_180      +0.024 (0.043)   -0.019 (0.039)   0.506 / 0.705 / 0.853
+  bar_180_240      -0.020 (0.042)   -0.076 (0.039)   0.495 / 0.696 / 0.847
+  bar_240_300      -0.013 (0.042)   -0.064 (0.039)   0.497 / 0.697 / 0.848
+  bar_300_420      -0.044 (0.044)   -0.080 (0.045)   0.489 / 0.691 / 0.844
+  bar_420_600      -0.107 (0.070)   -0.300 (0.063)   0.473 / 0.677 / 0.836
+  eld_0_60         +0.185 (0.132)   +0.216 (0.142)   0.546 / 0.737 / 0.872
+  eld_60_120       +0.260 (0.143)   +0.151 (0.151)   0.565 / 0.752 / 0.880
+  eld_120_180      -0.110 (0.162)   -0.093 (0.180)   0.472 / 0.676 / 0.835
+  eld_180_240      -0.194 (0.166)   -0.108 (0.200)   0.452 / 0.658 / 0.824
+  eld_240_300      -0.279 (0.184)   -0.108 (0.206)   0.431 / 0.638 / 0.811
+  eld_300_420      -0.221 (0.203)   -0.151 (0.219)   0.445 / 0.652 / 0.820
+  eld_420_600      -0.292 (0.495)   -0.524 (0.376)   0.427 / 0.635 / 0.809
+
+test, train-fitted bins on top of the base: per game -0.00014 [-0.00017, -0.00010]; frames inside a window (73715) -0.00064 [-0.00087, -0.00043]
+
+Baron buff live (0-180 s), by the share of the holders still alive and buffed (train fit):
+  bar_live_full  frames  17218  +0.095 (0.050)
+  bar_live_part  frames  14101  +0.069 (0.050)
+  bar_live_none  frames    637  +0.080 (0.167)

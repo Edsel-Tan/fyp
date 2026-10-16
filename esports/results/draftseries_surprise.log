@@ -1,0 +1,91 @@
+dom stats for 19642 games
+aggregates for 19807 games
+games with a prior from 2024-10: 15866; pre-test (fit) 4991, test 10875
+dominance stats present: 99.0% of games
+  per-game: corr(lead, win) 0.75, corr(g_area, win) 0.77; winners led > 1k for 71% of minutes on average; comeback wins (winner state P < 0.2 at some point): 16.3%
+
+== series k>=2: 8667 games (1162 cross-league); offset = union prior
+  ser_win        coef +0.058 (t +2.5)  OOS LL +0.0014 [-0.0002, +0.0030]   cross coef +0.167 (t +2.8)
+  ser_g_area     coef +0.105 (t +3.3)  OOS LL -0.0003 [-0.0015, +0.0009]   cross coef +0.270 (t +3.5)
+  ser_lead       coef +0.056 (t +2.8)  OOS LL -0.0002 [-0.0012, +0.0009]   cross coef +0.154 (t +3.1)
+  ser_gd15       coef +0.015 (t +3.4)  OOS LL -0.0006 [-0.0016, +0.0003]   cross coef +0.030 (t +2.6)
+  ser_gmin       coef +0.007 (t +3.1)  OOS LL +0.0003 [-0.0011, +0.0016]   cross coef +0.019 (t +3.3)
+  ser_gmax       coef +0.010 (t +4.1)  OOS LL -0.0005 [-0.0018, +0.0010]   cross coef +0.023 (t +4.0)
+  ser_s_area     coef +0.171 (t +3.4)  OOS LL -0.0001 [-0.0014, +0.0012]   cross coef +0.426 (t +3.5)
+  ser_s_minw_b   coef +0.099 (t +3.3)  OOS LL +0.0006 [-0.0009, +0.0022]   cross coef +0.257 (t +3.4)
+  ser_win_adj    coef +0.090 (t +2.9)  OOS LL +0.0004 [-0.0009, +0.0017]   cross coef +0.236 (t +3.1)
+  ser_win_lead   coef +0.081 (t +2.5)  OOS LL +0.0015 [-0.0001, +0.0032]   cross coef +0.214 (t +2.6)
+  ser_win_dom    coef +0.084 (t +3.2)  OOS LL +0.0007 [-0.0009, +0.0023]   cross coef +0.218 (t +3.4)
+  ser_win + ser_lead           ser_win +0.029 (t +1.0), ser_lead +0.041 (t +1.6)  OOS LL +0.0014 [-0.0002, +0.0030]
+  ser_win + ser_s_area         ser_win +0.006 (t +0.2), ser_s_area +0.162 (t +2.3)  OOS LL +0.0012 [-0.0005, +0.0028]
+  ser_win + ser_s_minw_b       ser_win -0.041 (t -0.8), ser_s_minw_b +0.146 (t +2.3)  OOS LL +0.0011 [-0.0006, +0.0027]
+  ser_win_adj + ser_g_area     ser_win_adj +0.015 (t +0.3), ser_g_area +0.093 (t +1.6)  OOS LL +0.0003 [-0.0010, +0.0016]
+
+== same-day (any earlier game in 12 h): 8929 games (1231 cross-league); offset = union prior
+  day_win        coef +0.067 (t +2.9)  OOS LL +0.0010 [-0.0006, +0.0026]   cross coef +0.181 (t +3.0)
+  day_g_area     coef +0.113 (t +3.6)  OOS LL -0.0005 [-0.0017, +0.0007]   cross coef +0.296 (t +3.9)
+  day_lead       coef +0.062 (t +3.1)  OOS LL -0.0003 [-0.0014, +0.0007]   cross coef +0.171 (t +3.5)
+  day_gd15       coef +0.016 (t +3.6)  OOS LL -0.0007 [-0.0018, +0.0004]   cross coef +0.032 (t +2.9)
+  day_gmin       coef +0.008 (t +3.4)  OOS LL +0.0001 [-0.0014, +0.0016]   cross coef +0.021 (t +3.7)
+  day_gmax       coef +0.010 (t +4.5)  OOS LL -0.0008 [-0.0022, +0.0006]   cross coef +0.025 (t +4.4)
+  day_s_area     coef +0.185 (t +3.7)  OOS LL -0.0003 [-0.0016, +0.0010]   cross coef +0.466 (t +3.8)
+  day_s_minw_b   coef +0.108 (t +3.6)  OOS LL +0.0003 [-0.0012, +0.0018]   cross coef +0.277 (t +3.7)
+  day_win_adj    coef +0.099 (t +3.2)  OOS LL +0.0001 [-0.0012, +0.0015]   cross coef +0.257 (t +3.3)
+  day_win_lead   coef +0.092 (t +2.9)  OOS LL +0.0010 [-0.0006, +0.0027]   cross coef +0.236 (t +2.9)
+  day_win_dom    coef +0.093 (t +3.6)  OOS LL +0.0004 [-0.0012, +0.0020]   cross coef +0.237 (t +3.7)
+  day_win + day_lead           day_win +0.036 (t +1.2), day_lead +0.043 (t +1.7)  OOS LL +0.0010 [-0.0007, +0.0026]
+  day_win + day_s_area         day_win +0.014 (t +0.4), day_s_area +0.163 (t +2.3)  OOS LL +0.0007 [-0.0010, +0.0023]
+  day_win + day_s_minw_b       day_win -0.030 (t -0.6), day_s_minw_b +0.143 (t +2.2)  OOS LL +0.0007 [-0.0009, +0.0023]
+  day_win_adj + day_g_area     day_win_adj +0.022 (t +0.4), day_g_area +0.095 (t +1.7)  OOS LL +0.0000 [-0.0012, +0.0014]
+
+== all games: 15866 games (2175 cross-league); offset = union prior
+  d2_win         coef +0.076 (t +3.6)  OOS LL +0.0013 [+0.0001, +0.0025]   cross coef +0.149 (t +2.9)
+  d2_g_area      coef +0.110 (t +4.0)  OOS LL +0.0001 [-0.0009, +0.0010]   cross coef +0.228 (t +3.5)
+  d2_lead        coef +0.060 (t +3.4)  OOS LL +0.0002 [-0.0007, +0.0010]   cross coef +0.131 (t +3.1)
+  d2_gd15        coef +0.015 (t +3.6)  OOS LL -0.0003 [-0.0010, +0.0004]   cross coef +0.021 (t +2.2)
+  d2_gmin        coef +0.009 (t +4.2)  OOS LL +0.0004 [-0.0008, +0.0015]   cross coef +0.017 (t +3.5)
+  d2_gmax        coef +0.011 (t +5.2)  OOS LL -0.0001 [-0.0012, +0.0010]   cross coef +0.020 (t +4.1)
+  d2_s_area      coef +0.178 (t +4.0)  OOS LL +0.0002 [-0.0008, +0.0011]   cross coef +0.351 (t +3.3)
+  d2_s_minw_b    coef +0.115 (t +4.3)  OOS LL +0.0008 [-0.0005, +0.0020]   cross coef +0.226 (t +3.4)
+  d2_win_adj     coef +0.102 (t +3.7)  OOS LL +0.0007 [-0.0004, +0.0018]   cross coef +0.204 (t +3.0)
+  d2_win_lead    coef +0.104 (t +3.7)  OOS LL +0.0013 [+0.0001, +0.0026]   cross coef +0.195 (t +2.8)
+  d2_win_dom     coef +0.097 (t +4.2)  OOS LL +0.0008 [-0.0004, +0.0020]   cross coef +0.188 (t +3.4)
+  d7_win         coef +0.066 (t +4.2)  OOS LL +0.0003 [-0.0007, +0.0014]   cross coef +0.103 (t +2.6)
+  d7_g_area      coef +0.083 (t +3.9)  OOS LL -0.0003 [-0.0010, +0.0004]   cross coef +0.120 (t +2.4)
+  d7_lead        coef +0.045 (t +3.3)  OOS LL -0.0001 [-0.0008, +0.0005]   cross coef +0.070 (t +2.1)
+  d7_gd15        coef +0.010 (t +3.4)  OOS LL -0.0002 [-0.0009, +0.0005]   cross coef +0.006 (t +0.8)
+  d7_gmin        coef +0.007 (t +4.7)  OOS LL -0.0004 [-0.0013, +0.0005]   cross coef +0.012 (t +3.1)
+  d7_gmax        coef +0.009 (t +5.5)  OOS LL -0.0005 [-0.0016, +0.0006]   cross coef +0.013 (t +3.4)
+  d7_s_area      coef +0.144 (t +4.3)  OOS LL -0.0002 [-0.0011, +0.0006]   cross coef +0.186 (t +2.3)
+  d7_s_minw_b    coef +0.097 (t +4.8)  OOS LL -0.0001 [-0.0011, +0.0009]   cross coef +0.145 (t +2.9)
+  d7_win_adj     coef +0.085 (t +4.1)  OOS LL +0.0000 [-0.0008, +0.0009]   cross coef +0.135 (t +2.5)
+  d7_win_lead    coef +0.089 (t +4.2)  OOS LL +0.0002 [-0.0008, +0.0012]   cross coef +0.129 (t +2.3)
+  d7_win_dom     coef +0.081 (t +4.6)  OOS LL -0.0000 [-0.0010, +0.0010]   cross coef +0.116 (t +2.7)
+  day_win        coef +0.067 (t +2.9)  OOS LL +0.0007 [-0.0002, +0.0016]   cross coef +0.181 (t +3.0)
+  day_g_area     coef +0.113 (t +3.6)  OOS LL -0.0002 [-0.0009, +0.0005]   cross coef +0.296 (t +3.9)
+  day_lead       coef +0.061 (t +3.1)  OOS LL -0.0001 [-0.0008, +0.0005]   cross coef +0.172 (t +3.5)
+  day_gd15       coef +0.016 (t +3.6)  OOS LL -0.0004 [-0.0010, +0.0003]   cross coef +0.032 (t +2.9)
+  day_gmin       coef +0.008 (t +3.4)  OOS LL +0.0002 [-0.0007, +0.0010]   cross coef +0.021 (t +3.7)
+  day_gmax       coef +0.010 (t +4.5)  OOS LL -0.0004 [-0.0012, +0.0005]   cross coef +0.025 (t +4.4)
+  day_s_area     coef +0.184 (t +3.7)  OOS LL -0.0001 [-0.0009, +0.0007]   cross coef +0.466 (t +3.8)
+  day_s_minw_b   coef +0.108 (t +3.6)  OOS LL +0.0003 [-0.0006, +0.0012]   cross coef +0.277 (t +3.7)
+  day_win_adj    coef +0.099 (t +3.2)  OOS LL +0.0002 [-0.0005, +0.0009]   cross coef +0.258 (t +3.3)
+  day_win_lead   coef +0.091 (t +2.9)  OOS LL +0.0007 [-0.0002, +0.0017]   cross coef +0.236 (t +2.9)
+  day_win_dom    coef +0.093 (t +3.6)  OOS LL +0.0003 [-0.0006, +0.0013]   cross coef +0.237 (t +3.7)
+
+== surprise columns in the union logistic (monthly refit on games since 2024-11); test 10875 games, 1673 cross-league, 6246 with a same-day earlier game
+  union (same fit rows)              0.5982  all +0.0000 [+0.0000, +0.0000]  cross +0.0000 [+0.0000, +0.0000]  same-day +0.0000 [+0.0000, +0.0000]
+  +ser_s_area                        0.5980  all -0.0002 [-0.0004, +0.0000]  cross -0.0006 [-0.0012, -0.0001]  same-day -0.0002 [-0.0006, +0.0002]
+  +day_s_area                        0.5979  all -0.0002 [-0.0005, +0.0000]  cross -0.0010 [-0.0017, -0.0004]  same-day -0.0003 [-0.0007, +0.0001]
+  +d2_s_area                         0.5980  all -0.0002 [-0.0005, +0.0001]  cross -0.0009 [-0.0017, -0.0002]  same-day -0.0002 [-0.0007, +0.0002]
+  +day_g_area                        0.5980  all -0.0002 [-0.0005, +0.0000]  cross -0.0009 [-0.0015, -0.0003]  same-day -0.0003 [-0.0007, +0.0001]
+  +day_lead                          0.5981  all -0.0001 [-0.0003, +0.0001]  cross -0.0006 [-0.0010, -0.0001]  same-day -0.0001 [-0.0004, +0.0002]
+  +day_win                           0.5981  all -0.0001 [-0.0002, +0.0001]  cross -0.0006 [-0.0009, -0.0002]  same-day -0.0001 [-0.0004, +0.0001]
+  +day_win_dom                       0.5980  all -0.0002 [-0.0004, +0.0000]  cross -0.0011 [-0.0017, -0.0005]  same-day -0.0003 [-0.0007, +0.0000]
+  +day_s_area x cross                0.5978  all -0.0003 [-0.0007, +0.0000]  cross -0.0019 [-0.0041, +0.0001]  same-day -0.0005 [-0.0012, +0.0001]
+  +day_g_area x cross                0.5979  all -0.0003 [-0.0006, +0.0001]  cross -0.0012 [-0.0035, +0.0010]  same-day -0.0004 [-0.0010, +0.0003]
+  +d2_s_area x cross                 0.5980  all -0.0001 [-0.0005, +0.0002]  cross -0.0006 [-0.0025, +0.0011]  same-day -0.0001 [-0.0007, +0.0005]
+  +d2_g_area x cross                 0.5980  all -0.0001 [-0.0005, +0.0003]  cross -0.0002 [-0.0022, +0.0017]  same-day -0.0001 [-0.0007, +0.0005]
+  +day_win x cross                   0.5980  all -0.0001 [-0.0004, +0.0001]  cross -0.0010 [-0.0027, +0.0006]  same-day -0.0002 [-0.0007, +0.0002]
+  +day (win, s_area, lead) x cross   0.5981  all -0.0000 [-0.0005, +0.0004]  cross -0.0001 [-0.0026, +0.0024]  same-day +0.0000 [-0.0007, +0.0007]
+  +day+d7 s_area x cross             0.5978  all -0.0003 [-0.0008, +0.0002]  cross -0.0006 [-0.0037, +0.0024]  same-day -0.0004 [-0.0012, +0.0004]

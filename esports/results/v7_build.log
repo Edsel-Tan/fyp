@@ -1,0 +1,27 @@
+pre-game blend on 277 selection games (53 cross-league): w0 -0.078 (0.192), w1 (cross) +0.855 (0.655)
+persistence term on 277 selection games: CV frame LL 0.4465 vs 0.4450 without -> dropped; g0 -0.535 g1 +0.786
+== test split, per-game log loss (v7_x = v7 prior without the market blend) ==
+  [all test] 10582 games: q_v6 0.4215
+    q_v7_x     0.4210  minus q_v6 -0.0005 [-0.0012, +0.0003]
+    q_v7       0.4211  minus q_v6 -0.0004 [-0.0011, +0.0003]
+  [all test] 10582 games: q_v5 0.4216
+    q_v7_x     0.4210  minus q_v5 -0.0006 [-0.0014, +0.0002]
+    q_v7       0.4211  minus q_v5 -0.0005 [-0.0013, +0.0003]
+    q_v6       0.4215  minus q_v5 -0.0001 [-0.0004, +0.0001]
+  [eval months 2026-02+] 7085 games: q_v6 0.4197
+    q_v7_x     0.4189  minus q_v6 -0.0008 [-0.0017, +0.0002]
+    q_v7       0.4191  minus q_v6 -0.0006 [-0.0015, +0.0004]
+  [cross-league] 1453 games: q_v6 0.4049
+    q_v7_x     0.4037  minus q_v6 -0.0012 [-0.0054, +0.0033]
+    q_v7       0.4039  minus q_v6 -0.0010 [-0.0052, +0.0033]
+  [international] 310 games: q_v6 0.4180
+    q_v7_x     0.4175  minus q_v6 -0.0006 [-0.0134, +0.0118]
+    q_v7       0.4187  minus q_v6 +0.0007 [-0.0118, +0.0139]
+live period: 527 games, prior_v7 present 100.0%
+  [live period, all games] 527 games: q_v6 0.4101
+    q_v7_x     0.4095  minus q_v6 -0.0006 [-0.0056, +0.0043]
+    q_v7       0.4080  minus q_v6 -0.0022 [-0.0071, +0.0030]
+    q_v5       0.4109  minus q_v6 +0.0007 [-0.0024, +0.0035]
+  [live period, games with a captured pre-game price] 165 games: q_v6 0.4144
+    q_v7_x     0.4228  minus q_v6 +0.0085 [+0.0005, +0.0165]
+    q_v7       0.4180  minus q_v6 +0.0036 [-0.0045, +0.0138]

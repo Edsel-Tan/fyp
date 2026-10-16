@@ -1,0 +1,50 @@
+19807 games since BURN; test 10875; v7 columns 55, C 0.01
+1 reproduction: monthly equal-weight refit vs prior_v7_m: max |diff| 5.75e-13
+
+== 2. time-weighted refits: per-game log loss minus v7 (match-clustered 95 % CI) ==
+  selection months 2025-07..2026-01: 3498 games; eval months 2026-02..: 7377 games (1145 cross-league)
+  v7 (monthly, equal weight)         sel 0.60651 (+0.00000)   eval 0.59248 +0.00000 [+0.00000, +0.00000]   eval cross +0.00000   all test +0.00000
+  h 30 d, monthly                    sel 0.61160 (+0.00509)   eval 0.60501 +0.01253 [+0.00852, +0.01684]   eval cross +0.01556   all test +0.01014
+  h 30 d, weekly                     sel 0.61586 (+0.00935)   eval 0.60129 +0.00881 [+0.00483, +0.01288]   eval cross +0.01811   all test +0.00898
+  h 60 d, monthly                    sel 0.60808 (+0.00157)   eval 0.59887 +0.00640 [+0.00345, +0.00934]   eval cross +0.00840   all test +0.00484
+  h 60 d, weekly                     sel 0.60826 (+0.00175)   eval 0.59625 +0.00378 [+0.00112, +0.00664]   eval cross +0.00663   all test +0.00313
+  h 90 d, monthly                    sel 0.60727 (+0.00076)   eval 0.59627 +0.00379 [+0.00178, +0.00603]   eval cross +0.00545   all test +0.00282
+  h 90 d, weekly                     sel 0.60695 (+0.00044)   eval 0.59439 +0.00192 [-0.00024, +0.00405]   eval cross +0.00370   all test +0.00144
+  h 180 d, monthly                   sel 0.60665 (+0.00014)   eval 0.59367 +0.00120 [-0.00003, +0.00249]   eval cross +0.00219   all test +0.00086
+  h 180 d, weekly                    sel 0.60617 (-0.00034)   eval 0.59263 +0.00016 [-0.00115, +0.00152]   eval cross +0.00106   all test -0.00000
+  h 365 d, monthly                   sel 0.60648 (-0.00003)   eval 0.59274 +0.00026 [-0.00040, +0.00091]   eval cross +0.00067   all test +0.00017
+  h 365 d, weekly                    sel 0.60606 (-0.00045)   eval 0.59207 -0.00041 [-0.00119, +0.00037]   eval cross -0.00010   all test -0.00042
+  h 730 d, monthly                   sel 0.60648 (-0.00004)   eval 0.59250 +0.00003 [-0.00030, +0.00036]   eval cross +0.00019   all test +0.00001
+  h 730 d, weekly                    sel 0.60609 (-0.00042)   eval 0.59199 -0.00049 [-0.00094, +0.00000]   eval cross -0.00042   all test -0.00047
+  equal weight, weekly               sel 0.60617 (-0.00035)   eval 0.59208 -0.00040 [-0.00065, -0.00014]   eval cross -0.00043   all test -0.00038
+  patch boost x2, h 365 weekly       sel 0.60642 (-0.00009)   eval 0.59197 -0.00051 [-0.00140, +0.00040]   eval cross -0.00010   all test -0.00037
+  patch boost x2, equal weekly       sel 0.60635 (-0.00017)   eval 0.59198 -0.00049 [-0.00088, -0.00010]   eval cross -0.00053   all test -0.00039
+  patch boost x4, h 365 weekly       sel 0.60736 (+0.00085)   eval 0.59205 -0.00042 [-0.00161, +0.00080]   eval cross +0.00042   all test -0.00001
+  patch boost x4, equal weekly       sel 0.60686 (+0.00035)   eval 0.59191 -0.00057 [-0.00125, +0.00002]   eval cross -0.00048   all test -0.00027
+  selection-month choice: h 365 d, weekly -> eval -0.00041 [-0.00119, +0.00037]
+
+== 3. per-patch role slopes on top of the prior logit (23 patches with >= 150 games, 10653 games) ==
+  slope per train SD of the role term; Q = Cochran heterogeneity vs chi2(P-1); tau = excess SD of the slope across patches;
+  ac1 = lag-1 autocorrelation of the patch slopes (does a patch's tilt carry into the next one?)
+             family role  pooled  pooled_se  patch_sd  mean_se      Q  df     p   tau    ac1
+           role_elo  top   0.032      0.041     0.270    0.251 29.858  22 0.122 0.125  0.219
+           role_elo  jgl  -0.062      0.040     0.275    0.240 23.650  22 0.366 0.056 -0.010
+           role_elo  mid  -0.006      0.042     0.320    0.269 30.042  22 0.117 0.129  0.450
+           role_elo  bot   0.049      0.038     0.199    0.245 13.168  22 0.928 0.000  0.168
+           role_elo  sup  -0.006      0.040     0.298    0.238 23.269  22 0.387 0.048 -0.073
+           lane_elo  top   0.004      0.024     0.126    0.132 23.562  22 0.371 0.031 -0.145
+           lane_elo  jgl   0.003      0.025     0.118    0.138 16.014  22 0.815 0.000  0.433
+           lane_elo  mid  -0.006      0.025     0.128    0.140 21.806  22 0.471 0.000 -0.030
+           lane_elo  bot   0.035      0.025     0.152    0.145 22.131  22 0.452 0.010 -0.095
+           lane_elo  sup  -0.007      0.026     0.108    0.142 12.772  22 0.939 0.000 -0.024
+kal (player Kalman)  top   0.020      0.024     0.151    0.128 35.344  22 0.036 0.092  0.081
+kal (player Kalman)  jgl  -0.028      0.024     0.145    0.134 25.245  22 0.285 0.045  0.121
+kal (player Kalman)  mid  -0.024      0.024     0.156    0.135 34.897  22 0.040 0.094  0.290
+kal (player Kalman)  bot   0.040      0.024     0.133    0.134 22.300  22 0.442 0.014  0.328
+kal (player Kalman)  sup   0.023      0.023     0.100    0.125 16.770  22 0.776 0.000 -0.045
+  lane (gd15 resid)  top  -0.004      0.023     0.128    0.130 24.533  22 0.320 0.039 -0.150
+  lane (gd15 resid)  jgl  -0.007      0.024     0.127    0.140 14.823  22 0.870 0.000  0.192
+  lane (gd15 resid)  mid  -0.017      0.024     0.147    0.134 23.401  22 0.379 0.030 -0.090
+  lane (gd15 resid)  bot   0.020      0.025     0.163    0.146 20.279  22 0.566 0.000  0.190
+  lane (gd15 resid)  sup   0.008      0.025     0.119    0.141 16.146  22 0.809 0.000  0.104
+  smallest Q p 0.0357 (Holm-adjusted 0.713); tests with p < 0.05: 2 of 20

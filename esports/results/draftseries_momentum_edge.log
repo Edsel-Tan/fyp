@@ -1,0 +1,6 @@
+k>=2 games with a t0-1 price: 857
+  buy previous-game winner     at the t0-1 VWAP: n  857  gross +2.7 pp/share (match-cluster se 1.6)
+  buy series leader (sd != 0)  at the t0-1 VWAP: n  802  gross +3.7 pp/share (match-cluster se 1.7)
+  buy model > market by 5 pp   at the t0-1 VWAP: n  514  gross +3.6 pp/share (match-cluster se 2.0)
+  buy model > market by 10 pp  at the t0-1 VWAP: n  252  gross +1.9 pp/share (match-cluster se 3.0)
+  [game 1 control] model > market by 5 pp: n 333 gross +4.6 pp (se 2.5)

@@ -1,0 +1,2 @@
+wrote /home/aimer/fyp-pmlive/lollive/data/v7: blend [-0.1013843   0.92233971], 55 prior cols, kalman {'q_t': 0.5, 'q_l': 0.0001, 'v_t': 1.0, 'v_l': 1.0, 'w_int': 2.0, 'side': 0.12, 'lam': 0.5, 'kd': 3.0}, comb latencies [0, 5, 15, 30, 60, 120]
+October refit on 19605 games; 202 October games in the study table: max |tracker - study prior_v7_m| 0.00e+00, median 0.00e+00; 31 newer games

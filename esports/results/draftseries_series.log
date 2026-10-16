@@ -1,0 +1,79 @@
+== series games k >= 2 in the test period: 6043 (Bo3 3339, Bo5 2462), with a market price 987
+  union prior (Oct refit), per-unit coefficients: series_diff +0.069, form_5 +0.036, elo_team_32 -0.00007/pt, h2h +0.010
+== 1. leftover momentum on top of the v5/v6 union prior (offset z)
+  [all] games 6043 (matches 3477); OOS = fit < 2026-02, score >= 2026-02 (4148 games)
+    + sd                   n  6043  sd +0.037 (t +1.3);  OOS LL +0.0007 [+0.0002, +0.0012]
+    + res                  n  6043  res +0.079 (t +1.4);  OOS LL +0.0009 [+0.0003, +0.0015]
+    + last                 n  6043  last +0.003 (t +0.1);  OOS LL +0.0018 [+0.0006, +0.0031]
+    + last_res             n  6043  last_res -0.001 (t -0.0);  OOS LL +0.0022 [+0.0008, +0.0036]
+    + gold                 n  6043  gold +0.057 (t +1.5);  OOS LL +0.0009 [+0.0003, +0.0014]
+    + dom                  n  6033  dom +0.419 (t +2.5);  OOS LL +0.0004 [+0.0002, +0.0006]
+    + res + gold           n  6043  res +0.039 (t +0.5), gold +0.037 (t +0.6);  OOS LL +0.0010 [+0.0004, +0.0016]
+    + day                  n  6043  day +1.042 (t +2.2);  OOS LL +0.0074 [+0.0018, +0.0144]
+    + event                n  6043  event +0.051 (t +3.2);  OOS LL -0.0008 [-0.0017, +0.0000]
+    + res + gold + event   n  6043  res +0.016 (t +0.2), gold +0.049 (t +0.8), event +0.051 (t +3.1);  OOS LL +0.0002 [-0.0008, +0.0013]
+    cross-league                 n   871  res +0.318 (t +2.3)   gold +0.189 (t +1.7)
+    same-league                  n  5172  res +0.034 (t +0.6)   gold +0.039 (t +0.9)
+    international                n   194  res -0.018 (t -0.1)   gold +0.055 (t +0.2)
+    Bo5                          n  2462  res +0.142 (t +1.9)   gold +0.110 (t +1.8)
+    Bo3                          n  3339  res -0.050 (t -0.6)   gold +0.014 (t +0.3)
+    low-info (n_min_games < 40)  n  6043  res +0.079 (t +1.4)   gold +0.057 (t +1.5)
+== 2. leftover momentum on top of the market's pre-game price (offset logit pm_pre)
+  market-priced games k >= 2: 987
+    + sd         n   987  sd +0.133 (0.070, t +1.9)
+    + res_m      n   890  res_m +0.280 (0.151, t +1.9)
+    + res        n   987  res +0.213 (0.149, t +1.4)
+    + last       n   987  last +0.151 (0.080, t +1.9)
+    + gold       n   987  gold +0.205 (0.095, t +2.2)
+    + dom        n   987  dom +0.896 (0.419, t +2.1)
+    + event      n   987  event +0.060 (0.050, t +1.2)
+    + model prior z: +0.173 (t +1.9)   [the v6 blend, for scale]
+== 3. how far the prior and the market move between consecutive games (A = game k blue team)
+  pre-draft model logit change: +0.363 (0.003) per unit surprise (y - p) of the previous game; mean |change| after a win 0.344
+  market logit change (same 904 games): +0.203 (0.030) per unit surprise; model on these games +0.362
+    cross-league: n 233 market +0.172 (0.026)  model +0.416 (0.014)
+    same-league: n 671 market +0.220 (0.038)  model +0.342 (0.009)
+== 4. calibration of the union prior on game k >= 2 by series state (A = blue)
+Traceback (most recent call last):
+  File "/home/aimer/fyp/esports/src/draftseries/series.py", line 194, in <module>
+    main()
+  File "/home/aimer/fyp/esports/src/draftseries/series.py", line 185, in main
+    S['state'] = np.select([S.sd >= 2, S.sd == 1, S.sd == 0, S.sd == -1, S.sd <= -2], ['A +2', 'A +1', 'level', 'A -1', 'A -2'])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aimer/fyp/.venv/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py", line 898, in select
+    raise TypeError(msg) from None
+TypeError: Choicelist and default value do not have a common dtype: The DType <class 'numpy.dtypes._PyLongDType'> could not be promoted by <class 'numpy.dtypes.StrDType'>. This means that no common DType exists for the given inputs. For example they cannot be stored in a single array unless the dtype is `object`. The full list of DTypes is: (<class 'numpy.dtypes.StrDType'>, <class 'numpy.dtypes.StrDType'>, <class 'numpy.dtypes.StrDType'>, <class 'numpy.dtypes.StrDType'>, <class 'numpy.dtypes.StrDType'>, <class 'numpy.dtypes._PyLongDType'>)
+== 4. calibration of the union prior on game k >= 2 by series state (A = blue)
+    A +1   n  2267  mean P(A) 0.651  A won 0.652  (diff +0.001 se 0.010)  market 0.617 on 556
+    A +2   n   354  mean P(A) 0.707  A won 0.712  (diff +0.005 se 0.024)  market 0.641 on 82
+    A -1   n  1722  mean P(A) 0.427  A won 0.412  (diff -0.015 se 0.012)  market 0.398 on 259
+    A -2   n   228  mean P(A) 0.373  A won 0.355  (diff -0.017 se 0.032)  market 0.339 on 32
+    level  n  1472  mean P(A) 0.547  A won 0.521  (diff -0.026 se 0.013)  market 0.520 on 58
+== 5. market with clean pre-/post-draft prices (archive minute VWAP / captured mid)
+  offset mpost (t0-1): 857 games k >= 2
+    + sd       n   857  sd +0.137 (0.074, t +1.8)
+    + res_mp   n   718  res_mp +0.309 (0.166, t +1.9)
+    + res      n   857  res +0.221 (0.155, t +1.4)
+    + last     n   857  last +0.126 (0.085, t +1.5)
+    + gold     n   857  gold +0.186 (0.101, t +1.8)
+    + dom      n   857  dom +0.728 (0.442, t +1.6)
+    + event    n   857  event +0.074 (0.052, t +1.4)
+    + z        n   857  z +0.136 (0.101, t +1.4)
+      cross-league: n 192 res_mp +0.214 (t +0.6)
+      same-league: n 526 res_mp +0.352 (t +1.8)
+  offset mp1 (t0+1): 923 games k >= 2
+    + sd       n   923  sd +0.158 (0.072, t +2.2)
+    + res_mp   n   742  res_mp +0.278 (0.165, t +1.7)
+    + res      n   923  res +0.249 (0.149, t +1.7)
+    + last     n   923  last +0.168 (0.082, t +2.0)
+    + gold     n   923  gold +0.225 (0.098, t +2.3)
+    + dom      n   923  dom +0.856 (0.427, t +2.0)
+    + event    n   923  event +0.081 (0.051, t +1.6)
+    + z        n   923  z +0.166 (0.100, t +1.7)
+      cross-league: n 195 res_mp +0.181 (t +0.6)
+      same-league: n 547 res_mp +0.321 (t +1.7)
+  between-game update, 693 games: market (t0-1 of game k-1 -> t0-15 of game k) +0.207 (0.025) logit per unit surprise; model pre-draft prior +0.343 (0.009)
+  outcome-implied update on top of the previous game's market price: +0.484 (0.191)
+  outcome-implied update on top of the previous game's pre-draft model prior: +0.563 (0.191)
+    cross-league: n 183  market moves +0.213, outcome-implied +0.498 (0.360);  model moves +0.404, outcome-implied +0.628 (0.345)
+    same-league: n 510  market moves +0.203, outcome-implied +0.474 (0.230);  model moves +0.318, outcome-implied +0.537 (0.234)

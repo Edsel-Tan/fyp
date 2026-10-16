@@ -1,0 +1,19 @@
+check zx==un_full on test: 0.0
+2024-10..2025-06 (pre-test)
+    all n 2599: res +0.256 (t +2.8) gold +0.155 (t +2.4) event +0.013 (t +0.5)
+    cross n 286: res +0.302 (t +1.3) gold +0.136 (t +0.7) event +0.009 (t +0.1)
+    same n 2313: res +0.252 (t +2.6) gold +0.161 (t +2.3) event +0.012 (t +0.5)
+2025-07..2026-01
+    all n 1895: res -0.073 (t -0.7) gold -0.048 (t -0.7) event +0.040 (t +1.6)
+    cross n 280: res +0.016 (t +0.1) gold -0.175 (t -0.9) event +0.087 (t +0.9)
+    same n 1615: res -0.090 (t -0.8) gold -0.025 (t -0.3) event +0.036 (t +1.4)
+2026-02..2026-10
+    all n 4148: res +0.142 (t +2.0) gold +0.098 (t +2.0) event +0.059 (t +2.8)
+    cross n 591: res +0.436 (t +2.4) gold +0.377 (t +2.5) event +0.064 (t +0.9)
+    same n 3557: res +0.087 (t +1.1) gold +0.063 (t +1.2) event +0.058 (t +2.7)
+pooled 2024-10..: res +0.079 (t +1.5)  res x cross +0.255 (t +1.9)  n 8642
+OOS fit pre-test -> test, + ['res_x']: coefs res_x +0.385;  LL all -0.0004 [-0.0013, +0.0005]  cross -0.0029 [-0.0093, +0.0037] (n 871)
+OOS fit pre-test -> test, + ['res', 'res_x']: coefs res +0.235, res_x +0.167;  LL all +0.0012 [-0.0004, +0.0029]  cross -0.0026 [-0.0097, +0.0041] (n 871)
+OOS fit pre-test -> test, + ['res_x', 'gold_x']: coefs res_x +0.360, gold_x +0.024;  LL all -0.0004 [-0.0013, +0.0005]  cross -0.0029 [-0.0092, +0.0031] (n 871)
+OOS fit pre-test -> test, + ['event']: coefs event +0.013;  LL all -0.0003 [-0.0006, -0.0001]  cross -0.0003 [-0.0008, +0.0002] (n 871)
+OOS fit pre-test -> test, + ['res_x', 'event']: coefs res_x +0.382, event +0.012;  LL all -0.0007 [-0.0016, +0.0003]  cross -0.0031 [-0.0097, +0.0033] (n 871)

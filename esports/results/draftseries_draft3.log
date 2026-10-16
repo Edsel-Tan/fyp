@@ -1,0 +1,16 @@
+== 3. new draft inputs on top of the union prior (monthly refit, test from 2025-07)
+  union            LL 0.5980  minus union +0.0000 [+0.0000, +0.0000]  cross +0.0000 [+0.0000, +0.0000]
+  +rec             LL 0.5978  minus union -0.0002 [-0.0006, +0.0002]  cross +0.0002 [-0.0007, +0.0011]
+  +meta            LL 0.5978  minus union -0.0002 [-0.0004, -0.0000]  cross -0.0006 [-0.0011, -0.0001]
+  +duo             LL 0.5980  minus union -0.0000 [-0.0002, +0.0001]  cross -0.0001 [-0.0005, +0.0004]
+  +dmg             LL 0.5982  minus union +0.0001 [-0.0004, +0.0007]  cross -0.0000 [-0.0013, +0.0013]
+  +comfort         LL 0.5981  minus union +0.0000 [-0.0000, +0.0001]  cross +0.0001 [+0.0000, +0.0002]
+  +all new         LL 0.5977  minus union -0.0003 [-0.0010, +0.0004]  cross -0.0005 [-0.0022, +0.0012]
+  union pre-draft  LL 0.6005  minus union +0.0025 [+0.0011, +0.0039]  cross +0.0003 [-0.0033, +0.0041]
+    corr(d_rec, blue_win) test +0.101; corr with draft_wr +0.57
+    corr(meta, blue_win) test +0.040; corr with draft_wr +0.10
+    corr(d_duo, blue_win) test +0.068; corr with draft_wr +0.50
+    corr(apbal, blue_win) test +0.034; corr with draft_wr +0.07
+    corr(tank, blue_win) test -0.035; corr with draft_wr -0.19
+    corr(com, blue_win) test +0.175; corr with draft_wr +0.06
+    corr(off, blue_win) test +0.077; corr with draft_wr +0.05
